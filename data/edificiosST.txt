@@ -1,0 +1,10 @@
+Edificio:
+Informatica;Unisersidade Fernando Pessoa
+SALAS:
+112;1;50;50
+220;2;50;50
+113;1;50;50
+109;1;50;50
+114;1;50;50
+111;1;50;50
+

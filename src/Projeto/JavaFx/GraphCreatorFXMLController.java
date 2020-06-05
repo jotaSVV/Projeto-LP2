@@ -9,7 +9,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Group;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
@@ -21,13 +20,18 @@ import javafx.scene.text.Text;
 import javafx.util.Callback;
 
 import java.net.URL;
-import java.util.Random;
 import java.util.ResourceBundle;
 
+import static Projeto.Faculdade.pdp;
+import static Projeto.Faculdade.salas;
 import static Projeto.JavaFx.GraphCreator.f1;
+import static Projeto.JavaFx.GraphCreator.graph_pdpSalas;
 
 public class GraphCreatorFXMLController implements Initializable {
-
+    public Pane graphPane;
+    private static final int radius = 25;
+    private String pdpSalastxt = ".//data//salasPdp.txt";
+    Graph_project gi = new Graph_project();
 
     ///TABLE VIEW SALAS
     @FXML
@@ -106,232 +110,6 @@ public class GraphCreatorFXMLController implements Initializable {
 
     @FXML
     private TableColumn<Faculdade, String> ColNome;
-
-    public ObservableList<Faculdade> getLista(){
-        ObservableList<Faculdade> lista = FXCollections.observableArrayList(
-        );
-        lista.add(f1);
-
-        return lista;
-    }
-    public ObservableList<Curso> getCurso(){
-        ObservableList<Curso> lista = FXCollections.observableArrayList(
-        );
-        for (String s: f1.getCursos().keys()
-        ) {
-            Curso c = f1.getCursos().get(s);
-            lista.add(c);
-        }
-        return lista;
-    }
-    public ObservableList<Edificio> getEdificios(){
-        ObservableList<Edificio> lista = FXCollections.observableArrayList(
-        );
-
-        for (String s: f1.getEdificios().keys()
-             ) {
-            Edificio e = f1.getEdificios().get(s);
-            lista.add(e);
-        }
-
-        return lista;
-    }
-
-    public ObservableList<Sala> getSalas(){
-        ObservableList<Sala> lista = FXCollections.observableArrayList(
-        );
-        for (Integer cod: f1.salas.keys()
-        ) {
-            Sala s = f1.salas.get(cod);
-            lista.add(s);
-        }
-
-        return lista;
-    }
-
-    public ObservableList<Turma> getTurmas(){
-        ObservableList<Turma> lista = FXCollections.observableArrayList(
-        );
-        for (String cod: f1.turmas.keys()
-        ) {
-            Turma t = f1.turmas.get(cod);
-            lista.add(t);
-        }
-        return lista;
-    }
-
-
-
-
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        ///Tabela Faculdade
-
-        ColNome.setCellValueFactory(new PropertyValueFactory<Faculdade,String>("Name"));
-        TableView.setItems(getLista());
-
-        ///Tabela Salas
-        codigoSala.setCellValueFactory(new PropertyValueFactory<Sala,Integer>("Codigo"));
-        nrCadeiras.setCellValueFactory(new PropertyValueFactory<Sala,Integer>("NrCadeiras"));
-        nrTomadas.setCellValueFactory(new PropertyValueFactory<Sala,Integer>("NrTomadas"));
-        piso.setCellValueFactory(new PropertyValueFactory<Sala,Integer>("Piso"));
-
-
-        Turmas.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Sala, String>, ObservableValue<String>>() {
-            @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<Sala, String> s) {
-                if (s.getValue() != null) {
-                    StringBuilder turmas = new StringBuilder();
-                    for(Turma t : s.getValue().getTurmas()) {
-                        turmas.append(t.getCodigo()).append("\n");
-                    }
-                    return new SimpleStringProperty(turmas.toString());
-                    //return new SimpleStringProperty(s.getValue().getTurmas().getCodigo());
-                } else {
-                    return new SimpleStringProperty("<no info>");
-                }
-            }
-        });
-        Edificio.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Sala, String>, ObservableValue<String>>() {
-            @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<Sala, String> s) {
-                if (s.getValue() != null) {
-                    return new SimpleStringProperty(s.getValue().getEdificio().getNome());
-                } else {
-                    return new SimpleStringProperty("<no info>");
-                }
-            }
-        });
-
-        TabelaSalas.setItems(getSalas());
-
-        ///Tabela Curso
-
-        nomeCurso.setCellValueFactory(new PropertyValueFactory<Curso,String>("Nome"));
-        faculdadeCurso.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Curso, String>, ObservableValue<String>>() {
-            @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<Curso, String> c) {
-                if (c.getValue() != null) {
-
-                    return new SimpleStringProperty(c.getValue().getFaculdade().getName());
-                } else {
-                    return new SimpleStringProperty("<no info>");
-                }
-            }
-        });
-
-        TabelaCursos.setItems(getCurso());
-
-        ///Tabela Edificio
-        nomeEdificio.setCellValueFactory(new PropertyValueFactory<Edificio,String>("Nome"));
-        faculdadeEdificio.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Edificio, String>, ObservableValue<String>>() {
-            @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<Edificio, String> e) {
-                if (e.getValue() != null) {
-                    return new SimpleStringProperty(e.getValue().getFaculdade().getName());
-                } else {
-                    return new SimpleStringProperty("<no info>");
-                }
-            }
-        });
-        salasEdificio.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Edificio, String>, ObservableValue<String>>() {
-            @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<Edificio, String> e) {
-                if (e.getValue() != null) {
-                    StringBuilder salas = new StringBuilder();
-                    for(Sala s : e.getValue().getSalas()) {
-
-                        salas.append(s.getCodigo() + "\n");
-                    }
-                    return new SimpleStringProperty(salas.toString());
-
-                } else {
-                    return new SimpleStringProperty("<no info>");
-                }
-            }
-        });
-
-
-        TabelaEdificio.setItems(getEdificios());
-
-
-        ///Tabela Turma
-        codigoTurma.setCellValueFactory(new PropertyValueFactory<Turma,String>("Codigo"));
-        anoTurma.setCellValueFactory(new PropertyValueFactory<Turma,Integer>("Ano"));
-        cursoTurma.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Turma, String>, ObservableValue<String>>() {
-            @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<Turma, String> t) {
-                if (t.getValue() != null) {
-                    return new SimpleStringProperty(t.getValue().getCurso().getNome());
-                } else {
-                    return new SimpleStringProperty("<no info>");
-                }
-            }
-        });
-        alunoTurma.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Turma, String>, ObservableValue<String>>() {
-            @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<Turma, String> t) {
-                if (t.getValue() != null) {
-                    StringBuilder alunos = new StringBuilder();
-                    for(Integer cod : t.getValue().getAlunos().keys()) {
-                        Aluno a = t.getValue().getAlunos().get(cod);
-                        alunos.append(a.getNumeroAluno() + " " + a.getNome()  + " " + a.getApelido()).append("\n");
-                    }
-                    return new SimpleStringProperty(alunos.toString());
-
-                } else {
-                    return new SimpleStringProperty("<no info>");
-                }
-            }
-        });
-        professorTurma.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Turma, String>, ObservableValue<String>>() {
-            @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<Turma, String> t) {
-                if (t.getValue() != null) {
-                    return new SimpleStringProperty(t.getValue().getProfessor().getNome());
-                } else {
-                    return new SimpleStringProperty("<no info>");
-                }
-            }
-        });
-        disciplinaTurma.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Turma, String>, ObservableValue<String>>() {
-            @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<Turma, String> t) {
-                if (t.getValue() != null) {
-                    return new SimpleStringProperty(t.getValue().getDisciplina().getNome());
-                } else {
-                    return new SimpleStringProperty("<no info>");
-                }
-            }
-        });
-        salaTurma.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Turma, String>, ObservableValue<String>>() {
-            @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<Turma, String> t) {
-                if (t.getValue() != null) {
-                    return new SimpleStringProperty(Integer.toString(t.getValue().getSala().getCodigo()));
-                } else {
-                    return new SimpleStringProperty("<no info>");
-                }
-            }
-        });
-        TabelaTurmas.setItems(getTurmas());
-
-    }
-
-
-    public Group graphGroup;
-    private double radius = 30.0;
-    private String salas_txt = ".//data//salasGraph.txt";
-import static Projeto.Faculdade.pdp;
-import static Projeto.Faculdade.salas;
-import static Projeto.JavaFx.GraphCreator.graph_pdpSalas;
-
-public class GraphCreatorFXMLController {
-    public Pane graphPane;
-    private static final int radius = 25;
-    private String pdpSalastxt = ".//data//salasPdp.txt";
-    Graph_project gi = new Graph_project();
 
     public void gerarVerticesSalasGraph(String v)
     {
@@ -412,10 +190,214 @@ public class GraphCreatorFXMLController {
         in.close();
     }
 
+    public ObservableList<Faculdade> getLista() {
+        ObservableList<Faculdade> lista = FXCollections.observableArrayList(
+        );
+        lista.add(f1);
+
+        return lista;
+    }
+
+    public ObservableList<Curso> getCurso() {
+        ObservableList<Curso> lista = FXCollections.observableArrayList(
+        );
+        for (String s : f1.getCursos().keys()
+        ) {
+            Curso c = f1.getCursos().get(s);
+            lista.add(c);
+        }
+        return lista;
+    }
+
+    public ObservableList<Edificio> getEdificios() {
+        ObservableList<Edificio> lista = FXCollections.observableArrayList(
+        );
+
+        for (String s : f1.getEdificios().keys()
+        ) {
+            Edificio e = f1.getEdificios().get(s);
+            lista.add(e);
+        }
+
+        return lista;
+    }
+
+    public ObservableList<Sala> getSalas() {
+        ObservableList<Sala> lista = FXCollections.observableArrayList(
+        );
+        for (Integer cod : f1.salas.keys()
+        ) {
+            Sala s = f1.salas.get(cod);
+            lista.add(s);
+        }
+
+        return lista;
+    }
+
+    public ObservableList<Turma> getTurmas() {
+        ObservableList<Turma> lista = FXCollections.observableArrayList(
+        );
+        for (String cod : f1.turmas.keys()
+        ) {
+            Turma t = f1.turmas.get(cod);
+            lista.add(t);
+        }
+        return lista;
+    }
 
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        ///Tabela Faculdade
+
+        ColNome.setCellValueFactory(new PropertyValueFactory<Faculdade, String>("Name"));
+        TableView.setItems(getLista());
+
+        ///Tabela Salas
+        codigoSala.setCellValueFactory(new PropertyValueFactory<Sala, Integer>("Codigo"));
+        nrCadeiras.setCellValueFactory(new PropertyValueFactory<Sala, Integer>("NrCadeiras"));
+        nrTomadas.setCellValueFactory(new PropertyValueFactory<Sala, Integer>("NrTomadas"));
+        piso.setCellValueFactory(new PropertyValueFactory<Sala, Integer>("Piso"));
 
 
+        Turmas.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Sala, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Sala, String> s) {
+                if (s.getValue() != null) {
+                    StringBuilder turmas = new StringBuilder();
+                    for (Turma t : s.getValue().getTurmas()) {
+                        turmas.append(t.getCodigo()).append("\n");
+                    }
+                    return new SimpleStringProperty(turmas.toString());
+                    //return new SimpleStringProperty(s.getValue().getTurmas().getCodigo());
+                } else {
+                    return new SimpleStringProperty("<no info>");
+                }
+            }
+        });
+        Edificio.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Sala, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Sala, String> s) {
+                if (s.getValue() != null) {
+                    return new SimpleStringProperty(s.getValue().getEdificio().getNome());
+                } else {
+                    return new SimpleStringProperty("<no info>");
+                }
+            }
+        });
+
+        TabelaSalas.setItems(getSalas());
+
+        ///Tabela Curso
+
+        nomeCurso.setCellValueFactory(new PropertyValueFactory<Curso, String>("Nome"));
+        faculdadeCurso.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Curso, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Curso, String> c) {
+                if (c.getValue() != null) {
+
+                    return new SimpleStringProperty(c.getValue().getFaculdade().getName());
+                } else {
+                    return new SimpleStringProperty("<no info>");
+                }
+            }
+        });
+
+        TabelaCursos.setItems(getCurso());
+
+        ///Tabela Edificio
+        nomeEdificio.setCellValueFactory(new PropertyValueFactory<Edificio, String>("Nome"));
+        faculdadeEdificio.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Edificio, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Edificio, String> e) {
+                if (e.getValue() != null) {
+                    return new SimpleStringProperty(e.getValue().getFaculdade().getName());
+                } else {
+                    return new SimpleStringProperty("<no info>");
+                }
+            }
+        });
+        salasEdificio.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Edificio, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Edificio, String> e) {
+                if (e.getValue() != null) {
+                    StringBuilder salas = new StringBuilder();
+                    for (Sala s : e.getValue().getSalas()) {
+
+                        salas.append(s.getCodigo() + "\n");
+                    }
+                    return new SimpleStringProperty(salas.toString());
+
+                } else {
+                    return new SimpleStringProperty("<no info>");
+                }
+            }
+        });
 
 
+        TabelaEdificio.setItems(getEdificios());
+
+
+        ///Tabela Turma
+        codigoTurma.setCellValueFactory(new PropertyValueFactory<Turma, String>("Codigo"));
+        anoTurma.setCellValueFactory(new PropertyValueFactory<Turma, Integer>("Ano"));
+        cursoTurma.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Turma, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Turma, String> t) {
+                if (t.getValue() != null) {
+                    return new SimpleStringProperty(t.getValue().getCurso().getNome());
+                } else {
+                    return new SimpleStringProperty("<no info>");
+                }
+            }
+        });
+        alunoTurma.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Turma, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Turma, String> t) {
+                if (t.getValue() != null) {
+                    StringBuilder alunos = new StringBuilder();
+                    for (Integer cod : t.getValue().getAlunos().keys()) {
+                        Aluno a = t.getValue().getAlunos().get(cod);
+                        alunos.append(a.getNumeroAluno() + " " + a.getNome() + " " + a.getApelido()).append("\n");
+                    }
+                    return new SimpleStringProperty(alunos.toString());
+
+                } else {
+                    return new SimpleStringProperty("<no info>");
+                }
+            }
+        });
+        professorTurma.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Turma, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Turma, String> t) {
+                if (t.getValue() != null) {
+                    return new SimpleStringProperty(t.getValue().getProfessor().getNome());
+                } else {
+                    return new SimpleStringProperty("<no info>");
+                }
+            }
+        });
+        disciplinaTurma.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Turma, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Turma, String> t) {
+                if (t.getValue() != null) {
+                    return new SimpleStringProperty(t.getValue().getDisciplina().getNome());
+                } else {
+                    return new SimpleStringProperty("<no info>");
+                }
+            }
+        });
+        salaTurma.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Turma, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Turma, String> t) {
+                if (t.getValue() != null) {
+                    return new SimpleStringProperty(Integer.toString(t.getValue().getSala().getCodigo()));
+                } else {
+                    return new SimpleStringProperty("<no info>");
+                }
+            }
+        });
+        TabelaTurmas.setItems(getTurmas());
+
+    }
 }

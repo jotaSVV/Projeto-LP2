@@ -17,6 +17,8 @@
  ******************************************************************************/
 
 package Projeto;
+import edu.princeton.cs.algs4.*;
+
 
 import java.io.Serializable;
 
@@ -64,10 +66,22 @@ public class SymbolDigraphWeighted implements Serializable {
         // while (in.hasNextLine()) {
         while (!in.isEmpty()) {
             String[] a = in.readLine().split(delimiter);
-            for (int i = 0; i < a.length; i++) {
-                    if (!st.contains(a[i]))
-                        st.put(a[i], st.size());
-            }
+         //   for (int i = 0; i < a.length; i++) {
+                    if (!st.contains(a[0])) {
+                        st.put(a[0], st.size());
+                        graph = new EdgeWeightedDigraph(st.size());
+                       // int v = st.get(a[0]);
+                       // for (int i = 1; i < a.length; i = i + 2) {
+                            //for (int j = 2; j < a.length; j = j + 2) {
+                            //    System.out.println("w-> " + a[i] + " x-> " + a[j] + " !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                             //   int w = st.get(a[i]);
+                                //Double x = Double.parseDouble(a[j]);
+
+                                //graph.addEdge(new DirectedEdge(v,w,x));
+                         //   }
+                       // }
+                    }
+          //  }
         }
         // inverted index to get string keys in an array
         keys = new String[st.size()];
@@ -75,7 +89,7 @@ public class SymbolDigraphWeighted implements Serializable {
             keys[st.get(name)] = name;
         }
 
-        // second pass builds the graph by connecting first vertex on each
+        /* // second pass builds the graph by connecting first vertex on each
         // line to all others
         graph = new edu.princeton.cs.algs4.EdgeWeightedDigraph(st.size());
         in = new edu.princeton.cs.algs4.In(filename);
@@ -92,6 +106,7 @@ public class SymbolDigraphWeighted implements Serializable {
                 }
             }
         }
+         */
     }
 
     /**

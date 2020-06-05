@@ -1,12 +1,8 @@
 package Projeto.JavaFx;
 
 import Projeto.Graph_project;
-import Projeto.Map;
-import Projeto.Point;
 import edu.princeton.cs.algs4.In;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -14,25 +10,15 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 
-import static Projeto.Faculdade.*;
-import static Projeto.JavaFx.GraphCreator.*;
+import static Projeto.Faculdade.pdp;
+import static Projeto.Faculdade.salas;
+import static Projeto.JavaFx.GraphCreator.graph_pdpSalas;
 
 public class GraphCreatorFXMLController {
-    Map<Point> map;
-    public ComboBox<String> floorComboBox;
     public Pane graphPane;
     private static final int radius = 25;
     private String pdpSalastxt = ".//data//salasPdp.txt";
     Graph_project gi = new Graph_project();
-
-    public GraphCreatorFXMLController(Map<Point> map) {
-        this.map = map;
-    }
-
-    @FXML
-    public void initialize(){
-
-    }
 
     public void gerarVerticesSalasGraph(String v)
     {

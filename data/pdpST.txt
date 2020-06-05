@@ -1,20 +1,20 @@
 Pdp:
-0;entrada;Informatica
-
-Pdp:
 4;escadasP3;Informatica
 
 Pdp:
-1;escadasP1;Informatica
+0;entrada;Informatica
 
 Pdp:
 5;biblioteca;Informatica
 
 Pdp:
-2;escadasP2;Informatica
+1;escadasP1;Informatica
 
 Pdp:
 6;bar;Informatica
+
+Pdp:
+2;escadasP2;Informatica
 
 Pdp:
 3;escadasBar;Informatica

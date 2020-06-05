@@ -11,8 +11,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
 
 public class GraphCreator extends Application {
     public static SymbolDigraphWeighted graph_pdpSalas ;    //cria o symbol graph de pdp
@@ -409,28 +407,13 @@ public class GraphCreator extends Application {
         launch(args);
         f1.listarPdp();
     }
-
     @Override
-    public void start(Stage primaryStage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("graph_creator.fxml"));
-        Map<Point> map = new Map<>();
-
-        loader.setController(new GraphCreatorFXMLController(map));
-        map.addPoint(f1.salas.get(109));
-        map.addPoint(f1.salas.get(111));
-        map.addPoint(f1.salas.get(112));
-        map.addPoint(f1.salas.get(113));
-        map.addPoint(f1.salas.get(114));
-        map.addPoint(f1.salas.get(220));
-
-        /**
-         *  ADICIONAR A LOCALIZAÇÃO DAS SALAS AQUI
-         */
-
-        Parent root = loader.load();
+    public void start(Stage primaryStage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("graph_creator.fxml"));
         Scene scene = new Scene(root);
         primaryStage.setTitle("Graph Creator");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+
 }

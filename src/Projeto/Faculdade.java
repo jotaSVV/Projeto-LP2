@@ -18,6 +18,7 @@ public class Faculdade {
     private String cursostxt = (".//data//cursosST.txt");
     private String edificiostxt = (".//data//edificiosST.txt");
     private String salastxt = (".//data//salasST.txt");
+    private String pdptxt = (".//data//pdpST.txt");
 
     private String name;
     public static SeparateChainingHashST<String, Curso> cursos = new SeparateChainingHashST<>();
@@ -25,6 +26,7 @@ public class Faculdade {
     public static SeparateChainingHashST<String, Disciplina> disciplinas = new SeparateChainingHashST<>();
     public static SeparateChainingHashST<String, Turma> turmas = new SeparateChainingHashST<>();
     public static SeparateChainingHashST<Integer, Sala> salas = new SeparateChainingHashST<>();
+    public static SeparateChainingHashST<Integer, PontosDePassagem> pdp = new SeparateChainingHashST<>();
     public static RedBlackBST<String, Professor> professores = new RedBlackBST<>();
     public static RedBlackBST<Integer, Aluno> alunos = new RedBlackBST<>();
     public static RedBlackBST<Data, Horario_Atendimento> horario_atendimento = new RedBlackBST<>();
@@ -1011,16 +1013,6 @@ public class Faculdade {
                 String line = in.readLine();
                 String[] fields = line.split(";");
                 Turma t = new Turma(Integer.parseInt(fields[0]), fields[1]);
-             /*   if (this.salas.contains(Integer.parseInt(fields[4]))) {
-                    Sala s = this.salas.get((Integer.parseInt(fields[4])));
-                    t.setSala(s);
-                    s.getTurmas().add(t);*/
-
-                //}else {
-                //    Sala s = new Sala(0,0); // = sala null
-                //    t.setSala(s);
-                 //   s.getTurmas().add(t);
-               // }
                 if (this.cursos.contains(fields[2])) {
                     Curso c = this.cursos.get(fields[2]);
                     this.turmas.put(t.getCodigo(), t); // adicionamos a turma à bd de turmas da faculdade
@@ -1236,16 +1228,30 @@ public class Faculdade {
                 myWriter.write(s.getCodigo() + ";" + s.getPiso() + ";" + s.getNrTomadas() + ";" + s.getNrCadeiras() + ";" + s.getEdificio().getNome() + "\n");
                 myWriter.write("TURMAS:\n");
                 int i = 0;
-                System.out.println("entrei ||||||||||||| " + s.getTurmas().size());
                 while(i < s.getTurmas().size()){
                     Turma t = s.getTurmas().get(i);
                     myWriter.write(t.getCodigo() + "\n");
                     i++;
                 }
-
                 myWriter.write("\n");
             }
 
+            myWriter.close();
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+
+    public void guardarpdpST(){
+        try {
+            FileWriter myWriter = new FileWriter(".//data//pdpST.txt");
+            for (int cod : pdp.keys()) {
+                PontosDePassagem p = pdp.get(cod);
+                myWriter.write("Pdp:\n");
+                myWriter.write(p.getCod() + ";" + p.getName() +";" + p.getEdificio().getNome() + "\n");
+                myWriter.write("\n");
+            }
             myWriter.close();
         } catch (IOException e) {
             System.out.println("An error occurred.");
@@ -1267,6 +1273,29 @@ public class Faculdade {
                 }
                 salas.put(s.getCodigo(), s);
             }
+        }
+    }
+
+    public void carregarPdpST(){
+        edu.princeton.cs.algs4.In in = new edu.princeton.cs.algs4.In(pdptxt);
+        while (!in.isEmpty()) {
+            if (in.readLine().compareTo("Pdp:") == 0) {
+                String line = in.readLine();
+                String[] fields = line.split(";");
+                PontosDePassagem p = new PontosDePassagem(Integer.parseInt(fields[0]),0,0,0,fields[1]);
+                if(edificios.contains(fields[2])){
+                    p.addEdificio(edificios.get(fields[2]));
+                    edificios.get(fields[2]).getPdp().add(p);
+                }
+                pdp.put(p.getCod(),p);
+            }
+        }
+    }
+
+    public void listarPdp(){
+        System.out.println("Pontos de Passagem: ");
+        for (Integer pi:pdp.keys()) {
+            System.out.println(pdp.get(pi).getName());
         }
     }
 
@@ -1315,11 +1344,32 @@ public class Faculdade {
             }
         }
     }
-
     public void now(){
         Data d = new Data();
         percOcupacaoSalas(d);
         ucsLecionadas(d);
+    }
+
+    public void addPosiSala(double x, double y, int z,Sala s){
+        if(!salas.contains(s.getCodigo())){
+            System.out.println("Erro, sala nao existe!!!");
+            return;
+        }
+        salas.get(s.getCodigo()).setX(x);
+        salas.get(s.getCodigo()).setY(y);
+        salas.get(s.getCodigo()).setZ(z);
+        salas.get(s.getCodigo()).setName("sala "+String.valueOf(s.getCodigo()));
+    }
+
+    public void addPosiPdp(double x, double y, int z,PontosDePassagem p){
+        if(!pdp.contains(p.getCod())){
+            System.out.println("Erro, sala nao existe!!!");
+            return;
+        }
+        pdp.get(p.getCod()).setX(x);
+        pdp.get(p.getCod()).setY(y);
+        pdp.get(p.getCod()).setZ(z);
+        pdp.get(p.getCod()).setName(p.getName());
     }
 
 }

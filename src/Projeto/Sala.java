@@ -1,7 +1,7 @@
 package Projeto;
 import java.util.ArrayList;
 
-public class Sala{
+public class Sala extends Point{
 
   private int codigo;
 
@@ -28,9 +28,6 @@ public class Sala{
   private Edificio edificio;
 
   ArrayList<Horario>  Horarios = new ArrayList<>();
-
-  public Point point;
-
 
   public ArrayList<Turma> getTurmas() {
     return turmas;
@@ -74,6 +71,7 @@ public class Sala{
   }
 
   public Sala(int codigo, int nrCadeiras) {
+    super(0,0,0,"sala"); // apenas para iniciar ( para nao dar erro )
     this.codigo = codigo;
     this.nrCadeiras = nrCadeiras;
     this.piso = codigo / 100;

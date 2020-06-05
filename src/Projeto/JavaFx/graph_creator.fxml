@@ -13,16 +13,22 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Projeto.JavaFx.GraphCreatorFXMLController">
    <children>
       <MenuBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="768.0" prefWidth="1024.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="452.0" prefWidth="754.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Projeto.JavaFx.GraphCreatorFXMLController">
+   <children>
+      <MenuBar layoutX="-7.0" layoutY="-3.0" prefHeight="34.0" prefWidth="764.0">
         <menus>
           <Menu mnemonicParsing="false" text="File">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#handleCreateSalasGraphAction" text="Salas graph" />
-            </items>
-          </Menu>
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#handleGerarGrafoSalas" text="Gerar grafo de salas" />
+               </items></Menu>
           <Menu mnemonicParsing="false" text="Edit">
-            <items>
+               <items>
               <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
+               </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
@@ -31,13 +37,24 @@
           </Menu>
         </menus>
       </MenuBar>
-      <TabPane layoutX="-2.0" layoutY="25.0" prefHeight="376.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutY="32.0" prefHeight="390.0" prefWidth="757.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Salas">
+          <Tab text="Planta da Faculdade">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Group fx:id="graphGroup" />
+                        <VBox layoutX="-4.0" prefHeight="359.0" prefWidth="764.0">
+                           <children>
+                              <Pane fx:id="graphPane" prefHeight="340.0" prefWidth="764.0">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" top="20.0" />
+                                 </VBox.margin>
+                              </Pane>
+                           </children>
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </VBox>
                      </children></AnchorPane>
             </content>
           </Tab>

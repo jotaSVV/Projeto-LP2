@@ -36,14 +36,23 @@ public class Sala{
     return turmas;
   }
 
+
   public Edificio getEdificio() {
     return edificio;
   }
 
+
+
   public void setEdificio(Edificio edificio) {
     this.edificio = edificio;
-  }
 
+  }
+  public String getNomeEdificio(){
+    if(edificio==null){
+        return "Sem edificio";
+    }
+    return edificio.getNome();
+  }
   public Point getPoint() {
     return point;
   }

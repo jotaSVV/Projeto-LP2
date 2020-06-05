@@ -14,7 +14,8 @@ import javafx.stage.Stage;
 
 public class GraphCreator extends Application {
     public static SymbolGraphWheighted graph_salas ;    //cria o symbol graph de salas
-
+    // Faculdades
+    public static Faculdade f1 = new Faculdade("Unisersidade Fernando Pessoa");
     public static void main(String[] args) {
         // Localizaçao
         Point point1 = new Point(12,123,1);
@@ -75,8 +76,7 @@ public class GraphCreator extends Application {
 //          Curso c1 = new Curso("INF");
 //        Curso c2 = new Curso("CBL");
 //
-//        // Faculdades
-        Faculdade f1 = new Faculdade("Unisersidade Fernando Pessoa");
+//
 //
 //        //Regista alunos na base de dados
 //        f1.alunos.put(a1.getNumeroAluno(),a1);

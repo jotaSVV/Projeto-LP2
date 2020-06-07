@@ -59,11 +59,13 @@ public class GraphCreatorFXMLController implements Initializable {
     public TextField resultSaidaEmergencia;
     public ComboBox<String> selectAlunoSEmergencia;
     //// ADD SUB GRAPH ////////////////////////////////////////////////////////////// AINDA POR FAZER !!!!!!!!!!!!!!!!!!!!!!
-    public ListView listViewAddGraph;
+    public ListView<Sala> listViewAddGraph;
     public Pane graphPane1;
+    public ListView<String> listViewAddGraph1;
     //////
     private String pdpSalastxt = ".//data//salasPdp.txt";
     private String pdpSalasBinFile = ".//data//SalasPdpBinFile.bin";
+    private String subGraphTxt = ".//data//subGraph.txt";
 
     Graph_project<Point> gi = new Graph_project<>();
     /////////////////////////////////////////////////7
@@ -74,7 +76,7 @@ public class GraphCreatorFXMLController implements Initializable {
     TABELA DOS PONTOS DE PASSAGEM
      */
     @FXML
-    private TableView TabelaPdps;
+    private javafx.scene.control.TableView<PontosDePassagem> TabelaPdps;
     @FXML
     private TableColumn<PontosDePassagem,String> nomePDP;
     @FXML
@@ -94,7 +96,7 @@ public class GraphCreatorFXMLController implements Initializable {
     @FXML
     private Button removerPDPS;
     @FXML
-    private ComboBox edificiosPDPcombo;
+    private ComboBox<Projeto.Edificio> edificiosPDPcombo;
     @FXML
     private TextField coddoPDP;
     @FXML
@@ -482,7 +484,7 @@ TABELA DISCIPLINAS
         ///Tabela Faculdade
         ColNome.setCellValueFactory(new PropertyValueFactory<Faculdade,String>("Name"));
         TableView.setItems(getLista());
-
+        viewAddGraph();
     }
 
 
@@ -1924,6 +1926,22 @@ TABELA DISCIPLINAS
 
     }
 
+    public void viewAddGraph(){
+        listViewAddGraph.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        listViewAddGraph.getItems().addAll(getSalas());
+        listViewAddGraph1.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        for (Integer p:pdp.keys()) {
+            listViewAddGraph1.getItems().addAll(pdp.get(p).getName() +" (" +pdp.get(p).getCod() +")");
+        }
+    }
+
     public void addSubGraph(ActionEvent event) {
+        ObservableList<Sala> s;
+        ObservableList<String> pontosDePassagem;
+        s = listViewAddGraph.getSelectionModel().getSelectedItems();
+        pontosDePassagem = listViewAddGraph1.getSelectionModel().getSelectedItems();
+
+        gi.guardarTxtSubGraph(subGraphTxt,s,pontosDePassagem,graph_pdpSalas);
+        // gerarSubGrafoSalas(); // Graph ja está funcionar no txt FALTA COLOCAR NA PARTE GRÁFICA
     }
 }

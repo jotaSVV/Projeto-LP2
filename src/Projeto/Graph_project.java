@@ -1,6 +1,7 @@
 package Projeto;
 import edu.princeton.cs.algs4.DirectedEdge;
 import edu.princeton.cs.algs4.Out;
+import javafx.collections.ObservableList;
 
 import java.io.*;
 
@@ -8,6 +9,7 @@ import static Projeto.Faculdade.*;
 import static Projeto.JavaFx.GraphCreator.graph_pdpSalas;
 
 public class Graph_project <T extends Point> {
+    public static SymbolDigraphWeighted subGraphPdpSalas;
 
     public void conectGraphs(T v1,T v2,SymbolDigraphWeighted g,String path, Integer w) {
         if(v1 instanceof PontosDePassagem){
@@ -116,6 +118,136 @@ public class Graph_project <T extends Point> {
         }
         out.close();
     }
+
+    public void guardarTxtSubGraph(String path, ObservableList<Sala> sala,ObservableList<String> pontosPdP,SymbolDigraphWeighted g) {
+        edu.princeton.cs.algs4.Out out = new edu.princeton.cs.algs4.Out(path);
+        boolean salasBoolean = false;
+        boolean salasBoolean1 = false;
+        boolean pdpBoolean = false;
+        boolean pdpBoolean1 = false;
+
+        if(pontosPdP.isEmpty() && sala.isEmpty()){
+            guardar_pdp_txt_graph(path); // como nao selecionei nada vai criar um graph igual ao original
+        }
+
+        //////////////// PDP 1
+
+        for (int v = 0; v < g.digraph().V(); v++) {       //percorre os vertices
+            if (salasOuPdp(g,v) == 1) {
+                for (String pdpAux : pontosPdP) {
+                    String[] numbers = pdpAux.split(" ");
+                    int aux = 0;
+                    int numPdp = 0;
+                    // Para pegar apenas no cod do PDP
+                    for (String s : numbers) {
+                        if (aux == 1) {
+                            numPdp = Integer.parseInt(s.replaceAll("[\\D]", "")); // para pegar apenas na parte inteira
+                            if(Integer.parseInt(graph_pdpSalas.nameOf(v)) == numPdp){ // se tiver o pdp vou passar à frente
+                                pdpBoolean = true;
+                            }
+                        }
+                        aux++;
+                    }
+                }if(!pdpBoolean){ // aqui so entrem os grafos que nao sao eliminados
+                   // System.out.print("pdp" + ";" + v + ";");
+                    out.print("pdp" + ";" + v + ";");
+                    //  out.print(salas.get(stSalas) + ";" + "\n");
+                    for (DirectedEdge d: g.digraph().adj(v)) { // percorro o directed edge para caso o vertice a que este vertice esteja conectado seja eliminado ele o elimine
+                        if(salasOuPdp(g,d.to()) == 0){ // se a sala estiver ligada a uma sala que vai ser eliminada
+                            for (Sala sAux1 : sala) { // PERCORREMOS AS SALAS ENVIADAS ( AS QUE NAO QUEREMOS METER NO SUB GRAPH )
+                                if(Integer.parseInt(graph_pdpSalas.nameOf(d.to()) ) == sAux1.getCodigo()){ // se tiver a sala vou passar à frente
+                                    pdpBoolean1 = true;
+                                }
+                            }
+                            if(!pdpBoolean1) {
+                               // System.out.print(d.to() + ";" + d.weight() + ";");
+                                out.print(d.to() + ";" + d.weight() + ";");
+                            }
+                        }if(salasOuPdp(g,d.to()) == 1){ // para o caso de estar ligado a um pdp que vai ser eliminado
+                            for (String pdpAux : pontosPdP) {
+                                String[] numbers = pdpAux.split(" ");
+                                int aux = 0;
+                                int numPdp = 0;
+                                // Para pegar apenas no cod do PDP
+                                for (String s : numbers) {
+                                    if (aux == 1) {
+                                        numPdp = Integer.parseInt(s.replaceAll("[\\D]", "")); // para pegar apenas na parte inteira
+                                        if(Integer.parseInt(graph_pdpSalas.nameOf(d.to()) ) == numPdp){ // se tiver o pdp vou passar à frente
+                                            pdpBoolean1 = true;
+                                        }
+                                    }
+                                    aux++;
+                                }
+                            }
+                            if(!pdpBoolean1) {
+                               // System.out.print(d.to() + ";" + d.weight() + ";");
+                                out.print(d.to() + ";" + d.weight() + ";");
+                            }
+                        }
+                        pdpBoolean1 = false;
+                    }
+                    System.out.println();
+                    out.print("\n");
+                }
+                pdpBoolean = false;
+            }
+        }
+
+        for (int v = 0; v < g.digraph().V(); v++) {       //percorre os vertices
+            if (salasOuPdp(g,v) == 0) {
+                for (Sala sAux : sala) { // PERCORREMOS AS SALAS ENVIADAS ( AS QUE NAO QUEREMOS METER NO SUB GRAPH )
+                    if(Integer.parseInt(graph_pdpSalas.nameOf(v)) == sAux.getCodigo() ){
+                        salasBoolean = true;
+                    }
+                }
+                if(!salasBoolean){ // aqui so entrem os grafos que nao sao eliminados
+                   // System.out.print("s" + ";" + v + ";");
+                    out.print("s" + ";" + v + ";");
+                  //  out.print(salas.get(stSalas) + ";" + "\n");
+                    for (DirectedEdge d: g.digraph().adj(v)) { // percorro o directed edge para caso o vertice a que este vertice esteja conectado seja eliminado ele o elimine
+                        if(salasOuPdp(g,d.to()) == 0){ // se a sala estiver ligada a uma sala que vai ser eliminada
+                            for (Sala sAux1 : sala) { // PERCORREMOS AS SALAS ENVIADAS ( AS QUE NAO QUEREMOS METER NO SUB GRAPH )
+                                if(Integer.parseInt(graph_pdpSalas.nameOf(d.to()) ) == sAux1.getCodigo()){ // se tiver a sala vou passar à frente
+                                    salasBoolean1 = true;
+                                }
+                            }
+                            if(!salasBoolean1) {
+                               // System.out.print(d.to() + ";" + d.weight() + ";");
+                                out.print(d.to() + ";" + d.weight() + ";");
+                            }
+                        }if(salasOuPdp(g,d.to()) == 1){ // para o caso de estar ligado a um pdp que vai ser eliminado
+                            for (String pdpAux : pontosPdP) {
+                                String[] numbers = pdpAux.split(" ");
+                                int aux = 0;
+                                int numPdp = 0;
+                                // Para pegar apenas no cod do PDP
+                                for (String s : numbers) {
+                                    if (aux == 1) {
+                                        numPdp = Integer.parseInt(s.replaceAll("[\\D]", "")); // para pegar apenas na parte inteira
+                                        if(Integer.parseInt(graph_pdpSalas.nameOf(d.to()) ) == numPdp){ // se tiver o pdp vou passar à frente
+                                            salasBoolean1 = true;
+                                        }
+                                    }
+                                    aux++;
+                                }
+                            }
+                            if(!salasBoolean1) {
+                               // System.out.print(d.to() + ";" + d.weight() + ";");
+                                out.print(d.to() + ";" + d.weight() + ";");
+                            }
+                        }
+                        salasBoolean1 = false;
+                    }
+                   // System.out.println();
+                    out.print("\n");
+                }
+               salasBoolean = false;
+            }
+        }
+        out.close();
+    }
+
+
 
     public Point pdpOuSalaMaisProxima(Aluno a){ // dá a localizacao da sala ou pdp mais proxima do aluno
         System.out.println("POS ALUNO: " +a.getX() +" " +a.getZ());

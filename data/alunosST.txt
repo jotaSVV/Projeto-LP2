@@ -3,7 +3,7 @@ Henrique;Moreira;3/10/1999;20;11111@ufp.edu.pt;11111
 TURMAS:
 2020;TUR2;CUR1;DIS2;332;
 POSICAO(XYZ):
-300.0;90.0;1;
+100.0;90.0;1;
 
 ALUNO:
 Diogo;Martins;3/10/1999;20;12111@ufp.edu.pt;12111

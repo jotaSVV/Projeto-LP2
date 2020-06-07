@@ -1059,6 +1059,9 @@ public class GraphCreatorFXMLController implements Initializable {
             comboSalaSala.getItems().addAll(salas.get(s).getName());
             comboSalaSala1.getItems().addAll(salas.get(s).getName());
         }
+        for (Integer p:pdp.keys()) {
+            salasComboBox.getItems().addAll(pdp.get(p).getName()+ " (" +pdp.get(p).getCod()+")");
+        }
     }
 
     public void showPdpComboBox(){
@@ -1081,10 +1084,28 @@ public class GraphCreatorFXMLController implements Initializable {
         String nomeAluno=alunosComboBox.getValue();
 
         int numAluno = Integer.parseInt(nomeAluno.replaceAll("[\\D]", "")); // para pegar apenas na parte inteira
-        int numSala = Integer.parseInt(nomeSala.replaceAll("[\\D]", "")); // para pegar apenas na parte inteira
+        int num = Integer.parseInt(nomeSala.replaceAll("[\\D]", "")); // para pegar apenas na parte inteira
 
-        if(salas.contains(numSala)){
-            Sala sala = salas.get(numSala);
+
+        if(!salas.contains(num)){ // É porque é um pdp
+            String[] numbers = nomeSala.split(" ");
+            int aux= 0;
+            num = 0; // como nao vai ser uma sala, vou ter de atualizar a variavel num
+            // Para pegar apenas no cod do PDP
+            for (String s : numbers) {
+                if(aux == 1){
+                    num = Integer.parseInt(s.replaceAll("[\\D]", "")); // para pegar apenas na parte inteira
+                }
+                aux++;
+            }
+            System.out.println("sou um pdp" + num);
+        }else {
+            System.out.println("sou uma sala" + num);
+        }
+
+        // Se for o ponto aonde quero ir for uma sala
+        if(salas.contains(num)){
+            Sala sala = salas.get(num);
             if(alunos.contains(numAluno)){
                 Aluno a1 = alunos.get(numAluno);
                 Point p = gi.pdpOuSalaMaisProxima(alunos.get(numAluno));
@@ -1128,6 +1149,68 @@ public class GraphCreatorFXMLController implements Initializable {
                                         a1.setX(sala.getX());
                                         a1.setY(sala.getY());
                                         a1.setZ(sala.getZ());
+                                        f1.guardar_STALUNOS();
+                                        double dist = sp.distTo(vi)+s1.distAlunoSalaProx;
+                                        resultDistance.setText(String.valueOf(dist));
+                                        distToSalas.setText("test");
+                                    }else {
+                                        resultDistance.setText("Sem Caminho Possivel");
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }else {
+                    System.out.println("Erro !!!!!!");
+                }
+            }
+        }
+        // se for um pdp
+        if(pdp.contains(num)){
+            PontosDePassagem pontoPassagem = pdp.get(num);
+            if(alunos.contains(numAluno)){
+                Aluno a1 = alunos.get(numAluno);
+                Point p = gi.pdpOuSalaMaisProxima(alunos.get(numAluno));
+                if ( p instanceof PontosDePassagem){
+                    PontosDePassagem p1 = (PontosDePassagem)p;
+                    System.out.println("RETORNOU UM PDP " +p1.getName());
+                    for (int v = 0; v < graph_pdpSalas.digraph().V();v++){
+                        if(pdp.get(p1.getCod()).getCod() == Integer.parseInt(graph_pdpSalas.nameOf(v))){
+                            for (int vi = 0; vi < graph_pdpSalas.digraph().V(); vi++){
+                                if(pontoPassagem.getCod() == Integer.parseInt(graph_pdpSalas.nameOf(vi))){
+                                    DijkstraSP_Projeto sp = new DijkstraSP_Projeto(graph_pdpSalas, v);
+                                    if(sp.hasPathTo(vi)){
+                                        a1.setX(pontoPassagem.getX());
+                                        a1.setY(pontoPassagem.getY());
+                                        a1.setZ(pontoPassagem.getZ());
+                                        f1.guardar_STALUNOS();
+                                        double dist = sp.distTo(vi)+p1.distAlunoPdpProx;
+                                        System.out.println(dist);
+                                        System.out.println("Aluno POS:" +a1.getX() +" "+ a1.getY() +" "+a1.getZ());
+                                        resultDistance.setText(String.valueOf(dist));
+                                        //   distToSalas.setText("test");
+                                        //  distToSalas.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+                                        //   distToSalas;
+                                        //  public TableColumn dadosAluno;
+                                    }else {
+                                        resultDistance.setText("Sem Caminho Possivel");
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }else if( p instanceof Sala){
+                    Sala s1 = (Sala)p;
+                    System.out.println("RETORNOU UMA SALA " +s1.getCodigo());
+                    for (int v = 0; v < graph_pdpSalas.digraph().V();v++){
+                        if(salas.get(s1.getCodigo()).getCodigo() == Integer.parseInt(graph_pdpSalas.nameOf(v))){
+                            for (int vi = 0; vi < graph_pdpSalas.digraph().V(); vi++){
+                                if(pontoPassagem.getCod() == Integer.parseInt(graph_pdpSalas.nameOf(vi))){
+                                    DijkstraSP_Projeto sp = new DijkstraSP_Projeto(graph_pdpSalas, v);
+                                    if(sp.hasPathTo(vi)){
+                                        a1.setX(pontoPassagem.getX());
+                                        a1.setY(pontoPassagem.getY());
+                                        a1.setZ(pontoPassagem.getZ());
                                         f1.guardar_STALUNOS();
                                         double dist = sp.distTo(vi)+s1.distAlunoSalaProx;
                                         resultDistance.setText(String.valueOf(dist));
@@ -1191,9 +1274,7 @@ public class GraphCreatorFXMLController implements Initializable {
             Sala sala1 = salas.get(numSala1);
 
             gi.conectGraphs(sala,sala1,graph_pdpSalas,pdpSalastxt,i);
-
         }
-        handleGerarGrafoSalas(null); // atualiza o grafo
     }
 
     public void handlerButtonConnectPdpPdp(ActionEvent event) {

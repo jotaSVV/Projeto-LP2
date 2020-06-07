@@ -385,3 +385,7 @@ Sala:
 220;2;50;50;Informatica
 TURMAS:
 
+Sala:
+224;2;50;50;Informatica
+TURMAS:
+

@@ -31,7 +31,7 @@ public class Professor extends Pessoa {
 
     public String email(){
         this.setEmail(this.getNome()+this.getApelido()+"@ufp.edu.pt");
-        Point pos = new Point(0,0,0,this.getNome()); // crio a localização do professor (pos 0,0,0)
+        Point pos = new Point(0,0,0); // crio a localização do professor (pos 0,0,0)
         this.setPoint(pos);
         return this.getNome()+this.getApelido()+"@ufp.edu.pt";
 

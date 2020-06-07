@@ -91,40 +91,26 @@ public class SymbolGraphWheighted implements Serializable {
         // while (in.hasNextLine()) {
         while (!in.isEmpty()) {
             String[] a = in.readLine().split(delimiter);
-                //for (int i = 0; i < a.length; i++) {
-                    if (!st.contains(a[0])) // a[0] -> codigo da sala
-                    {
-                        st.put(a[0], st.size());
-                        graph = new EdgeWeightedGraph(st.size());
-                      //  System.out.println("asdasdasdasdsadsad" + a[0]);
-                        int v = st.get(a[0]);
-                        for(int i = 1;i<a.length;i=i+2)
-                        {
-                            for(int j = 2;j<a.length;j=j+2)
-                            {
-                                int w = st.get(a[i]);
-                                Double x = Double.parseDouble(a[j]);
-                                graph.addEdge(new Edge(v,w,x));
-                            }
-                        }
+                for (int i = 0; i < a.length; i++) {
+                    if (a[i].length() == 3) {
+                        if (!st.contains(a[i]))
+                            st.put(a[i], st.size());
                     }
-
-              //  }
+                }
         }
         // inverted index to get string keys in an array
         keys = new String[st.size()];
         for (String name : st.keys()) {
             keys[st.get(name)] = name;
         }
-        /*
+
         // second pass builds the graph by connecting first vertex on each
         // line to all others
         graph = new EdgeWeightedGraph(st.size());
         in = new In(filename);
-        while (in.isEmpty()) {
+        while (in.hasNextLine()) {
             String[] a = in.readLine().split(delimiter);
             int v = st.get(a[0]);
-            System.out.println("asdasdasdasdsadsad" + v);
             for(int i = 1;i<a.length;i=i+2)
             {
                 for(int j = 2;j<a.length;j=j+2)
@@ -135,8 +121,6 @@ public class SymbolGraphWheighted implements Serializable {
                 }
             }
         }
-
-         */
     }
 
     /**

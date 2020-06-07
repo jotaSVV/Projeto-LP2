@@ -10,7 +10,6 @@ public class Edificio{
    * @element-type Sala
    */
   private ArrayList<Sala> salas = new ArrayList<>();
-  private ArrayList<PontosDePassagem> pdp = new ArrayList<>();
   public Point point;
 
   private Faculdade faculdade;
@@ -39,14 +38,6 @@ public class Edificio{
 
   public Point getPoint() {
     return point;
-  }
-
-  public ArrayList<PontosDePassagem> getPdp() {
-    return pdp;
-  }
-
-  public void setPdp(ArrayList<PontosDePassagem> pdp) {
-    this.pdp = pdp;
   }
 
   public Faculdade getFaculdade() {

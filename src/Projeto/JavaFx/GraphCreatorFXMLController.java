@@ -10,10 +10,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
-import javafx.scene.control.TableColumn;
-eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
-import javafx.scene.layout.Pane;
-import javafx.scene.Group;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
@@ -273,13 +269,11 @@ TABELA DISCIPLINAS
 
     public ObservableList<Faculdade> getLista(){
         ObservableList<Faculdade> lista = FXCollections.observableArrayList(
-<<<<<<< HEAD
         );
         lista.add(f1);
 
         return lista;
     }
-<<<<<<< HEAD
 
     public ObservableList<Professor> getProfessores(){
         ObservableList<Professor> lista = FXCollections.observableArrayList(
@@ -294,8 +288,6 @@ TABELA DISCIPLINAS
 
     public ObservableList<Aluno> getAlunos(){
         ObservableList<Aluno> lista = FXCollections.observableArrayList(
-=======
->>>>>>> parent of 8c8e426... juncao dos codigos
         );
         for (Integer cod: f1.alunos.keys()
         ) {
@@ -304,11 +296,6 @@ TABELA DISCIPLINAS
         }
         return lista;
     }
-<<<<<<< HEAD
-=======
->>>>>>> parent of 8c8e426... juncao dos codigos
-=======
->>>>>>> parent of 8c8e426... juncao dos codigos
     public ObservableList<Curso> getCurso(){
         ObservableList<Curso> lista = FXCollections.observableArrayList(
         );
@@ -370,9 +357,6 @@ TABELA DISCIPLINAS
 
 
 
-
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -381,17 +365,6 @@ TABELA DISCIPLINAS
         ColNome.setCellValueFactory(new PropertyValueFactory<Faculdade,String>("Name"));
         TableView.setItems(getLista());
 
-<<<<<<< HEAD
-=======
-        ///Tabela Salas
-        codigoSala.setCellValueFactory(new PropertyValueFactory<Sala,Integer>("Codigo"));
-        nrCadeiras.setCellValueFactory(new PropertyValueFactory<Sala,Integer>("NrCadeiras"));
-        nrTomadas.setCellValueFactory(new PropertyValueFactory<Sala,Integer>("NrTomadas"));
-        piso.setCellValueFactory(new PropertyValueFactory<Sala,Integer>("Piso"));
-<<<<<<< HEAD
->>>>>>> parent of 8c8e426... juncao dos codigos
-=======
->>>>>>> parent of 8c8e426... juncao dos codigos
 
 
 
@@ -410,17 +383,9 @@ TABELA DISCIPLINAS
             public ObservableValue<String> call(TableColumn.CellDataFeatures<Professor, String> p) {
                 if (p.getValue() != null) {
                     StringBuilder turmas = new StringBuilder();
-<<<<<<< HEAD
-<<<<<<< HEAD
                     for(String cod : p.getValue().getTurmas().keys()) {
                         Turma a = p.getValue().getTurmas().get(cod);
                         turmas.append(a.getCodigo()).append("\n");
-=======
-=======
->>>>>>> parent of 8c8e426... juncao dos codigos
-                    for(Turma t : s.getValue().getTurmas()) {
-                        turmas.append(t.getCodigo()).append("\n");
->>>>>>> parent of 8c8e426... juncao dos codigos
                     }
                     return new SimpleStringProperty(turmas.toString());
 
@@ -449,39 +414,9 @@ TABELA DISCIPLINAS
 
         TabelaProfessores.setItems(getProfessores());
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-        nomeCurso.setCellValueFactory(new PropertyValueFactory<Curso,String>("Nome"));
-        faculdadeCurso.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Curso, String>, ObservableValue<String>>() {
-            @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<Curso, String> c) {
-                if (c.getValue() != null) {
->>>>>>> parent of 8c8e426... juncao dos codigos
 
 
 
-<<<<<<< HEAD
-=======
-        ///Tabela Edificio
-        nomeEdificio.setCellValueFactory(new PropertyValueFactory<Edificio,String>("Nome"));
-        faculdadeEdificio.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Edificio, String>, ObservableValue<String>>() {
-            @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<Edificio, String> e) {
-                if (e.getValue() != null) {
-                    return new SimpleStringProperty(e.getValue().getFaculdade().getName());
-                } else {
-                    return new SimpleStringProperty("<no info>");
-                }
-            }
-        });
-        salasEdificio.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Edificio, String>, ObservableValue<String>>() {
-            @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<Edificio, String> e) {
-                if (e.getValue() != null) {
-                    StringBuilder salas = new StringBuilder();
-                    for(Sala s : e.getValue().getSalas()) {
->>>>>>> parent of 8c8e426... juncao dos codigos
 
 
 
@@ -535,10 +470,6 @@ TABELA DISCIPLINAS
         ectsDisciplina.setCellValueFactory(new PropertyValueFactory<Disciplina,Integer>("Ects"));
         semestreDisciplina.setCellValueFactory(new PropertyValueFactory<Disciplina,Integer>("Semestre"));
         turmasDisciplinas.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Disciplina, String>, ObservableValue<String>>() {
-=======
-        nomeCurso.setCellValueFactory(new PropertyValueFactory<Curso,String>("Nome"));
-        faculdadeCurso.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Curso, String>, ObservableValue<String>>() {
->>>>>>> parent of 8c8e426... juncao dos codigos
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<Disciplina, String> d) {
                 if (d.getValue() != null) {
@@ -570,7 +501,6 @@ TABELA DISCIPLINAS
             }
         });
 
-<<<<<<< HEAD
 
         TabelaDisciplinas.setItems(getDisciplinas());
         professoresdaDisciplina.setItems(getProfessores());
@@ -590,11 +520,6 @@ TABELA DISCIPLINAS
         apelidoAluno.setCellValueFactory(new PropertyValueFactory<Aluno,String>("Apelido"));
         dataAluno.setCellValueFactory(new PropertyValueFactory<Aluno,String>("DataNascimento"));
         turmasAluno.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Aluno, String>, ObservableValue<String>>() {
-=======
-        ///Tabela Edificio
-        nomeEdificio.setCellValueFactory(new PropertyValueFactory<Edificio,String>("Nome"));
-        faculdadeEdificio.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Edificio, String>, ObservableValue<String>>() {
->>>>>>> parent of 8c8e426... juncao dos codigos
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<Aluno, String> t) {
                 if (t.getValue() != null) {
@@ -612,21 +537,12 @@ TABELA DISCIPLINAS
         });
         disciplinasAluno.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Aluno, String>, ObservableValue<String>>() {
             @Override
-<<<<<<< HEAD
             public ObservableValue<String> call(TableColumn.CellDataFeatures<Aluno, String> a) {
                 if (a.getValue() != null) {
                     StringBuilder disciplinas = new StringBuilder();
                     for(String cod : a.getValue().getDisciplinas().keys()) {
                         Disciplina d = a.getValue().getDisciplinas().get(cod);
                         disciplinas.append(d.getNome()).append("\n");
-=======
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<Edificio, String> e) {
-                if (e.getValue() != null) {
-                    StringBuilder salas = new StringBuilder();
-                    for(Sala s : e.getValue().getSalas()) {
-
-                        salas.append(s.getCodigo() + "\n");
->>>>>>> parent of 8c8e426... juncao dos codigos
                     }
                     return new SimpleStringProperty(disciplinas.toString());
 
@@ -1051,8 +967,6 @@ TABELA DISCIPLINAS
     }
 
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 
     public void handleCreateSalasGraphAction(ActionEvent actionEvent) {
         drawGraph_salas();
@@ -1070,100 +984,6 @@ TABELA DISCIPLINAS
                 Circle cw = (Circle) spw.getChildren().get(0);
                 Line line = new Line(cv.getCenterX(),cv.getCenterY(),cw.getCenterX(),cw.getCenterY());
                 graphGroup.getChildren().add(line);
-=======
-=======
->>>>>>> parent of 8c8e426... juncao dos codigos
-    public Group graphGroup;
-    private double radius = 30.0;
-    private String salas_txt = ".//data//salasGraph.txt";
-import static Projeto.Faculdade.pdp;
-import static Projeto.Faculdade.salas;
-import static Projeto.JavaFx.GraphCreator.graph_pdpSalas;
-
-public class GraphCreatorFXMLController {
-    public Pane graphPane;
-    private static final int radius = 25;
-    private String pdpSalastxt = ".//data//salasPdp.txt";
-    Graph_project gi = new Graph_project();
-
-    public void gerarVerticesSalasGraph(String v)
-    {
-        int codSala = Integer.parseInt(v);
-        double posX = salas.get(codSala).getX();
-        double posY = salas.get(codSala).getY();
-        int piso = salas.get(codSala).getZ();
-        Circle c = new Circle(posX,posY,radius);
-        c.setOpacity(0.6);
-        c.setFill(Color.RED);
-        c.setId(""+v);
-        Text text = new Text(""+v);
-        StackPane stack = new StackPane();
-        stack.setLayoutX(posX-radius);
-        stack.setLayoutY(posY-radius);
-        stack.getChildren().addAll(c,text);
-        graphPane.getChildren().add(stack);
-    }
-    public void gerarVerticesPdpGraph(String v)
-    {
-        int codPdp = Integer.parseInt(v);
-        String name = pdp.get(codPdp).getName();
-        double posX = pdp.get(codPdp).getX();
-        double posY = pdp.get(codPdp).getY();
-        int piso = pdp.get(codPdp).getZ();
-        Circle c = new Circle(posX,posY,radius);
-        c.setOpacity(0.6);
-        c.setFill(Color.BLACK);
-        c.setId(""+v);
-        Text text = new Text(""+name);
-        StackPane stack = new StackPane();
-        stack.setLayoutX(posX-radius);
-        stack.setLayoutY(posY-radius);
-        stack.getChildren().addAll(c,text);
-        graphPane.getChildren().add(stack);
-    }
-
-    public void drawGraph()
-    {
-        String delimiter = ";";
-        In in = new In(pdpSalastxt);
-        while (in.hasNextLine()) {
-            String[] a = in.readLine().split(delimiter);
-            String type = a[0];
-            int v = Integer.parseInt(a[1]);
-            if(type.compareTo("s")==0)
-            {
-                gerarVerticesSalasGraph(graph_pdpSalas.nameOf(v));
-            }else{
-                if(type.compareTo("pdp")==0){
-                    gerarVerticesPdpGraph(graph_pdpSalas.nameOf(v));
-                }else {
-                    System.out.println("Erro no txt");
-                }
-            }
-        }
-        in.close();
-    }
-
-    public void handleGerarGrafoSalas(ActionEvent actionEvent) {
-        drawGraph();
-        String delimiter = ";";
-        In in = new In(pdpSalastxt);
-        while (in.hasNextLine()) {
-            String[] a = in.readLine().split(delimiter);
-            int v = Integer.parseInt(a[1]);
-            StackPane spv = (StackPane) graphPane.getChildren().get(v);
-            Circle cv = (Circle) spv.getChildren().get(0);
-            for(int i = 2;i<a.length;i=i+2)
-            {
-                int w=Integer.parseInt(a[i]); // a que grafo estao conectadoss
-                StackPane spw = (StackPane) graphPane.getChildren().get(w);
-                Circle cw = (Circle) spw.getChildren().get(0);
-                Line line = new Line(cv.getCenterX(),cv.getCenterY(),cw.getCenterX(),cw.getCenterY());
-                graphPane.getChildren().add(line);
-<<<<<<< HEAD
->>>>>>> parent of 8c8e426... juncao dos codigos
-=======
->>>>>>> parent of 8c8e426... juncao dos codigos
             }
         }
         in.close();

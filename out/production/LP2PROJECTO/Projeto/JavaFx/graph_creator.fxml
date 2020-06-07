@@ -61,20 +61,25 @@
                            <children>
                                <VBox prefHeight="534.0" prefWidth="932.0">
                                    <children>
-                                       <HBox layoutY="589.0" prefHeight="104.0" prefWidth="932.0">
+                                       <HBox layoutY="589.0" prefHeight="78.0" prefWidth="932.0">
                                            <children>
                                     <ListView fx:id="listViewAddGraph" prefHeight="31.0" prefWidth="175.0">
                                        <HBox.margin>
-                                          <Insets bottom="10.0" left="200.0" top="10.0" />
+                                          <Insets bottom="10.0" left="100.0" top="30.0" />
+                                       </HBox.margin>
+                                    </ListView>
+                                    <ListView fx:id="listViewAddGraph1" layoutX="210.0" layoutY="20.0" prefHeight="17.0" prefWidth="175.0">
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="50.0" top="30.0" />
                                        </HBox.margin>
                                     </ListView>
                                                <Button mnemonicParsing="false" onAction="#addSubGraph" text="addGraph">
                                        <HBox.margin>
-                                          <Insets bottom="10.0" left="200.0" top="15.0" />
+                                          <Insets bottom="10.0" left="200.0" top="40.0" />
                                        </HBox.margin></Button>
                                            </children>
                                        </HBox>
-                                       <Pane fx:id="graphPane1" prefHeight="517.0" prefWidth="0.0">
+                                       <Pane fx:id="graphPane1" prefHeight="414.0" prefWidth="932.0">
                                            <VBox.margin>
                                                <Insets bottom="10.0" top="20.0" />
                                            </VBox.margin>

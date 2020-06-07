@@ -17,8 +17,10 @@ TURMAS:
 Curso:
 INF;Unisersidade Fernando Pessoa
 TURMAS:
+10;JPT;INF;SO;224;
 2020;ERT;INF;LP2;224;
 2020;TYH;INF;SO;224;
+10;RAF;INF;SO;224;
 
 Curso:
 CUR2;Unisersidade Fernando Pessoa

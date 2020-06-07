@@ -141,6 +141,8 @@ public class GraphCreatorFXMLController implements Initializable {
     private Button listarSalas;
     @FXML
     private Button removerSalas;
+    @FXML
+    private Button pesquisarSalas;
 
 
     /// FIM TABLE VIEW SALAS
@@ -167,7 +169,13 @@ public class GraphCreatorFXMLController implements Initializable {
     @FXML
     private TextField nomeDoCurso;
     @FXML
-    private ComboBox<Faculdade> faculdadeDoCurso;
+    private ComboBox faculdadeDoCurso;
+    @FXML
+    private Button pesquisarCursos;
+
+/*
+TABELA DISCIPLINAS
+ */
 
     /*
     TABELA DISCIPLINAS
@@ -199,6 +207,9 @@ public class GraphCreatorFXMLController implements Initializable {
     private Button listarDisciplinas;
     @FXML
     private Button adicionarDisciplinas;
+
+
+
     ///FIM TABELA Disciplinas
 
     /*
@@ -238,7 +249,11 @@ public class GraphCreatorFXMLController implements Initializable {
     @FXML
     private ComboBox<Sala> salasdaTurma;
     @FXML
-    private ComboBox<Professor> professordaTurma;
+    private ComboBox professordaTurma;
+    @FXML
+    private Button pesquisarTurmas;
+    @FXML
+    private Button limparTabelaTurmas;
 
     ///Fim Tabela Turmas
     /// TABLE VIEW EDIFICIO
@@ -814,6 +829,255 @@ public class GraphCreatorFXMLController implements Initializable {
     HANDLERS DAS TURMAS
      */
 
+
+    public void handlePesquisarTurmas(ActionEvent actionEvent){
+        ObservableList<Turma> results = FXCollections.observableArrayList(
+        );
+
+        ///se o textfield codigos turma nao estiver vazia , significa que temos uma pesquisa por codigo
+        if(!codigosdaTurma.getText().isEmpty()){
+            //no caso da procura por codigo , como apenas existe um codigo unico por turma , basta usarmos o contains
+            if(f1.turmas.contains(codigosdaTurma.getText())){
+                results.add(f1.turmas.get(codigosdaTurma.getText()));
+            }
+        }
+
+        //Agora vamos pesquisar turmas pelo ano
+
+        //se o textfield ano nao vazio, vamos  procurar
+        if(!anodaTurma.getText().isEmpty()){
+            ///Se o results estiver vazio ou nao tivemos correspondencia no campo anterior ou este nao foi procurado
+            ///portanto temos q procurar na ST diretamente
+            if(results.isEmpty()){
+                ///Vamos percorrer a ST turmas
+                for (String cod: f1.turmas.keys()
+                     ) {
+                    Turma t = f1.turmas.get(cod);
+                    ///Se a turma atual tiver um ano igual ao ano que procuramos , metemos no results
+                    if(Integer.parseInt(anodaTurma.getText())==t.getAno()){
+                        results.add(t);
+                    }
+                }
+            }else{
+                ///Só entramos aqui se o results tiver algo lá dentro
+                for (Turma t: results
+                     ) {
+                    //Se o ano da turma atual for diferente do ano a procurar , removemos do results
+                    if(t.getAno() != Integer.parseInt(anodaTurma.getText())){
+                        results.remove(t);
+                    }
+                }
+            }
+        }
+
+        ///Agora vamos procurar pelos cursos nas turmas
+
+        ///Se o campo cursos nao estiver vazio, entao procuramos
+        if(!cursosTurmas.getSelectionModel().isEmpty()){
+           ///Se o results estiver vazio , entao temos que procurar na st
+            if(results.isEmpty()){
+                for (String cod: f1.turmas.keys()
+                     ) {
+                    Turma t = f1.turmas.get(cod);
+                    ///Se o curso a procurar for igual ao curso atual , entao adicionamos ao result
+                    if(t.getCurso().getNome().compareTo(cursosTurmas.getSelectionModel().getSelectedItem().toString())==0){
+                        results.add(t);
+                    }
+                }
+            }else{
+                for (Turma t : results
+                     ) {
+                    ///Vamos percorrer os results , caso a turma atual tenha um curso diferente do que procuramos , removemos
+                    if(t.getCurso().getNome().compareTo(cursosTurmas.getSelectionModel().getSelectedItem().toString())!=0){
+                        results.remove(t);
+                    }
+                }
+            }
+        }
+
+        ///Se a combo box dos alunos nao estiver vazia , entao vamos procurar
+        if(!alunosComboBox.getSelectionModel().isEmpty()){
+            //Se a results estiver vazia, entao temos que procurar diretamente na  ST
+            if(results.isEmpty()){
+                for (String cod: f1.turmas.keys()
+                     ) {
+                    Turma t = f1.turmas.get(cod);
+                    ///Para a turma atual , procuramos nos seus alunos se o aluno que queremos está dentro da turma
+                    for (Integer c : t.getAlunos().keys()
+                         ) {
+                        Aluno a = f1.alunos.get(c);
+                        ///Se os numeros de aluno coincidirem , entao podemos adicionar aos results
+                        if(a.getNumeroAluno() == Integer.parseInt(alunosComboBox.getSelectionModel().getSelectedItem().toString())){
+                            results.add(t);
+                        }
+                    }
+                }
+            }else{
+                for (Turma t :results
+                     ) {
+                    for (Integer cod: t.getAlunos().keys()
+                         ) {
+                        Aluno a = t.getAlunos().get(cod);
+                        ///Se a turma atual do results nao tiver o aluno pretendido , entao removemos essa turma dos results
+                        if(!t.getAlunos().contains(Integer.parseInt(alunosComboBox.getSelectionModel().getSelectedItem().toString()))){
+                            results.remove(t);
+                        }
+                    }
+                }
+            }
+        }
+
+        ///Se o campo dos professores nao estiver vazio , entao procuramos
+        if(!professordaTurma.getSelectionModel().isEmpty()){
+            ///Se o results estiver vazio , procuramos na ST
+            if(results.isEmpty()){
+                for (String cod: f1.turmas.keys()
+                     ) {
+                    Turma t = f1.turmas.get(cod);
+                    ///Se o professor que procuramos coincidir com o da turma , entao adicionamos aos results
+                    if(professordaTurma.getSelectionModel().getSelectedItem().toString().compareTo(t.getProfessor().getEmail())==0){
+                        results.add(t);
+                    }
+                }
+            }else{
+                for (Turma t: results
+                     ) {
+                    ///Se o professor da turma atual dos results for diferente do que procuramos , entao removemos a turma do results
+                    if(professordaTurma.getSelectionModel().getSelectedItem().toString().compareTo(t.getProfessor().getEmail())!=0){
+                        results.remove(t);
+                    }
+                }
+            }
+        }
+
+
+        ///Pesquisa de turmas por disciplina
+        if(!disciplinaDaTurma.getSelectionModel().isEmpty()){
+            if(results.isEmpty()){
+                for (String c: f1.turmas.keys()
+                     ) {
+                    Turma t = f1.turmas.get(c);
+                    ///Se a disciplina que procuramos coincidir com a disciplina da turma , entao vai para os results
+                    if(t.getDisciplina().getNome().compareTo(disciplinaDaTurma.getSelectionModel().getSelectedItem().toString())==0){
+                        results.add(t);
+                    }
+                }
+            }else{
+                for (Turma t: results
+                     ) {
+                    ///Se a disciplina atual em results for diferente da que procuramos , entao removemos
+                    if(t.getDisciplina().getNome().compareTo(disciplinaDaTurma.getSelectionModel().getSelectedItem().toString())!=0){
+                        results.remove(t);
+                    }
+                }
+            }
+        }
+
+        ///Pesquisa de turmas por sala
+        if(!salasdaTurma.getSelectionModel().isEmpty()){
+            if(results.isEmpty()){
+                for (String c: f1.turmas.keys()
+                ) {
+                    Turma t = f1.turmas.get(c);
+                    ///Se a sala que procuramos coincidir com a sala da turma , entao vai para os results
+                    if(t.getSala().getCodigo() == Integer.parseInt(salasdaTurma.getSelectionModel().getSelectedItem().toString())){
+                        results.add(t);
+                    }
+                }
+            }else{
+                for (Turma t: results
+                ) {
+                    ///Se o numero da sala atual em results for diferente da que procuramos , entao removemos
+                    if(t.getSala().getCodigo() != Integer.parseInt(salasdaTurma.getSelectionModel().getSelectedItem().toString())){
+                        results.remove(t);
+
+                    }
+                }
+            }
+        }
+
+
+
+
+
+        ///ULTIMA TRIAGEM PARA QUANDO UNS FILTROS NAO SAO ADICIONADOS PELA ORDEM
+        if(!codigosdaTurma.getText().isEmpty()){
+            for (Turma t: results
+                 ) {
+                if(t.getCodigo().compareTo(codigosdaTurma.getText())!=0){
+                    results.remove(t);
+
+
+                }
+            }
+        }
+        if(!anodaTurma.getText().isEmpty()){
+            for (Turma t: results
+            ) {
+                if(t.getAno()!= Integer.parseInt(anodaTurma.getText())){
+                    results.remove(t);
+
+                }
+            }
+        }
+
+        if(!cursosTurmas.getSelectionModel().isEmpty()){
+            for (Turma t: results
+            ) {
+                if(t.getCurso().getNome().compareTo(cursosTurmas.getSelectionModel().getSelectedItem().toString())!=0){
+                    results.remove(t);
+
+                }
+            }
+        }
+        if(!professordaTurma.getSelectionModel().isEmpty()){
+            for (Turma t: results
+            ) {
+                if(t.getProfessor().getNome().compareTo(professordaTurma.getSelectionModel().getSelectedItem().toString())!=0){
+                    results.remove(t);
+
+                }
+            }
+        }
+        if(!disciplinaDaTurma.getSelectionModel().isEmpty()){
+            for (Turma t: results
+            ) {
+                if(t.getDisciplina().getNome().compareTo(disciplinaDaTurma.getSelectionModel().getSelectedItem().toString())!=0){
+                    results.remove(t);
+
+                }
+            }
+        }
+        if(!salasdaTurma.getSelectionModel().isEmpty()){
+            for (Turma t: results
+            ) {
+                if(t.getSala().getCodigo()!= Integer.parseInt(salasdaTurma.getSelectionModel().getSelectedItem().toString())){
+                    results.remove(t);
+
+                }
+            }
+        }
+
+
+
+            TabelaTurmas.getItems().clear();
+            TabelaTurmas.setItems(results);
+
+
+
+    }
+
+    public void handleGuardarSTSparaTXT(ActionEvent actionEvent){
+        f1.guardarsalasST();
+        f1.guardarpdpST();
+        f1.guardaredificiosST();
+        f1.guardarcursosST();
+        f1.guardar_turmasST();
+        f1.guardar_STPROFESSORES();
+        f1.guardardisciplinasST();
+        f1.guardar_STALUNOS();
+    }
+
     public void handleListarTurmas(ActionEvent actionEvent){
         ///Tabela Turma
         codigoTurma.setCellValueFactory(new PropertyValueFactory<Turma,String>("Codigo"));
@@ -965,6 +1229,26 @@ public class GraphCreatorFXMLController implements Initializable {
     /*
     HANDLERS DOS CURSOS
      */
+
+    public void handlePesquisarCursos(ActionEvent actionEvent){
+        ObservableList<Curso> results = FXCollections.observableArrayList(
+        );
+
+        if(!nomeDoCurso.getText().isEmpty()){
+            for (String c: f1.cursos.keys()
+                 ) {
+                Curso aux = f1.cursos.get(c);
+                if(nomeDoCurso.getText().compareTo(aux.getNome())==0){
+                    results.add(aux);
+                }
+            }
+        }
+
+        TabelaCursos.getItems().clear();
+        TabelaCursos.setItems(results);
+    }
+
+
     public void handleListarCursos(ActionEvent actionEvent){
         ///Tabela Curso
 
@@ -1029,6 +1313,53 @@ public class GraphCreatorFXMLController implements Initializable {
     /*
          HANDLERS DA SALA
      */
+
+    public void handlePesquisarSalas(ActionEvent actionEvent){
+        ObservableList<Sala> results = FXCollections.observableArrayList(
+        );
+
+        ///Primeiro Vamos procurar salas pelo requisito codigo
+
+        if(!codigoSalaTextfield.getText().isEmpty()){
+            for (Integer cod: f1.salas.keys()
+            ) {
+                Sala s = f1.salas.get(cod);
+                if(Integer.parseInt(codigoSalaTextfield.getText()) == s.getCodigo() ){
+                    results.add(s);
+                }
+            }
+        }
+
+        ///Pesquisar agora de acordo com o nr de tomadas
+
+        ///Caso a observable list esteja vazia , significa que o campo codigo nao está a ser procurado e entao
+        ///temos que procurar diretamente na st , caso contrario procuramos apenas na observable list
+        if(!nrCadeirasSalaTextfield.getText().isEmpty()){
+            if(results.isEmpty()){
+                for (Integer c: f1.salas.keys()
+                     ) {
+                    Sala s = f1.salas.get(c);
+                    if(s.getNrCadeiras() == Integer.parseInt(nrCadeirasSalaTextfield.getText()) ){
+                        results.add(s);
+                    }
+                }
+            }else{
+                for (Sala s: results
+                     ) {
+                    ///Vamos percorrer a result e remover todas as salas que tenham nrCadeiras diferente
+                    if(s.getNrCadeiras() !=Integer.parseInt(nrCadeirasSalaTextfield.getText()) ){
+                        results.remove(s);
+                    }
+                }
+            }
+        }
+
+        TabelaSalas.getItems().clear();
+        TabelaSalas.setItems(results);
+
+    }
+
+
     public void handleAddSala(ActionEvent actionEvent){
 
         if(codigoSalaTextfield.getText().isEmpty() || nrCadeirasSalaTextfield.getText().isEmpty() || edificiosSala.getSelectionModel().isEmpty()){
@@ -1215,6 +1546,12 @@ public class GraphCreatorFXMLController implements Initializable {
 //        });
         comboBoxFaculdadesEdificio.setItems(getLista());
     }
+
+
+    public void handleLimparTabelTurmas(ActionEvent actionEvent){
+        TabelaTurmas.getItems().clear();
+    }
+
 
     public void handleAddTurma() {
     }

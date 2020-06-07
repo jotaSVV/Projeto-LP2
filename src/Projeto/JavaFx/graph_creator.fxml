@@ -12,6 +12,7 @@
                <Menu mnemonicParsing="false" text="File">
                    <items>
                        <MenuItem mnemonicParsing="false" onAction="#handleGerarGrafoSalas" text="Gerar grafo de salas" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleGuardarSTSparaTXT" text="Guardar ST'S TO TXT" />
                    </items></Menu>
                <Menu mnemonicParsing="false" text="Edit">
                    <items>
@@ -412,6 +413,7 @@
                                           <ComboBox fx:id="edificiosSala" layoutX="226.0" layoutY="425.0" prefHeight="25.0" prefWidth="150.0" />
                                           <Button fx:id="listarSalas" layoutX="539.0" layoutY="425.0" mnemonicParsing="false" onAction="#handleListarSalas" text="Listar Salas" />
                                           <Button fx:id="removerSalas" layoutX="424.0" layoutY="463.0" mnemonicParsing="false" onAction="#handleRemoverSala" text="Remover" />
+                                          <Button fx:id="pesquisarSalas" layoutX="539.0" layoutY="463.0" mnemonicParsing="false" onAction="#handlePesquisarSalas" text="Pesquisar" />
                                        </children></AnchorPane>
                               </content>
                             </Tab>
@@ -432,6 +434,7 @@
                                           <Text layoutX="14.0" layoutY="465.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Faculdade" />
                                           <TextField fx:id="nomeDoCurso" layoutX="81.0" layoutY="415.0" />
                                           <ComboBox fx:id="faculdadeDoCurso" layoutX="81.0" layoutY="448.0" prefWidth="150.0" />
+                                          <Button fx:id="pesquisarCursos" layoutX="266.0" layoutY="448.0" mnemonicParsing="false" onAction="#handlePesquisarCursos" prefHeight="25.0" prefWidth="67.0" text="Pesquisar" />
                                        </children>
                                     </AnchorPane>
                                 </content>
@@ -466,6 +469,8 @@
                                           <Text layoutX="457.0" layoutY="427.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sala" />
                                           <Text layoutX="457.0" layoutY="473.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Professor" />
                                           <ComboBox fx:id="professordaTurma" layoutX="516.0" layoutY="456.0" prefWidth="150.0" />
+                                          <Button fx:id="pesquisarTurmas" layoutX="722.0" layoutY="494.0" mnemonicParsing="false" onAction="#handlePesquisarTurmas" text="Pesquisar" />
+                                          <Button fx:id="limparTabelaTurmas" layoutX="614.0" layoutY="494.0" mnemonicParsing="false" onAction="#handleLimparTabelTurmas" text="Limpar" />
                                        </children>
                                     </AnchorPane>
                                 </content>

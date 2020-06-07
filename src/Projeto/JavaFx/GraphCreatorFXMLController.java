@@ -9,11 +9,13 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TableColumn;
+eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+import javafx.scene.layout.Pane;
 import javafx.scene.Group;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -23,7 +25,6 @@ import javafx.util.Callback;
 import javafx.util.converter.IntegerStringConverter;
 
 import java.net.URL;
-import java.util.Random;
 import java.util.ResourceBundle;
 
 import static Projeto.Faculdade.pdp;
@@ -36,8 +37,6 @@ public class GraphCreatorFXMLController implements Initializable {
     private static final int radius = 25;
     private String pdpSalastxt = ".//data//salasPdp.txt";
     Graph_project gi = new Graph_project();
-    public Group graphGroup;
-    private String salas_txt = ".//data//salasGraph.txt";
 
     ///TABLE VIEW SALAS
     @FXML
@@ -500,7 +499,19 @@ TABELA DISCIPLINAS
 
         TabelaProfessores.setItems(getProfessores());
 
+
+
+
+
+
+
     }
+
+
+    public Group graphGroup;
+    private double radius = 30.0;
+    private String salas_txt = ".//data//salasGraph.txt";
+    Graph_project gi = new Graph_project();
 
     public void create_vertice_in_ProGraph(int v)
     {

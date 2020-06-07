@@ -22,6 +22,7 @@ import javafx.scene.text.Text;
 import javafx.util.Callback;
 import javafx.util.converter.IntegerStringConverter;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -59,8 +60,10 @@ public class GraphCreatorFXMLController implements Initializable {
     private String pdpSalasBinFile = ".//data//SalasPdpBinFile.bin";
 
     Graph_project<Point> gi = new Graph_project<>();
-
-    ///TABLE VIEW SALAS
+    /////////////////////////////////////////////////7
+    /*
+    TABELA DAS SALAS
+     */
     @FXML
     private javafx.scene.control.TableView<Sala> TabelaSalas;
 
@@ -91,6 +94,8 @@ public class GraphCreatorFXMLController implements Initializable {
 
     @FXML
     private Button listarSalas;
+    @FXML
+    private Button removerSalas;
 
 
     /// FIM TABLE VIEW SALAS
@@ -261,7 +266,9 @@ public class GraphCreatorFXMLController implements Initializable {
 
     /// FIM TABELA ALUNOS
 
-    /// TABLE VIEW PROFESSORES
+   /*
+   TABELA PROFESSORES
+    */
 
     @FXML
     private javafx.scene.control.TableView<Professor> TabelaProfessores;
@@ -278,6 +285,26 @@ public class GraphCreatorFXMLController implements Initializable {
     private TableColumn<Professor, String> disciplinasProfessor;
     @FXML
     private TableColumn<Professor, String> turmasProfessor;
+    @FXML
+    private Button listarProfessores;
+    @FXML
+    private Button AdicionarProfessores;
+    @FXML
+    private TextField nomedoProfessor;
+    @FXML
+    private TextField apelidodoProfessor;
+    @FXML
+    private TextField dianascProfessor;
+    @FXML
+    private TextField mesnscProfessor;
+    @FXML
+    private TextField anonascProfessor;
+    @FXML
+    private ListView discProfessor;
+    @FXML
+    private ListView turmasdoProfessor;
+
+
     /// FIM TABELA PROFESSORES
 
     @FXML
@@ -380,6 +407,17 @@ public class GraphCreatorFXMLController implements Initializable {
         ///Tabela Faculdade
         ColNome.setCellValueFactory(new PropertyValueFactory<Faculdade,String>("Name"));
         TableView.setItems(getLista());
+
+    }
+
+
+
+
+    /*
+    HANDLER DOS PROFESSORES
+     */
+
+    public void handleListarProfessores(ActionEvent actionEvent){
         ///Tabela Professores
         nomeProfessor.setCellValueFactory(new PropertyValueFactory<Professor,String>("Nome"));
         apelidoProfessor.setCellValueFactory(new PropertyValueFactory<Professor,String>("Apelido"));
@@ -418,7 +456,69 @@ public class GraphCreatorFXMLController implements Initializable {
             }
         });
         TabelaProfessores.setItems(getProfessores());
+        discProfessor.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        discProfessor.setItems(getDisciplinas());
+        turmasdoProfessor.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        turmasdoProfessor.setItems(getTurmas());
     }
+
+ /*
+ Funçao adicionar professor por acabar , falta verificar as ligaçoes , por ex um professor nao pode ser adicionado a uma turma que já tem um professor, entre outros
+  */
+//    public void handleAdicionarProfessor(ActionEvent actionEvent){
+//        if(nomedoProfessor.getText().isEmpty()  || apelidodoAluno.getText().isEmpty() || dianascProfessor.getText().isEmpty()|| mesnscProfessor.getText().isEmpty()|| anonascProfessor.getText().isEmpty() ){
+//            Alert a1 = new Alert(Alert.AlertType.ERROR);
+//            a1.setTitle("Professor");
+//            a1.setContentText("Por favor preencha o campo que se encontra vazio!");
+//            a1.setHeaderText(null);
+//            a1.showAndWait();
+//        }else{
+//            ///Crio um objeto Professor com os dados
+//            Data d = new Data(Integer.parseInt(dianascProfessor.getText()),Integer.parseInt(mesnscProfessor.getText()),Integer.parseInt(anonascProfessor.getText()));
+//            Professor p = new Professor(nomedoProfessor.getText(),apelidodoProfessor.getText(),d);
+//            ObservableList<Disciplina> disciplinas = discProfessor.getSelectionModel().getSelectedItems();
+//            ObservableList<Turma> turmas = turmasdoProfessor.getSelectionModel().getSelectedItems();
+//            ///Vou percorrer as disciplinas selecionadas e verificar junto das turmas selecionadas e ver se coincidem , se sim adiciona a informaçao
+//            for(Disciplina d : disciplinas){
+//                ///Percorro as turmas selecionadas
+//                for(Turma t : turmas){
+//                    ///Vamos percorrer as turmas dentro da disciplina atual e ver se existe um match entre a turma selecionada e a turma da disciplina , caso sim podemos adicionar tudo
+//                    for(Turma aux : d.getTurmas()){
+//                        ///Caso exista um match entao adicionamos o professor, caso contrario nao e mandamos o aviso
+//                        if(t.getCodigo().compareTo(aux.getCodigo())==0){
+//                            p.getTurmas().put(aux.getCodigo(),aux);
+//                            f1.turmas.get(aux.getCodigo()).
+//                            f1.professores.put(p.getEmail(),p);
+//
+//                            TabelaProfessores.getItems().add(p);
+//                        }
+//                    }
+//
+//                }
+//            }
+//
+//
+//
+//
+//
+//
+//
+//            if(f1.disciplinas.contains(d.getNome())){
+//                Alert a1 = new Alert(Alert.AlertType.ERROR);
+//                a1.setTitle("Disciplina");
+//                a1.setContentText("Já existe uma disciplina com esse codigo!");
+//                a1.setHeaderText(null);
+//                a1.showAndWait();
+//            }else{
+//                //adiciona o curso à ST Cursos da faculdade
+//                f1.disciplinas.put(d.getNome(),d);
+//                //Adiciona ao respetivo curso a turma
+//
+//
+//            }
+//        }
+//    }
+
 
     /*
     HANDLERS DISCIPLINAS
@@ -462,7 +562,10 @@ public class GraphCreatorFXMLController implements Initializable {
             }
         });
         TabelaDisciplinas.setItems(getDisciplinas());
+        professoresdaDisciplina.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         professoresdaDisciplina.setItems(getProfessores());
+
+
     }
 
     public void handleAdicionarDisciplina(ActionEvent actionEvent){
@@ -562,11 +665,12 @@ public class GraphCreatorFXMLController implements Initializable {
             for(Turma t : turmas){
                a.getTurmas().put(t.getCodigo(),t);
                a.getDisciplinas().put(a.getTurmas().get(t.getCodigo()).getDisciplina().getNome(),a.getTurmas().get(t.getCodigo()).getDisciplina());
+               f1.turmas.get(t.getCodigo()).getAlunos().put(a.getNumeroAluno(),a);
             }
             if(f1.alunos.contains(a.getNumeroAluno())){
                 Alert a1 = new Alert(Alert.AlertType.ERROR);
-                a1.setTitle("Turma");
-                a1.setContentText("Já existe uma turma com esse codigo!");
+                a1.setTitle("Aluno");
+                a1.setContentText("Já existe um aluno com esse codigo!");
                 a1.setHeaderText(null);
                 a1.showAndWait();
             }else{
@@ -652,50 +756,73 @@ public class GraphCreatorFXMLController implements Initializable {
         anoTurma.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
     }
 
-//    public void handleAddTurma(ActionEvent actionEvent){
-//        if(codigosdaTurma.getText().isEmpty() || anodaTurma.getText().isEmpty() || cursosTurmas.getSelectionModel().isEmpty() || salasdaTurma.getSelectionModel().isEmpty() || disciplinaDaTurma.getSelectionModel().isEmpty() || professordaTurma.getSelectionModel().isEmpty()){
-//            Alert a1 = new Alert(Alert.AlertType.ERROR);
-//            a1.setTitle("Turma");
-//            a1.setContentText("Por favor preencha o campo que se encontra vazio!");
-//            a1.setHeaderText(null);
-//            a1.showAndWait();
-//        }else{
-//
-//            Turma t = new Turma(Integer.parseInt(anodaTurma.getText()),codigosdaTurma.getText());
-//            Curso c = f1.cursos.get(cursosTurmas.getValue().toString());
-//            Disciplina d = f1.disciplinas.get(disciplinaDaTurma.getValue().toString());
-//            Sala s = f1.salas.get(Integer.parseInt(salasdaTurma.getValue().toString()));
-//            for (String cod: d.getProfessores().keys()
-//                 ) {
-//                if(f1.professores.contains(d.getProfessores().get(cod).getEmail())){
-//                    Professor p = f1.professores.get(d.getProfessores().get(cod).getEmail());
-//                }
-//
-//
-//            }
-//
-//            t.setDisciplina(d);
-//            t.setCurso(c);
-//            t.setSala(s);
-//            t.setProfessor(p);
-//            if(f1.turmas.contains(t.getCodigo())){
-//                Alert a1 = new Alert(Alert.AlertType.ERROR);
-//                a1.setTitle("Turma");
-//                a1.setContentText("Já existe uma turma com esse codigo!");
-//                a1.setHeaderText(null);
-//                a1.showAndWait();
-//            }else{
-//                //adiciona o curso à ST Cursos da faculdade
-//                f1.turmas.put(t.getCodigo(),t);
-//                //Adiciona ao respetivo curso a turma
-//                f1.cursos.get(t.getCurso().getNome()).getTurmas().put(t.getCodigo(),t);
-//                f1.professores.get(t.getProfessor().getEmail()).getTurmas().put(t.getCodigo(),t);
-//                f1.salas.get(t.getSala().getCodigo()).getTurmas().add(t);
-//                f1.disciplinas.get(t.getDisciplina().getNome()).getTurmas().add(t);
-//                TabelaTurmas.getItems().add(t);
-//            }
-//        }
-//    }
+    public void handleAddTurma(ActionEvent actionEvent){
+        if(codigosdaTurma.getText().isEmpty() || anodaTurma.getText().isEmpty() || cursosTurmas.getSelectionModel().isEmpty() || salasdaTurma.getSelectionModel().isEmpty() || disciplinaDaTurma.getSelectionModel().isEmpty() || professordaTurma.getSelectionModel().isEmpty()){
+            Alert a1 = new Alert(Alert.AlertType.ERROR);
+            a1.setTitle("Turma");
+            a1.setContentText("Por favor preencha o campo que se encontra vazio!");
+            a1.setHeaderText(null);
+            a1.showAndWait();
+        }else{
+
+            Turma t = new Turma(Integer.parseInt(anodaTurma.getText()),codigosdaTurma.getText());
+            Curso c = f1.cursos.get(cursosTurmas.getValue().toString());
+            Disciplina d = f1.disciplinas.get(disciplinaDaTurma.getValue().toString());
+            Sala s = f1.salas.get(Integer.parseInt(salasdaTurma.getValue().toString()));
+
+            for (String discod: c.getTurmas().keys()
+                 ) {
+                Turma tur = c.getTurmas().get(discod);
+                if(tur.getDisciplina().getNome() == d.getNome()){
+                    for (String cod: d.getProfessores().keys()
+                    ) {
+                        if(d.getProfessores().contains(professordaTurma.getValue().toString())){
+                            Professor p = d.getProfessores().get(professordaTurma.getValue().toString());
+                            t.setProfessor(p);
+                            t.setDisciplina(d);
+                            t.setCurso(c);
+                            t.setSala(s);
+                            if(f1.turmas.contains(t.getCodigo())){
+                                Alert a1 = new Alert(Alert.AlertType.ERROR);
+                                a1.setTitle("Turma");
+                                a1.setContentText("Já existe uma turma com esse codigo!");
+                                a1.setHeaderText(null);
+                                a1.showAndWait();
+                            }else{
+                                //adiciona o curso à ST Cursos da faculdade
+                                f1.turmas.put(t.getCodigo(),t);
+                                //Adiciona ao respetivo curso a turma
+                                f1.cursos.get(t.getCurso().getNome()).getTurmas().put(t.getCodigo(),t);
+                                f1.professores.get(t.getProfessor().getEmail()).getTurmas().put(t.getCodigo(),t);
+                                f1.salas.get(t.getSala().getCodigo()).getTurmas().add(t);
+                                f1.disciplinas.get(t.getDisciplina().getNome()).getTurmas().add(t);
+                                TabelaTurmas.getItems().add(t);
+                            }
+                            break;
+                        }else{
+                            Alert a1 = new Alert(Alert.AlertType.ERROR);
+                            a1.setTitle("Turma");
+                            a1.setContentText("Por favor selecione um professor da disciplina!");
+                            a1.setHeaderText(null);
+                            a1.showAndWait();
+                        }
+                    }
+                }else {
+                    Alert a1 = new Alert(Alert.AlertType.ERROR);
+                    a1.setTitle("Turma");
+                    a1.setContentText("Por favor selecione uma disciplina do curso!");
+                    a1.setHeaderText(null);
+                    a1.showAndWait();
+                }
+                break;
+            }
+
+
+
+
+
+        }
+    }
 
     public void handleEditarAnoTurma(TableColumn.CellEditEvent editedcell){
         Turma t = TabelaTurmas.getSelectionModel().getSelectedItem();
@@ -869,6 +996,14 @@ public class GraphCreatorFXMLController implements Initializable {
             f1.salas.get(s.getCodigo()).setNrTomadas(Integer.parseInt(aux));
         }
     }
+
+
+    public void handleRemoverSala(ActionEvent actionEvent) throws IOException {
+        ///Recebo o codigo da sala a remover
+        Sala s = f1.salas.get(Integer.parseInt(codigoSalaTextfield.getText()));
+        f1.removerSalas(s);
+    }
+
 
     /*
         HANDLERS EDIFICIO

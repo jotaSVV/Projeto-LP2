@@ -2,15 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8c55197f-5a22-4f2f-9095-09cd0bc29e84" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Projeto/Bipartite_Projeto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Projeto/DepthFirstSearch_Project.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Projeto/DijkstraSP_Projeto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/alunosST.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/alunosST.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/cursosST.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/cursosST.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/disciplinasST.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/disciplinasST.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/edificiosST.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/edificiosST.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/pdpST.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/pdpST.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/professoresST.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/professoresST.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/salasPdp.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/salasPdp.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/salasST.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/salasST.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/turmasST.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/turmasST.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/LP2PROJECTO/Projeto/JavaFx/graph_creator.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LP2PROJECTO/Projeto/JavaFx/graph_creator.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Projeto/JavaFx/FaculdadeSTFXMLController.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Projeto/JavaFx/GraphCreatorFXMLController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Projeto/JavaFx/GraphCreatorFXMLController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Projeto/JavaFx/graph_creator.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Projeto/JavaFx/graph_creator.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/princeton/cs/algs4/DirectedEdge.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/princeton/cs/algs4/DirectedEdge.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,26 +34,6 @@
         <option value="Class" />
       </list>
     </option>
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>GraphCreatorFXMLController</find>
-      <find>GraphGroup</find>
-      <find>handle</find>
-      <find>name</find>
-      <find>hand</find>
-      <find>fac</find>
-      <find>data</find>
-      <find>tabelaEdificio</find>
-      <find>handleAddEdificio</find>
-      <find>Button</find>
-      <find>adicionarEdificio</find>
-      <find>comboBoxFaculdadesEdificio</find>
-      <find>TURMAS</find>
-      <find>CARRE</find>
-      <find>toString</find>
-      <find>Initia</find>
-    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -211,22 +195,22 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="499" y="188" key="#com.intellij.ide.util.PackageChooserDialog/0.0.1536.824@0.0.1536.824" timestamp="1590009093660" />
-    <state width="1493" height="182" key="GridCell.Tab.0.bottom" timestamp="1591501711497">
+    <state width="1493" height="182" key="GridCell.Tab.0.bottom" timestamp="1591503064675">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="182" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1591501711497" />
-    <state width="1493" height="182" key="GridCell.Tab.0.center" timestamp="1591501711497">
+    <state width="1493" height="182" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1591503064675" />
+    <state width="1493" height="182" key="GridCell.Tab.0.center" timestamp="1591503064675">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="182" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1591501711497" />
-    <state width="1493" height="182" key="GridCell.Tab.0.left" timestamp="1591501711497">
+    <state width="1493" height="182" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1591503064675" />
+    <state width="1493" height="182" key="GridCell.Tab.0.left" timestamp="1591503064675">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="182" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1591501711497" />
-    <state width="1493" height="182" key="GridCell.Tab.0.right" timestamp="1591501711497">
+    <state width="1493" height="182" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1591503064675" />
+    <state width="1493" height="182" key="GridCell.Tab.0.right" timestamp="1591503064675">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="182" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1591501711497" />
+    <state width="1493" height="182" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1591503064675" />
     <state x="249" y="0" key="SettingsEditor" timestamp="1591279156523">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

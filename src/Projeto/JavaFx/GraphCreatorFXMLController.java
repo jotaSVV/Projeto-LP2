@@ -30,7 +30,7 @@ import static Projeto.JavaFx.GraphCreator.f1;
 import static Projeto.JavaFx.GraphCreator.graph_pdpSalas;
 public class GraphCreatorFXMLController implements Initializable {
 
-    /// MEU CODIGO ///////////////////////////////////
+
     public Pane graphPane;
     private static final int radius = 25;
     public HBox addSearchBox12;
@@ -38,7 +38,7 @@ public class GraphCreatorFXMLController implements Initializable {
     public HBox addSearchBox121;
     public TextField printConexo;
 
-    // ADD GRAFOS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // ADD GRAFOS
     public ComboBox<String> salasComboBox;
     public ComboBox<String> alunosComboBox;
     public ComboBox<String> comboSala;
@@ -51,11 +51,14 @@ public class GraphCreatorFXMLController implements Initializable {
     public ComboBox<String> comboSalaSala;
     public ComboBox<String> comboSalaSala1;
     public TextField resultDistance;
+    /// para colocar a distancia de sala para sala
+    public TableColumn<Object, Integer> distToSalas;
+    public TableColumn dadosAluno;
 
     private String pdpSalastxt = ".//data//salasPdp.txt";
 
     Graph_project<Point> gi = new Graph_project<>();
-    /////////////////////////////////////////////////7
+
     ///TABLE VIEW SALAS
     @FXML
     private javafx.scene.control.TableView<Sala> TabelaSalas;
@@ -83,7 +86,7 @@ public class GraphCreatorFXMLController implements Initializable {
     private TextField nrCadeirasSalaTextfield;
 
     @FXML
-    private ComboBox edificiosSala;
+    private ComboBox<Projeto.Edificio> edificiosSala;
 
     @FXML
     private Button listarSalas;
@@ -113,12 +116,11 @@ public class GraphCreatorFXMLController implements Initializable {
     @FXML
     private TextField nomeDoCurso;
     @FXML
-    private ComboBox faculdadeDoCurso;
+    private ComboBox<Faculdade> faculdadeDoCurso;
 
-/*
-TABELA DISCIPLINAS
- */
-
+    /*
+    TABELA DISCIPLINAS
+     */
 
     @FXML
     private javafx.scene.control.TableView<Disciplina> TabelaDisciplinas;
@@ -141,16 +143,12 @@ TABELA DISCIPLINAS
     @FXML
     private TextField semestredaDisciplina;
     @FXML
-    private ListView professoresdaDisciplina;
+    private ListView<Professor> professoresdaDisciplina;
     @FXML
     private Button listarDisciplinas;
     @FXML
     private Button adicionarDisciplinas;
-
-
     ///FIM TABELA Disciplinas
-
-
 
     /*
     TABELA DAS TURMAS
@@ -175,7 +173,7 @@ TABELA DISCIPLINAS
     @FXML
     private TableColumn<Turma, String> salaTurma;
     @FXML
-    private ComboBox cursosTurmas;
+    private ComboBox<Curso> cursosTurmas;
     @FXML
     private TextField codigosdaTurma;
     @FXML
@@ -185,11 +183,11 @@ TABELA DISCIPLINAS
     @FXML
     private Button AdicionarTurmas;
     @FXML
-    private ComboBox disciplinaDaTurma;
+    private ComboBox<Disciplina> disciplinaDaTurma;
     @FXML
-    private ComboBox salasdaTurma;
+    private ComboBox<Sala> salasdaTurma;
     @FXML
-    private ComboBox professordaTurma;
+    private ComboBox<Professor> professordaTurma;
 
     ///Fim Tabela Turmas
     /// TABLE VIEW EDIFICIO
@@ -205,7 +203,7 @@ TABELA DISCIPLINAS
     private TableColumn<Edificio, String> salasEdificio;
 
     @FXML
-    private ComboBox comboBoxFaculdadesEdificio ;
+    private ComboBox<Faculdade> comboBoxFaculdadesEdificio ;
 
     @FXML
     private Button adicionarEdificio;
@@ -253,7 +251,7 @@ TABELA DISCIPLINAS
     @FXML
     private TextField anonascimentoAluno;
     @FXML
-    private ListView turmasdoAluno;
+    private ListView<Turma> turmasdoAluno;
     @FXML
     private Button listarAlunos;
     @FXML
@@ -279,13 +277,7 @@ TABELA DISCIPLINAS
     private TableColumn<Professor, String> disciplinasProfessor;
     @FXML
     private TableColumn<Professor, String> turmasProfessor;
-
-
     /// FIM TABELA PROFESSORES
-
-
-
-
 
     @FXML
     private javafx.scene.control.TableView<Faculdade> TableView;
@@ -379,10 +371,6 @@ TABELA DISCIPLINAS
         return lista;
     }
 
-
-
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         showSalasComboBox();
@@ -472,8 +460,6 @@ TABELA DISCIPLINAS
                 }
             }
         });
-
-
         TabelaDisciplinas.setItems(getDisciplinas());
         professoresdaDisciplina.setItems(getProfessores());
     }
@@ -591,8 +577,6 @@ TABELA DISCIPLINAS
             }
         }
     }
-
-
 
     /*
     HANDLERS DAS TURMAS
@@ -787,9 +771,6 @@ TABELA DISCIPLINAS
         }
     }
 
-
-
-
     /*
          HANDLERS DA SALA
      */
@@ -888,7 +869,6 @@ TABELA DISCIPLINAS
         }
     }
 
-
     /*
         HANDLERS EDIFICIO
      */
@@ -919,7 +899,7 @@ TABELA DISCIPLINAS
     }
 
     public void handleListarEdificios(ActionEvent actionEvent){
-///Tabela Edificio
+    ///Tabela Edificio
         nomeEdificio.setCellValueFactory(new PropertyValueFactory<Edificio,String>("Nome"));
         faculdadeEdificio.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Edificio, String>, ObservableValue<String>>() {
             @Override
@@ -976,7 +956,6 @@ TABELA DISCIPLINAS
     public void handleAddTurma() {
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void gerarVerticesSalasGraph(String v)
     {
         int codSala = Integer.parseInt(v);
@@ -994,6 +973,7 @@ TABELA DISCIPLINAS
         stack.getChildren().addAll(c,text);
         graphPane.getChildren().add(stack);
     }
+
     public void gerarVerticesPdpGraph(String v)
     {
         int codPdp = Integer.parseInt(v);
@@ -1071,12 +1051,6 @@ TABELA DISCIPLINAS
             printConexo.setText("Not Conexo");
     }
 
-    public void handleSelectAlunos(ActionEvent event) {
-    }
-
-    public void handleSelectSalas(ActionEvent event) {
-    }
-
     public void showSalasComboBox(){
         for (Integer s:salas.keys()) {
             salasComboBox.getItems().addAll(salas.get(s).getName());
@@ -1101,7 +1075,7 @@ TABELA DISCIPLINAS
         }
     }
 
-    public void handleCalculeDistance(ActionEvent event){ // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    public void handleCalculeDistance(ActionEvent event){ // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! falta tentar para o dist -x
         String nomeSala=salasComboBox.getValue();
         String nomeAluno=alunosComboBox.getValue();
 
@@ -1130,6 +1104,10 @@ TABELA DISCIPLINAS
                                         System.out.println(dist);
                                         System.out.println("Aluno POS:" +a1.getX() +" "+ a1.getY() +" "+a1.getZ());
                                         resultDistance.setText(String.valueOf(dist));
+                                     //   distToSalas.setText("test");
+                                      //  distToSalas.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+                                     //   distToSalas;
+                                      //  public TableColumn dadosAluno;
                                     }else {
                                         resultDistance.setText("Sem Caminho Possivel");
                                     }
@@ -1152,6 +1130,7 @@ TABELA DISCIPLINAS
                                         f1.guardar_STALUNOS();
                                         double dist = sp.distTo(vi)+s1.distAlunoSalaProx;
                                         resultDistance.setText(String.valueOf(dist));
+                                        distToSalas.setText("test");
                                     }else {
                                         resultDistance.setText("Sem Caminho Possivel");
                                     }

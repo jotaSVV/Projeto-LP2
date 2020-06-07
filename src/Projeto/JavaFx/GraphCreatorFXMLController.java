@@ -506,7 +506,36 @@ TABELA DISCIPLINAS
         professoresdaDisciplina.setItems(getProfessores());
     }
 
+    public void handleAdicionarDisciplina(ActionEvent actionEvent){
+        if(nomedaDisciplina.getText().isEmpty()  || ectsdaDisciplina.getText().isEmpty() || semestredaDisciplina.getText().isEmpty() ){
+            Alert a1 = new Alert(Alert.AlertType.ERROR);
+            a1.setTitle("Disciplina");
+            a1.setContentText("Por favor preencha o campo que se encontra vazio!");
+            a1.setHeaderText(null);
+            a1.showAndWait();
+        }else{
 
+            Disciplina d = new Disciplina(nomedaDisciplina.getText(),Integer.parseInt(ectsdaDisciplina.getText()),Integer.parseInt(semestredaDisciplina.getText()));
+            ObservableList<Professor> professores;
+            professores = professoresdaDisciplina.getSelectionModel().getSelectedItems();
+            for(Professor p : professores){
+                d.getProfessores().put(p.getEmail(),p);
+            }
+            if(f1.disciplinas.contains(d.getNome())){
+                Alert a1 = new Alert(Alert.AlertType.ERROR);
+                a1.setTitle("Disciplina");
+                a1.setContentText("Já existe uma disciplina com esse codigo!");
+                a1.setHeaderText(null);
+                a1.showAndWait();
+            }else{
+                //adiciona o curso à ST Cursos da faculdade
+                f1.disciplinas.put(d.getNome(),d);
+                //Adiciona ao respetivo curso a turma
+
+                TabelaDisciplinas.getItems().add(d);
+            }
+        }
+    }
 
     /*
     HANDLERS ALUNOS
@@ -666,42 +695,50 @@ TABELA DISCIPLINAS
         anoTurma.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
     }
 
-    public void handleAddTurma(ActionEvent actionEvent){
-        if(codigosdaTurma.getText().isEmpty() || anodaTurma.getText().isEmpty() || cursosTurmas.getSelectionModel().isEmpty() || salasdaTurma.getSelectionModel().isEmpty() || disciplinaDaTurma.getSelectionModel().isEmpty() || professordaTurma.getSelectionModel().isEmpty()){
-            Alert a1 = new Alert(Alert.AlertType.ERROR);
-            a1.setTitle("Turma");
-            a1.setContentText("Por favor preencha o campo que se encontra vazio!");
-            a1.setHeaderText(null);
-            a1.showAndWait();
-        }else{
-
-            Turma t = new Turma(Integer.parseInt(anodaTurma.getText()),codigosdaTurma.getText());
-            Curso c = f1.cursos.get(cursosTurmas.getValue().toString());
-            Disciplina d = f1.disciplinas.get(disciplinaDaTurma.getValue().toString());
-            Sala s = f1.salas.get(Integer.parseInt(salasdaTurma.getValue().toString()));
-            Professor p = f1.professores.get(professordaTurma.getValue().toString());
-            t.setDisciplina(d);
-            t.setCurso(c);
-            t.setSala(s);
-            t.setProfessor(p);
-            if(f1.turmas.contains(t.getCodigo())){
-                Alert a1 = new Alert(Alert.AlertType.ERROR);
-                a1.setTitle("Turma");
-                a1.setContentText("Já existe uma turma com esse codigo!");
-                a1.setHeaderText(null);
-                a1.showAndWait();
-            }else{
-                //adiciona o curso à ST Cursos da faculdade
-                f1.turmas.put(t.getCodigo(),t);
-                //Adiciona ao respetivo curso a turma
-                f1.cursos.get(t.getCurso().getNome()).getTurmas().put(t.getCodigo(),t);
-                f1.professores.get(t.getProfessor().getEmail()).getTurmas().put(t.getCodigo(),t);
-                f1.salas.get(t.getSala().getCodigo()).getTurmas().add(t);
-                f1.disciplinas.get(t.getDisciplina().getNome()).getTurmas().add(t);
-                TabelaTurmas.getItems().add(t);
-            }
-        }
-    }
+//    public void handleAddTurma(ActionEvent actionEvent){
+//        if(codigosdaTurma.getText().isEmpty() || anodaTurma.getText().isEmpty() || cursosTurmas.getSelectionModel().isEmpty() || salasdaTurma.getSelectionModel().isEmpty() || disciplinaDaTurma.getSelectionModel().isEmpty() || professordaTurma.getSelectionModel().isEmpty()){
+//            Alert a1 = new Alert(Alert.AlertType.ERROR);
+//            a1.setTitle("Turma");
+//            a1.setContentText("Por favor preencha o campo que se encontra vazio!");
+//            a1.setHeaderText(null);
+//            a1.showAndWait();
+//        }else{
+//
+//            Turma t = new Turma(Integer.parseInt(anodaTurma.getText()),codigosdaTurma.getText());
+//            Curso c = f1.cursos.get(cursosTurmas.getValue().toString());
+//            Disciplina d = f1.disciplinas.get(disciplinaDaTurma.getValue().toString());
+//            Sala s = f1.salas.get(Integer.parseInt(salasdaTurma.getValue().toString()));
+//            for (String cod: d.getProfessores().keys()
+//                 ) {
+//                if(f1.professores.contains(d.getProfessores().get(cod).getEmail())){
+//                    Professor p = f1.professores.get(d.getProfessores().get(cod).getEmail());
+//                }
+//
+//
+//            }
+//
+//            t.setDisciplina(d);
+//            t.setCurso(c);
+//            t.setSala(s);
+//            t.setProfessor(p);
+//            if(f1.turmas.contains(t.getCodigo())){
+//                Alert a1 = new Alert(Alert.AlertType.ERROR);
+//                a1.setTitle("Turma");
+//                a1.setContentText("Já existe uma turma com esse codigo!");
+//                a1.setHeaderText(null);
+//                a1.showAndWait();
+//            }else{
+//                //adiciona o curso à ST Cursos da faculdade
+//                f1.turmas.put(t.getCodigo(),t);
+//                //Adiciona ao respetivo curso a turma
+//                f1.cursos.get(t.getCurso().getNome()).getTurmas().put(t.getCodigo(),t);
+//                f1.professores.get(t.getProfessor().getEmail()).getTurmas().put(t.getCodigo(),t);
+//                f1.salas.get(t.getSala().getCodigo()).getTurmas().add(t);
+//                f1.disciplinas.get(t.getDisciplina().getNome()).getTurmas().add(t);
+//                TabelaTurmas.getItems().add(t);
+//            }
+//        }
+//    }
 
     public void handleEditarAnoTurma(TableColumn.CellEditEvent editedcell){
         Turma t = TabelaTurmas.getSelectionModel().getSelectedItem();

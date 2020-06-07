@@ -56,6 +56,9 @@ public class Sala extends Point{
     }
     return edificio.getNome();
   }
+  public Point getPoint() {
+    return point;
+  }
 
   public int getCodigo() {
     return codigo;

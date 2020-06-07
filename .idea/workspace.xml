@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8c55197f-5a22-4f2f-9095-09cd0bc29e84" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Projeto/JavaFx/FaculdadeSTFXMLController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/alunosST.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/alunosST.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/cursosST.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/cursosST.txt" afterDir="false" />
@@ -12,11 +13,15 @@
       <change beforePath="$PROJECT_DIR$/data/salasST.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/salasST.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/turmasST.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/turmasST.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/LP2PROJECTO/Projeto/JavaFx/graph_creator.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LP2PROJECTO/Projeto/JavaFx/graph_creator.fxml" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/src/Projeto/Aluno.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Projeto/Aluno.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Projeto/Curso.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Projeto/Curso.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Projeto/Disciplina.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Projeto/Disciplina.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Projeto/Edificio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Projeto/Edificio.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Projeto/Faculdade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Projeto/Faculdade.java" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/src/Projeto/JavaFx/GraphCreator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Projeto/JavaFx/GraphCreator.java" afterDir="false" />
+>>>>>>> parent of 8c8e426... juncao dos codigos
       <change beforePath="$PROJECT_DIR$/src/Projeto/JavaFx/GraphCreatorFXMLController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Projeto/JavaFx/GraphCreatorFXMLController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Projeto/JavaFx/graph_creator.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Projeto/JavaFx/graph_creator.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Projeto/Professor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Projeto/Professor.java" afterDir="false" />
@@ -37,6 +42,7 @@
     <option name="isMigrated" value="true" />
   </component>
   <component name="FileEditorManager">
+<<<<<<< HEAD
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Projeto/JavaFx/GraphCreatorFXMLController.java">
@@ -69,10 +75,19 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="119">
               <caret line="27" selection-start-line="27" selection-end-line="27" />
+=======
+    <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Projeto/Aluno.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+>>>>>>> parent of 8c8e426... juncao dos codigos
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Projeto/Curso.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -83,6 +98,15 @@
                 <element signature="e#735#736#0" expanded="true" />
                 <element signature="e#781#782#0" expanded="true" />
                 <element signature="e#812#813#0" expanded="true" />
+=======
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Projeto/JavaFx/GraphCreatorFXMLController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="212" column="76" selection-start-line="212" selection-start-column="76" selection-end-line="212" selection-end-column="76" />
+              <folding>
+                <element signature="imports" expanded="true" />
+>>>>>>> parent of 8c8e426... juncao dos codigos
               </folding>
             </state>
           </provider>
@@ -91,6 +115,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Projeto/Turma.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="178">
               <caret line="94" column="22" selection-start-line="94" selection-start-column="22" selection-end-line="94" selection-end-column="22" />
               <folding>
@@ -99,11 +124,16 @@
                 <element signature="e#1871#1872#0" expanded="true" />
                 <element signature="e#1899#1900#0" expanded="true" />
               </folding>
+=======
+            <state relative-caret-position="136">
+              <caret line="12" column="26" selection-start-line="12" selection-start-column="26" selection-end-line="12" selection-end-column="26" />
+>>>>>>> parent of 8c8e426... juncao dos codigos
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/src/Projeto/Sala.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="137">
@@ -114,11 +144,18 @@
                 <element signature="e#650#651#0" expanded="true" />
                 <element signature="e#675#676#0" expanded="true" />
               </folding>
+=======
+        <entry file="file://$PROJECT_DIR$/src/Projeto/Faculdade.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="20" selection-start-line="20" selection-end-line="20" />
+>>>>>>> parent of 8c8e426... juncao dos codigos
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/src/Projeto/Professor.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="195">
@@ -127,11 +164,18 @@
                 <element signature="e#4267#4268#0" expanded="true" />
                 <element signature="e#4297#4298#0" expanded="true" />
               </folding>
+=======
+        <entry file="file://$PROJECT_DIR$/src/Projeto/Edificio.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-51">
+              <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+>>>>>>> parent of 8c8e426... juncao dos codigos
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/src/Projeto/Disciplina.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="408">
@@ -140,11 +184,18 @@
                 <element signature="e#551#552#0" expanded="true" />
                 <element signature="e#577#578#0" expanded="true" />
               </folding>
+=======
+        <entry file="file://$PROJECT_DIR$/data/salasST.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" column="7" selection-start-line="6" selection-start-column="7" selection-end-line="6" selection-end-column="7" />
+>>>>>>> parent of 8c8e426... juncao dos codigos
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/src/Projeto/Faculdade.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="16932">
@@ -152,12 +203,21 @@
               <folding>
                 <element signature="e#62431#62432#0" expanded="true" />
                 <element signature="e#62468#62469#0" expanded="true" />
+=======
+        <entry file="file://$PROJECT_DIR$/src/Projeto/JavaFx/GraphCreator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="17" column="18" selection-start-line="17" selection-start-column="18" selection-end-line="17" selection-end-column="18" />
+              <folding>
+                <element signature="imports" expanded="true" />
+>>>>>>> parent of 8c8e426... juncao dos codigos
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/src/Projeto/Edificio.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="127">
@@ -167,6 +227,14 @@
                 <element signature="e#419#420#0" expanded="true" />
                 <element signature="e#461#462#0" expanded="true" />
                 <element signature="e#491#492#0" expanded="true" />
+=======
+        <entry file="file://$PROJECT_DIR$/src/Projeto/Sala.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="111">
+              <caret line="39" column="33" selection-start-line="39" selection-start-column="33" selection-end-line="39" selection-end-column="33" />
+              <folding>
+                <element signature="e#675#676#0" expanded="true" />
+>>>>>>> parent of 8c8e426... juncao dos codigos
               </folding>
             </state>
           </provider>
@@ -190,6 +258,7 @@
       <find>name</find>
       <find>hand</find>
       <find>fac</find>
+<<<<<<< HEAD
       <find>data</find>
       <find>tabelaEdificio</find>
       <find>handleAddEdificio</find>
@@ -200,6 +269,8 @@
       <find>CARRE</find>
       <find>toString</find>
       <find>Initia</find>
+=======
+>>>>>>> parent of 8c8e426... juncao dos codigos
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -208,6 +279,7 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/data/salasST.txt" />
         <option value="$PROJECT_DIR$/src/Projeto/JavaFx/GraphCreator.java" />
         <option value="$PROJECT_DIR$/src/Projeto/Faculdade.java" />
@@ -219,6 +291,12 @@
         <option value="$PROJECT_DIR$/src/Projeto/Professor.java" />
         <option value="$PROJECT_DIR$/src/Projeto/Aluno.java" />
         <option value="$PROJECT_DIR$/src/Projeto/Turma.java" />
+=======
+        <option value="$PROJECT_DIR$/src/Projeto/Sala.java" />
+        <option value="$PROJECT_DIR$/data/salasST.txt" />
+        <option value="$PROJECT_DIR$/src/Projeto/JavaFx/GraphCreator.java" />
+        <option value="$PROJECT_DIR$/src/Projeto/Faculdade.java" />
+>>>>>>> parent of 8c8e426... juncao dos codigos
         <option value="$PROJECT_DIR$/src/Projeto/JavaFx/GraphCreatorFXMLController.java" />
       </list>
     </option>
@@ -238,7 +316,10 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+<<<<<<< HEAD
       <pane id="PackagesPane" />
+=======
+>>>>>>> parent of 8c8e426... juncao dos codigos
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -273,6 +354,10 @@
           <select />
         </subPane>
       </pane>
+<<<<<<< HEAD
+=======
+      <pane id="PackagesPane" />
+>>>>>>> parent of 8c8e426... juncao dos codigos
       <pane id="Scope" />
     </panes>
   </component>
@@ -400,6 +485,7 @@
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
+<<<<<<< HEAD
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25340393" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
@@ -407,6 +493,20 @@
       <window_info id="UI Designer" order="4" />
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
+=======
+      <window_info id="Image Layers" />
+      <window_info id="Designer" />
+      <window_info id="UI Designer" />
+      <window_info id="Capture Tool" />
+      <window_info id="Favorites" side_tool="true" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24962178" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Version Control" />
+      <window_info anchor="bottom" id="Terminal" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="Flutter Performance" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" weight="0.3289689" />
+>>>>>>> parent of 8c8e426... juncao dos codigos
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3289689" />
@@ -414,6 +514,7 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
+<<<<<<< HEAD
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
@@ -429,6 +530,18 @@
       <window_info anchor="right" id="Flutter Outline" order="7" />
       <window_info anchor="right" id="Capture Analysis" order="8" />
       <window_info anchor="right" id="Palette&#9;" order="9" />
+=======
+      <window_info anchor="right" id="Palette" />
+      <window_info anchor="right" id="Theme Preview" />
+      <window_info anchor="right" id="Flutter Inspector" />
+      <window_info anchor="right" id="Maven" />
+      <window_info anchor="right" id="Capture Analysis" />
+      <window_info anchor="right" id="Palette&#9;" />
+      <window_info anchor="right" id="Flutter Outline" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+>>>>>>> parent of 8c8e426... juncao dos codigos
     </layout>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -482,6 +595,7 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="499" y="188" key="#com.intellij.ide.util.PackageChooserDialog/0.0.1536.824@0.0.1536.824" timestamp="1590009093660" />
+<<<<<<< HEAD
     <state width="1493" height="205" key="GridCell.Tab.0.bottom" timestamp="1591279428841">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -495,6 +609,33 @@
     </state>
     <state width="1493" height="205" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1591279428840" />
     <state width="1493" height="205" key="GridCell.Tab.0.right" timestamp="1591279428840">
+=======
+    <state x="551" y="306" width="433" height="217" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1591282349914">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="551" y="306" width="433" height="217" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1536.824@0.0.1536.824" timestamp="1591282349914" />
+    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1591291959027">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1591291959027" />
+    <state width="1493" height="235" key="GridCell.Tab.0.bottom" timestamp="1591379302961">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="235" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1591379302961" />
+    <state width="1493" height="235" key="GridCell.Tab.0.center" timestamp="1591379302960">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="235" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1591379302960" />
+    <state width="1493" height="235" key="GridCell.Tab.0.left" timestamp="1591379302960">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="235" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1591379302960" />
+    <state width="1493" height="235" key="GridCell.Tab.0.right" timestamp="1591379302960">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="235" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1591379302960" />
+    <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1591366129702">
+>>>>>>> parent of 8c8e426... juncao dos codigos
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1493" height="205" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1591279428840" />
@@ -678,6 +819,95 @@
             <element signature="e#24569#25446#0" />
             <element signature="e#24561#26939#0" />
             <element signature="e#25455#26333#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/Projeto/Aluno.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Projeto/JavaFx/graph_creator.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="98" column="53" selection-start-line="98" selection-start-column="53" selection-end-line="98" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Projeto/Sala.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="111">
+          <caret line="39" column="33" selection-start-line="39" selection-start-column="33" selection-end-line="39" selection-end-column="33" />
+          <folding>
+            <element signature="e#675#676#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/alunosST.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/turmasST.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-856" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/salasST.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="7" selection-start-line="6" selection-start-column="7" selection-end-line="6" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/cursosST.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Projeto/JavaFx/GraphCreator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="17" column="18" selection-start-line="17" selection-start-column="18" selection-end-line="17" selection-end-column="18" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/edificiosST.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Projeto/Edificio.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-51">
+          <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Projeto/Faculdade.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="20" selection-start-line="20" selection-end-line="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Projeto/Turma.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="12" column="26" selection-start-line="12" selection-start-column="26" selection-end-line="12" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Projeto/JavaFx/GraphCreatorFXMLController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="212" column="76" selection-start-line="212" selection-start-column="76" selection-end-line="212" selection-end-column="76" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

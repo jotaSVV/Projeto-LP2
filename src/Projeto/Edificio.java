@@ -5,11 +5,12 @@ public class Edificio{
 
   public String nome;
 
-    /**
-   * 
+  /**
+   *
    * @element-type Sala
    */
   private ArrayList<Sala> salas = new ArrayList<>();
+  private ArrayList<PontosDePassagem> pdp = new ArrayList<>();
   public Point point;
 
   private Faculdade faculdade;
@@ -17,15 +18,6 @@ public class Edificio{
   public Edificio(String nome, Faculdade faculdade) {
     this.nome = nome;
     this.faculdade = faculdade;
-  }
-
-  public void setNome(String nome) {
-    this.nome = nome;
-  }
-
-  @Override
-  public String toString() {
-    return this.getNome();
   }
 
   public String getNome() {
@@ -40,11 +32,24 @@ public class Edificio{
     return point;
   }
 
+  public ArrayList<PontosDePassagem> getPdp() {
+    return pdp;
+  }
+
+  public void setPdp(ArrayList<PontosDePassagem> pdp) {
+    this.pdp = pdp;
+  }
+
   public Faculdade getFaculdade() {
     return faculdade;
   }
 
   public void setFaculdade(Faculdade faculdade) {
     this.faculdade = faculdade;
+  }
+
+  @Override
+  public String toString() {
+    return this.getNome();
   }
 }

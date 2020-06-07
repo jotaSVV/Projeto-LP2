@@ -1,33 +1,33 @@
 Curso:
 CUR4;Unisersidade Fernando Pessoa
 TURMAS:
-2020;TUR6;CUR4;BIO;220;
-
-Curso:
-INF;Unisersidade Fernando Pessoa
-TURMAS:
-2020;TYH;INF;SO;220;
-2020;ERT;INF;LP2;220;
-
-Curso:
-CUR1;Unisersidade Fernando Pessoa
-TURMAS:
-2020;TUR1;CUR1;DIS1;220;
-2020;TUR2;CUR1;DIS2;220;
+2020;TUR6;CUR4;BIO;224;
 
 Curso:
 CBL;Unisersidade Fernando Pessoa
 TURMAS:
-2020;WRTH;CBL;BIO;220;
+2020;WRTH;CBL;BIO;224;
+
+Curso:
+CUR1;Unisersidade Fernando Pessoa
+TURMAS:
+2020;TUR1;CUR1;DIS1;224;
+2020;TUR2;CUR1;DIS2;224;
+
+Curso:
+INF;Unisersidade Fernando Pessoa
+TURMAS:
+2020;ERT;INF;LP2;224;
+2020;TYH;INF;SO;224;
 
 Curso:
 CUR2;Unisersidade Fernando Pessoa
 TURMAS:
-2020;TUR3;CUR2;DIS3;220;
-2020;TUR4;CUR2;DIS4;220;
+2020;TUR3;CUR2;DIS3;224;
+2020;TUR4;CUR2;DIS4;224;
 
 Curso:
 CUR3;Unisersidade Fernando Pessoa
 TURMAS:
-2020;TUR5;CUR3;DIS5;220;
+2020;TUR5;CUR3;DIS5;224;
 

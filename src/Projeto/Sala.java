@@ -23,6 +23,8 @@ public class Sala extends Point{
 
   private int nrTomadas;
 
+  public double distAlunoSalaProx = 0;
+
   private ArrayList<Turma> turmas = new ArrayList<>();
 
   private Edificio edificio;

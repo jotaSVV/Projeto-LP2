@@ -15,6 +15,9 @@ package Projeto;
       this.name = name;
     }
 
+    public Point() {
+    }
+
     public double getX() {
       return x;
     }

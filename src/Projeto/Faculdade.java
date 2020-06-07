@@ -856,11 +856,12 @@ public class Faculdade {
                 Aluno a = alunos.get(cod);
                 myWriter.write(a.getNome() + ";" + a.getApelido() + ";" + a.getDataNascimento().getDay() + "/" + a.getDataNascimento().getMonth() + "/" + a.getDataNascimento().getYear() + ";" + a.age() + ";" + a.getNumeroAluno() + "@ufp.edu.pt" + ";" + a.getNumeroAluno() + "\n");
                 myWriter.write("TURMAS:\n");
-                for (String c : a.getTurmas().keys()
-                ) {
+                for (String c : a.getTurmas().keys()) {
                     Turma t = a.getTurmas().get(c);
                     myWriter.write(t.getAno() + ";" + t.getCodigo() + ";" + t.getCurso().getNome() + ";" + t.getDisciplina().getNome() + ";" + t.getSala().getCodigo() + ";" + "\n");
                 }
+                myWriter.write("POSICAO(XYZ):\n");
+                myWriter.write(a.getX() + ";" + a.getY() + ";" + a.getZ() + ";" + "\n");
                 myWriter.write("\n");
             }
             myWriter.close();
@@ -882,7 +883,7 @@ public class Faculdade {
                 a.setEmail(fields[4]);
                 if (in.readLine().compareTo("TURMAS:") == 0) {
                     String aux2 = in.readLine();
-                    while((aux2.compareTo("") != 0)){
+                    while((aux2.compareTo("POSICAO(XYZ):") != 0)){
                         String[] turmainfo = aux2.split(";");
                         for (String tur : this.turmas.keys()) {
                             Turma t = this.turmas.get(tur);
@@ -899,6 +900,10 @@ public class Faculdade {
                         }
                         aux2 = in.readLine();
                     }
+                    // ADICIONAR AS COORDENADAS NOS ALUNOS
+                    String aux3 = in.readLine();
+                    String[] posix = aux3.split(";");
+                    a.addCoords(Double.parseDouble(posix[0]),Double.parseDouble(posix[1]),Integer.parseInt(posix[2]));
                 }
                 alunos.put(a.getNumeroAluno(), a);
             }

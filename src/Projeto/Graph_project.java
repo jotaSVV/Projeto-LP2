@@ -2,8 +2,8 @@ package Projeto;
 import edu.princeton.cs.algs4.DirectedEdge;
 import edu.princeton.cs.algs4.Out;
 
-import static Projeto.Faculdade.pdp;
-import static Projeto.Faculdade.salas;
+import static Projeto.Faculdade.*;
+
 public class Graph_project <T extends Point> {
 
     public void conectGraphs(T v1,T v2,SymbolDigraphWeighted g,String path, Integer w) {
@@ -33,6 +33,7 @@ public class Graph_project <T extends Point> {
                 for (int vi = 0; vi < g.digraph().V(); vi++) { // percorro novamente os vertices
                     if (Integer.parseInt(g.nameOf(vi)) == s2.getCodigo()) { // se o vertice for igual ao codigo da sala 2 faco a ligacao do 2 vertices
                         g.digraph().addEdge(new DirectedEdge(v, vi, w)); //adiciona ligaçao entre salas
+                        g.digraph().addEdge(new DirectedEdge(vi, v, w)); //adiciona ligaçao entre salas
                         writeSalasPdpTxt(g, path);
                     }
                 }
@@ -46,6 +47,7 @@ public class Graph_project <T extends Point> {
                 for (int vi = 0; vi < g.digraph().V(); vi++) { // percorro novamente os vertices
                     if (Integer.parseInt(g.nameOf(vi)) == p2.getCod()) { // se o vertice for igual ao codigo da sala 2 faco a ligacao do 2 vertices
                         g.digraph().addEdge(new DirectedEdge(v, vi, w)); //adiciona ligaçao entre salas
+                        g.digraph().addEdge(new DirectedEdge(vi, v, w)); //adiciona ligaçao entre salas
                         writeSalasPdpTxt(g, path); // como vai ser igual as salas posso chamar o mesmo
                     }
                 }
@@ -112,5 +114,59 @@ public class Graph_project <T extends Point> {
         out.close();
     }
 
-
+    public Point pdpOuSalaMaisProxima(Aluno a){ // dá a localizacao da sala ou pdp mais proxima do aluno
+        System.out.println("POS ALUNO: " +a.getX() +" " +a.getZ());
+        double dist_sala = 1000; // valor aleatorio
+        double dist_pdp = 1000;
+        int cod_sala = 0;
+        int cod_pdp = 0;
+        for (Integer s:salas.keys()) {
+            Sala si = salas.get(s);
+            if (salas.get(s).getZ() == a.getZ()){ // Só vale a pena verificar as salas do meu piso, pq as do piso superior tem um custo maior (estao + longe ) pq tenho de subir as escadas
+                double aux = si.getX();
+                if(aux - a.getX() < dist_sala && aux - a.getX() > 0){ // caso a diferenca entre a pos do aluno e da sala seja positiva
+                    dist_sala = aux - a.getX();
+                    cod_sala = si.getCodigo();
+                }else if(aux - a.getX() < 0){
+                    double num_negat = (aux - a.getX()) * -1; // torno a diferenca positiva
+                    if(num_negat < dist_sala){
+                        dist_sala = num_negat;
+                        cod_sala = si.getCodigo();
+                    }
+                }else if(aux == a.getX()){
+                    System.out.println("Como ja estava numa sala nao tive de andar para a mais proxima");
+                    return si;
+                }
+            }
+        }
+        for (Integer p:pdp.keys()) {
+            if (pdp.get(p).getZ() == a.getZ()){ // Só vale a pena verificar as salas do meu piso, pq as do piso superior tem um custo maior (estao + longe ) pq tenho de subir as escadas
+                PontosDePassagem pi = pdp.get(p);
+                double aux = pi.getX();
+                if(aux - a.getX() < dist_pdp && aux - a.getX() > 0){ // caso a diferenca entre a pos do aluno e da sala seja positiva
+                    dist_pdp = aux - a.getX();
+                    cod_pdp = pi.getCod();
+                }else if(aux - a.getX() < 0){
+                    double num_negat = (aux - a.getX()) * -1; // torno a diferenca positiva
+                    if(num_negat < dist_pdp){
+                        dist_pdp = num_negat;
+                        cod_pdp = pi.getCod();
+                    }
+                }else if(aux == a.getX()){
+                    System.out.println("Como ja estava num pdp nao tive de andar para a mais proxima");
+                    return pi;
+                }
+            }
+        }
+        if(dist_sala < dist_pdp){
+            System.out.println("maluco comecou em uma sala ");
+            salas.get(cod_sala).distAlunoSalaProx = dist_sala; // para saber qt é que o aluno teve de andar para chegar à sala mais proxima
+            return salas.get(cod_sala);
+        }else if(dist_pdp < dist_sala){
+            System.out.println("maluco comecou em um pdp ");
+            pdp.get(cod_pdp).distAlunoPdpProx = dist_pdp;
+            return pdp.get(cod_pdp);
+        }
+        return null;
+    }
 }

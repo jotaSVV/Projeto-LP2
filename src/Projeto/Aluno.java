@@ -27,8 +27,12 @@ public class Aluno extends  Pessoa {
   public Aluno(String nome, String apelido, Data dataNascimento, int numeroAluno) {
     super(nome, apelido, dataNascimento);
     this.numeroAluno = numeroAluno;
-    Point pos = new Point(0,0,0,this.getNome()); // crio a localização do professor (pos 0,0,0)
-    this.setPoint(pos);
+  }
+
+  public void addCoords(double x, double y, int z){
+    this.setX(x); // para "nascer" na entrada da faculdade
+    this.setY(y);
+    this.setZ(z);
   }
 
   public String email(){

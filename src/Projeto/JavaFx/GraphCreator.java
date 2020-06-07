@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 
 
 public class GraphCreator extends Application {
-    public static SymbolDigraphWeighted graph_pdpSalas ;    //cria o symbol graph de pdp
+    public static SymbolDigraphWeighted graph_pdpSalas ;    // cria o symbol graph de pdp
     private static final double floorSize = 90;
     public static final Faculdade f1 = new Faculdade("Unisersidade Fernando Pessoa");;
 
@@ -308,6 +308,8 @@ public class GraphCreator extends Application {
         f1.guardardisciplinasST();
         f1.guardar_STALUNOS();
 
+        // f1.listarPdp();
+
         // Listar os cursos da faculdade
 //        Curso c3 = new Curso("TEST");
 //        f1.cursos.put(c3.getNome(),c3);
@@ -348,22 +350,21 @@ public class GraphCreator extends Application {
         f1.addPosiSala(500.0, floorSize * 3, f1.salas.get(334).getPiso(), f1.salas.get(334));
 
         // Adicionar as Localizações dos Pontos de Passagem
-        f1.addPosiPdp(600,floorSize * 1,1,f1.pdp.get(1));
-        f1.addPosiPdp(100,floorSize * 2,2,f1.pdp.get(2));
-        f1.addPosiPdp(600,floorSize * 3,3,f1.pdp.get(4));
-        f1.addPosiPdp(30,20,0,f1.pdp.get(3));
+        f1.addPosiPdp(600,floorSize * 1,1,f1.pdp.get(1)); // ESCADAS P1
+        f1.addPosiPdp(100,floorSize * 2,2,f1.pdp.get(2)); // ESCADAS P2
+        f1.addPosiPdp(600,floorSize * 3,3,f1.pdp.get(4)); // ESCADAS P2
+        f1.addPosiPdp(40,floorSize * 1,1,f1.pdp.get(3)); // ESCADAS P0
 
         // Entrada
-        f1.addPosiPdp(40,floorSize * 1,1,f1.pdp.get(0));
+        f1.addPosiPdp(30,20,0,f1.pdp.get(0));
         // Biblioteca
         f1.addPosiPdp(600,20,0,f1.pdp.get(5));
         // BAR
         f1.addPosiPdp(350,20,0,f1.pdp.get(6));
 
-        // GRAFO DE SALAS
         Graph_project<Point> g = new Graph_project<>();                          //para aceder a classe
 
-        // GRAFO PONTOS DE PASSAGEM E SALAS
+        // GRAFO DE PONTOS DE PASSAGEM E SALAS
         String pdpSalastxt = ".//data//salasPdp.txt";
         g.guardar_pdp_txt_graph(pdpSalastxt);
         graph_pdpSalas = new SymbolDigraphWeighted(pdpSalastxt,";");
@@ -385,7 +386,7 @@ public class GraphCreator extends Application {
         g.conectGraphs(f1.salas.get(333),f1.salas.get(334),graph_pdpSalas,pdpSalastxt,10);
         // CONECTAR SALAS E PDP
         // ENTRADA
-        g.conectGraphs(f1.pdp.get(0),f1.salas.get(109),graph_pdpSalas,pdpSalastxt,5); // entrada à 1 sala do piso 1
+        g.conectGraphs(f1.pdp.get(3),f1.salas.get(109),graph_pdpSalas,pdpSalastxt,5); // entrada à 1 sala do piso 1
         // 1 PISO
         g.conectGraphs(f1.pdp.get(1),f1.salas.get(114),graph_pdpSalas,pdpSalastxt,15); // Ligaçao do piso 1 ao piso 2
         g.conectGraphs(f1.pdp.get(1),f1.salas.get(220),graph_pdpSalas,pdpSalastxt,25);
@@ -398,13 +399,12 @@ public class GraphCreator extends Application {
         g.conectGraphs(f1.pdp.get(4),f1.salas.get(220),graph_pdpSalas,pdpSalastxt,25); // p3 ao piso 2
 
         // CONECTAR PONTOS DE PASSAGEM COM PONTOS DE PASSAGEM
-        g.conectGraphs(f1.pdp.get(0),f1.pdp.get(3),graph_pdpSalas,pdpSalastxt,15); // entrada as escadas do bar
-        g.conectGraphs(f1.pdp.get(3),f1.pdp.get(6),graph_pdpSalas,pdpSalastxt,30); // escadas do bar ao bar
+        g.conectGraphs(f1.pdp.get(0),f1.pdp.get(3),graph_pdpSalas,pdpSalastxt,15); // entrada as escadas do P0
+        g.conectGraphs(f1.pdp.get(0),f1.pdp.get(6),graph_pdpSalas,pdpSalastxt,30); // entrada ao bar
         g.conectGraphs(f1.pdp.get(6),f1.pdp.get(5),graph_pdpSalas,pdpSalastxt,30); // bar à biblioteca
         g.conectGraphs(f1.pdp.get(5),f1.pdp.get(1),graph_pdpSalas,pdpSalastxt,20); // biblioteca as escadas P1
 
         launch(args);
-        f1.listarPdp();
     }
     @Override
     public void start(Stage primaryStage) throws Exception {

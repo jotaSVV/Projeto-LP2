@@ -1,59 +1,59 @@
 Disciplina:
-DIS2;6;1
+BIO;5;1
 PROFESSORES:
-Filonema;Almeida;3/11/1956;63;FilonemaAlmeida@ufp.edu.pt
+Jose;Jose;1/3/1971;49;JoseJose@ufp.edu.pt
 TURMA:
-2020;TUR2;CUR1;DIS2;224;
+2020;WRTH;CBL;BIO;332;
+2020;TUR6;CUR4;BIO;332;
 
 Disciplina:
 SO;6;2
 PROFESSORES:
 Georgina;Castro;1/3/1971;49;GeorginaCastro@ufp.edu.pt
 TURMA:
-2020;TYH;INF;SO;224;
-10;JPT;INF;SO;224;
-10;RAF;INF;SO;224;
+2020;TYH;INF;SO;332;
+10;JPT;INF;SO;332;
+10;RAF;INF;SO;332;
 
 Disciplina:
-BIO;5;1
+DIS2;6;1
 PROFESSORES:
-Jose;Jose;1/3/1971;49;JoseJose@ufp.edu.pt
+Filonema;Almeida;3/11/1956;63;FilonemaAlmeida@ufp.edu.pt
 TURMA:
-2020;WRTH;CBL;BIO;224;
-2020;TUR6;CUR4;BIO;224;
+2020;TUR2;CUR1;DIS2;332;
 
 Disciplina:
 DIS3;7;1
 PROFESSORES:
 Cristina;Almeida;1/3/1971;49;CristinaAlmeida@ufp.edu.pt
 TURMA:
-2020;TUR3;CUR2;DIS3;224;
-
-Disciplina:
-DIS4;6;2
-PROFESSORES:
-Cristina;Almeida;1/3/1971;49;CristinaAlmeida@ufp.edu.pt
-TURMA:
-2020;TUR4;CUR2;DIS4;224;
+2020;TUR3;CUR2;DIS3;332;
 
 Disciplina:
 LP2;7;2
 PROFESSORES:
 Ricardo;Almeida;14/4/1980;40;RicardoAlmeida@ufp.edu.pt
 TURMA:
-2020;ERT;INF;LP2;224;
+2020;ERT;INF;LP2;332;
 
 Disciplina:
-DIS1;5;1
+DIS4;6;2
 PROFESSORES:
-Filonema;Almeida;3/11/1956;63;FilonemaAlmeida@ufp.edu.pt
+Cristina;Almeida;1/3/1971;49;CristinaAlmeida@ufp.edu.pt
 TURMA:
-2020;TUR1;CUR1;DIS1;224;
+2020;TUR4;CUR2;DIS4;332;
 
 Disciplina:
 DIS5;5;2
 PROFESSORES:
 Joao;Goncalves;1/3/1971;49;JoaoGoncalves@ufp.edu.pt
 TURMA:
-2020;TUR5;CUR3;DIS5;224;
+2020;TUR5;CUR3;DIS5;332;
+
+Disciplina:
+DIS1;5;1
+PROFESSORES:
+Filonema;Almeida;3/11/1956;63;FilonemaAlmeida@ufp.edu.pt
+TURMA:
+2020;TUR1;CUR1;DIS1;332;
 

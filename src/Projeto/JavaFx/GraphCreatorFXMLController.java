@@ -273,6 +273,7 @@ TABELA DISCIPLINAS
 
     public ObservableList<Faculdade> getLista(){
         ObservableList<Faculdade> lista = FXCollections.observableArrayList(
+<<<<<<< HEAD
         );
         lista.add(f1);
 
@@ -293,6 +294,8 @@ TABELA DISCIPLINAS
 
     public ObservableList<Aluno> getAlunos(){
         ObservableList<Aluno> lista = FXCollections.observableArrayList(
+=======
+>>>>>>> parent of 8c8e426... juncao dos codigos
         );
         for (Integer cod: f1.alunos.keys()
         ) {
@@ -301,6 +304,9 @@ TABELA DISCIPLINAS
         }
         return lista;
     }
+<<<<<<< HEAD
+=======
+>>>>>>> parent of 8c8e426... juncao dos codigos
 =======
 >>>>>>> parent of 8c8e426... juncao dos codigos
     public ObservableList<Curso> getCurso(){
@@ -364,6 +370,9 @@ TABELA DISCIPLINAS
 
 
 
+
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -379,6 +388,9 @@ TABELA DISCIPLINAS
         nrCadeiras.setCellValueFactory(new PropertyValueFactory<Sala,Integer>("NrCadeiras"));
         nrTomadas.setCellValueFactory(new PropertyValueFactory<Sala,Integer>("NrTomadas"));
         piso.setCellValueFactory(new PropertyValueFactory<Sala,Integer>("Piso"));
+<<<<<<< HEAD
+>>>>>>> parent of 8c8e426... juncao dos codigos
+=======
 >>>>>>> parent of 8c8e426... juncao dos codigos
 
 
@@ -399,10 +411,13 @@ TABELA DISCIPLINAS
                 if (p.getValue() != null) {
                     StringBuilder turmas = new StringBuilder();
 <<<<<<< HEAD
+<<<<<<< HEAD
                     for(String cod : p.getValue().getTurmas().keys()) {
                         Turma a = p.getValue().getTurmas().get(cod);
                         turmas.append(a.getCodigo()).append("\n");
 =======
+=======
+>>>>>>> parent of 8c8e426... juncao dos codigos
                     for(Turma t : s.getValue().getTurmas()) {
                         turmas.append(t.getCodigo()).append("\n");
 >>>>>>> parent of 8c8e426... juncao dos codigos
@@ -435,9 +450,38 @@ TABELA DISCIPLINAS
         TabelaProfessores.setItems(getProfessores());
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+        nomeCurso.setCellValueFactory(new PropertyValueFactory<Curso,String>("Nome"));
+        faculdadeCurso.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Curso, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Curso, String> c) {
+                if (c.getValue() != null) {
+>>>>>>> parent of 8c8e426... juncao dos codigos
 
 
 
+<<<<<<< HEAD
+=======
+        ///Tabela Edificio
+        nomeEdificio.setCellValueFactory(new PropertyValueFactory<Edificio,String>("Nome"));
+        faculdadeEdificio.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Edificio, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Edificio, String> e) {
+                if (e.getValue() != null) {
+                    return new SimpleStringProperty(e.getValue().getFaculdade().getName());
+                } else {
+                    return new SimpleStringProperty("<no info>");
+                }
+            }
+        });
+        salasEdificio.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Edificio, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Edificio, String> e) {
+                if (e.getValue() != null) {
+                    StringBuilder salas = new StringBuilder();
+                    for(Sala s : e.getValue().getSalas()) {
+>>>>>>> parent of 8c8e426... juncao dos codigos
 
 
 
@@ -1008,6 +1052,7 @@ TABELA DISCIPLINAS
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     public void handleCreateSalasGraphAction(ActionEvent actionEvent) {
         drawGraph_salas();
@@ -1026,6 +1071,8 @@ TABELA DISCIPLINAS
                 Line line = new Line(cv.getCenterX(),cv.getCenterY(),cw.getCenterX(),cw.getCenterY());
                 graphGroup.getChildren().add(line);
 =======
+=======
+>>>>>>> parent of 8c8e426... juncao dos codigos
     public Group graphGroup;
     private double radius = 30.0;
     private String salas_txt = ".//data//salasGraph.txt";
@@ -1113,6 +1160,9 @@ public class GraphCreatorFXMLController {
                 Circle cw = (Circle) spw.getChildren().get(0);
                 Line line = new Line(cv.getCenterX(),cv.getCenterY(),cw.getCenterX(),cw.getCenterY());
                 graphPane.getChildren().add(line);
+<<<<<<< HEAD
+>>>>>>> parent of 8c8e426... juncao dos codigos
+=======
 >>>>>>> parent of 8c8e426... juncao dos codigos
             }
         }

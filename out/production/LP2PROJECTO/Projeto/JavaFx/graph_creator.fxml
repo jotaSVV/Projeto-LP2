@@ -14,8 +14,11 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <<<<<<< HEAD
+<<<<<<< HEAD
 <?import javafx.scene.text.Text?>
 =======
+=======
+>>>>>>> parent of 8c8e426... juncao dos codigos
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Projeto.JavaFx.GraphCreatorFXMLController">
    <children>

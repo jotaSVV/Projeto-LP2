@@ -246,15 +246,12 @@ public class Faculdade {
             for (String e:this.getEdificios().keys()) { // Percorro os edificios para chegar as salas
                 for (Sala s : this.getEdificios().get(e).getSalas()) { // Percorremos as salas
                     if(s.getHorarios().size() == 0){ // se a sala nao tiver horarios adicionamos
-                        //System.out.println("sala- " +s.getCodigo() +" horario- " +h1.getDataInicio() + " " +h1.getDataFim());
                         t.horario_aulas(h1,s);
                         return true;
                     }else { // se ja tiver horarios, verifico se sao compativeis com o horarios gerado
                         for (Horario hii:s.getHorarios()) {
-                            System.out.println("entrei !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! "+ s.getCodigo());
                             if(!intersection_hor(hii,h1)){ // percorro os horarios das salas para ver se a sala é compativel com o horario
                                 t.horario_aulas(h1,s);
-                                //System.out.println("sala- " +s.getCodigo() +" horario- " +h1.getDataInicio() + " " +h1.getDataFim());
                                 return true;
                             }
                         }

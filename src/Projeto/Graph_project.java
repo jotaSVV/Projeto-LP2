@@ -250,7 +250,6 @@ public class Graph_project <T extends Point> {
 
 
     public Point pdpOuSalaMaisProxima(Aluno a){ // dá a localizacao da sala ou pdp mais proxima do aluno
-        System.out.println("POS ALUNO: " +a.getX() +" " +a.getZ());
         double dist_sala = 1000; // valor aleatorio
         double dist_pdp = 1000;
         int cod_sala = 0;
@@ -269,7 +268,6 @@ public class Graph_project <T extends Point> {
                         cod_sala = si.getCodigo();
                     }
                 }else if(aux == a.getX()){
-                    System.out.println("Como ja estava numa sala nao tive de andar para a mais proxima");
                     return si;
                 }
             }
@@ -288,17 +286,14 @@ public class Graph_project <T extends Point> {
                         cod_pdp = pi.getCod();
                     }
                 }else if(aux == a.getX()){
-                    System.out.println("Como ja estava num pdp nao tive de andar para a mais proxima");
                     return pi;
                 }
             }
         }
         if(dist_sala < dist_pdp){
-            System.out.println("maluco comecou em uma sala ");
             salas.get(cod_sala).distAlunoSalaProx = dist_sala; // para saber qt é que o aluno teve de andar para chegar à sala mais proxima
             return salas.get(cod_sala);
         }else if(dist_pdp < dist_sala){
-            System.out.println("maluco comecou em um pdp ");
             pdp.get(cod_pdp).distAlunoPdpProx = dist_pdp;
             return pdp.get(cod_pdp);
         }
@@ -316,7 +311,6 @@ public class Graph_project <T extends Point> {
                     Point p = pdpOuSalaMaisProxima(alunos.get(a.getNumeroAluno())); // retorna o pdp mais proximo do alunos (isto se ele nao tiver em nenhuma sala ou pdp)
                     if (p instanceof PontosDePassagem) {
                         PontosDePassagem p1 = (PontosDePassagem) p; // p1 = pdp ou sala aonde o aluno se encontra
-                        System.out.println("RETORNOU UM PDP " + p1.getName());
                         for (int v = 0; v < graph_pdpSalas.digraph().V(); v++) {
                             if (pdp.get(p1.getCod()).getCod() == Integer.parseInt(graph_pdpSalas.nameOf(v))) { // vamos ver o vertice que corresponde ao pdp/sala que o aluno está
                                 for (int vi = 0; vi < graph_pdpSalas.digraph().V(); vi++) {
@@ -337,7 +331,6 @@ public class Graph_project <T extends Point> {
                         }
                     }else if( p instanceof Sala){
                         Sala s1 = (Sala)p;
-                        System.out.println("RETORNOU UMA SALA " +s1.getCodigo());
                         for (int v = 0; v < graph_pdpSalas.digraph().V();v++){
                             if(salas.get(s1.getCodigo()).getCodigo() == Integer.parseInt(graph_pdpSalas.nameOf(v))){ // vamos ver o vertice que corresponde ao pdp/sala que o aluno está
                                 for (int vi = 0; vi < graph_pdpSalas.digraph().V(); vi++){

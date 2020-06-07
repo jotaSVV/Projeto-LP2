@@ -20,6 +20,15 @@ public class Edificio{
     this.faculdade = faculdade;
   }
 
+  public void setNome(String nome) {
+    this.nome = nome;
+  }
+
+  @Override
+  public String toString() {
+    return this.getNome();
+  }
+
   public String getNome() {
     return nome;
   }

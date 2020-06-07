@@ -19,6 +19,12 @@ public class Sala extends Point{
     this.nrTomadas = nrTomadas;
   }
 
+
+  @Override
+  public String toString() {
+    return Integer.toString(this.codigo);
+  }
+
   private int piso;
 
   private int nrTomadas;

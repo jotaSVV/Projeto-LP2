@@ -1344,6 +1344,13 @@ public class Faculdade {
             }
         }
     }
+
+
+    @Override
+    public String toString() {
+        return this.getName();
+    }
+
     public void now(){
         Data d = new Data();
         percOcupacaoSalas(d);

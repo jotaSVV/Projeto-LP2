@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -8,12 +11,11 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="452.0" prefWidth="754.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Projeto.JavaFx.GraphCreatorFXMLController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Projeto.JavaFx.GraphCreatorFXMLController">
    <children>
       <MenuBar layoutX="-7.0" layoutY="-3.0" prefHeight="34.0" prefWidth="764.0">
         <menus>
@@ -33,7 +35,7 @@
           </Menu>
         </menus>
       </MenuBar>
-      <TabPane layoutY="32.0" prefHeight="390.0" prefWidth="757.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutX="-2.0" layoutY="25.0" prefHeight="576.0" prefWidth="806.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Planta da Faculdade">
             <content>
@@ -58,13 +60,13 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TabPane prefHeight="347.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+                        <TabPane prefHeight="549.0" prefWidth="806.0" tabClosingPolicy="UNAVAILABLE">
                           <tabs>
                             <Tab text="Faculdade">
                               <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <TableView fx:id="TableView" prefHeight="319.0" prefWidth="600.0">
+                                          <TableView fx:id="TableView" prefHeight="400.0" prefWidth="806.0">
                                              <columns>
                                                 <TableColumn fx:id="ColNome" prefWidth="75.0" text="Nome" />
                                              </columns>
@@ -77,13 +79,19 @@
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <TableView fx:id="TabelaEdificio" prefHeight="317.0" prefWidth="600.0">
+                                          <TableView fx:id="TabelaEdificio" prefHeight="400.0" prefWidth="806.0">
                                              <columns>
                                                 <TableColumn fx:id="nomeEdificio" prefWidth="75.0" text="Nome" />
                                                 <TableColumn fx:id="faculdadeEdificio" prefWidth="75.0" text="Faculdade" />
                                                 <TableColumn fx:id="salasEdificio" prefWidth="75.0" text="Sala" />
                                              </columns>
                                           </TableView>
+                                          <Text layoutX="14.0" layoutY="431.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome do Edificio" />
+                                          <TextField fx:id="nomeEdificioTextField" layoutX="114.0" layoutY="414.0" />
+                                          <Text layoutX="14.0" layoutY="464.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Faculdade" />
+                                          <ComboBox fx:id="comboBoxFaculdadesEdificio" layoutX="114.0" layoutY="447.0" prefWidth="150.0" />
+                                          <Button fx:id="adicionarEdificio" layoutX="301.0" layoutY="414.0" mnemonicParsing="false" onAction="#handleAddEdificio" text="Adicionar" />
+                                          <Button fx:id="listarEdificios" layoutX="300.0" layoutY="447.0" mnemonicParsing="false" onAction="#handleListarEdificios" prefHeight="25.0" prefWidth="68.0" text="Listar" />
                                        </children>
                                     </AnchorPane>
                                  </content>
@@ -92,16 +100,24 @@
                               <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <TableView fx:id="TabelaSalas" prefHeight="317.0" prefWidth="600.0">
+                                          <TableView fx:id="TabelaSalas" prefHeight="400.0" prefWidth="806.0">
                                             <columns>
                                               <TableColumn fx:id="codigoSala" prefWidth="75.0" text="Codigo" />
-                                              <TableColumn fx:id="nrCadeiras" prefWidth="75.0" text="nrCadeiras" />
-                                                <TableColumn fx:id="nrTomadas" prefWidth="75.0" text="nrTomadas" />
+                                              <TableColumn fx:id="nrCadeiras" onEditCommit="#handleEditarNrCadeirasSala" prefWidth="75.0" text="nrCadeiras" />
+                                                <TableColumn fx:id="nrTomadas" onEditCommit="#handleEditarNrTomadasSala" prefWidth="75.0" text="nrTomadas" />
                                                 <TableColumn fx:id="piso" prefWidth="75.0" text="piso" />
                                                 <TableColumn fx:id="Turmas" prefWidth="75.0" text="Turmas" />
                                                 <TableColumn fx:id="Edificio" prefWidth="75.0" text="edificio" />
                                             </columns>
                                           </TableView>
+                                          <Button fx:id="adicionarSala" layoutX="424.0" layoutY="425.0" mnemonicParsing="false" onAction="#handleAddSala" text="Adicionar" />
+                                          <TextField fx:id="codigoSalaTextfield" layoutX="82.0" layoutY="425.0" prefWidth="81.0" />
+                                          <Text layoutX="14.0" layoutY="442.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Codigo" />
+                                          <Text layoutX="14.0" layoutY="472.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nr Cadeiras" />
+                                          <TextField fx:id="nrCadeirasSalaTextfield" layoutX="82.0" layoutY="455.0" prefWidth="81.0" />
+                                          <Text layoutX="181.0" layoutY="442.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edificio" />
+                                          <ComboBox fx:id="edificiosSala" layoutX="226.0" layoutY="425.0" prefHeight="25.0" prefWidth="150.0" />
+                                          <Button fx:id="listarSalas" layoutX="539.0" layoutY="425.0" mnemonicParsing="false" onAction="#handleListarSalas" text="Listar Salas" />
                                        </children></AnchorPane>
                               </content>
                             </Tab>
@@ -109,13 +125,19 @@
                                 <content>
                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <TableView fx:id="TabelaCursos" layoutY="7.0" prefHeight="311.0" prefWidth="606.0">
+                                          <TableView fx:id="TabelaCursos" layoutY="-1.0" prefHeight="400.0" prefWidth="806.0">
                                             <columns>
                                               <TableColumn fx:id="nomeCurso" prefWidth="75.0" text="Nome" />
                                               <TableColumn fx:id="faculdadeCurso" prefWidth="75.0" text="Faculdade" />
                                                 <TableColumn fx:id="turmaCurso" prefWidth="75.0" text="Turmas" />
                                             </columns>
                                           </TableView>
+                                          <Button fx:id="AdicionarCurso" layoutX="266.0" layoutY="415.0" mnemonicParsing="false" onAction="#handleAddCurso" text="Adicionar" />
+                                          <Button fx:id="listarCursos" layoutX="359.0" layoutY="415.0" mnemonicParsing="false" onAction="#handleListarCursos" text="Listar" />
+                                          <Text layoutX="14.0" layoutY="432.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome" />
+                                          <Text layoutX="14.0" layoutY="465.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Faculdade" />
+                                          <TextField fx:id="nomeDoCurso" layoutX="81.0" layoutY="415.0" />
+                                          <ComboBox fx:id="faculdadeDoCurso" layoutX="81.0" layoutY="448.0" prefWidth="150.0" />
                                        </children>
                                     </AnchorPane>
                                 </content>
@@ -124,10 +146,10 @@
                                 <content>
                                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <TableView fx:id="TabelaTurmas" prefHeight="320.0" prefWidth="600.0">
+                                          <TableView fx:id="TabelaTurmas" prefHeight="400.0" prefWidth="806.0">
                                             <columns>
                                               <TableColumn fx:id="codigoTurma" prefWidth="75.0" text="Codigo" />
-                                              <TableColumn fx:id="anoTurma" prefWidth="75.0" text="Ano" />
+                                              <TableColumn fx:id="anoTurma" onEditCommit="#handleEditarAnoTurma" prefWidth="75.0" text="Ano" />
                                                 <TableColumn fx:id="cursoTurma" prefWidth="75.0" text="Curso" />
                                                 <TableColumn fx:id="alunoTurma" prefWidth="75.0" text="Alunos" />
                                                 <TableColumn fx:id="professorTurma" prefWidth="75.0" text="Professor" />
@@ -136,6 +158,20 @@
                                                 <TableColumn fx:id="salaTurma" prefWidth="75.0" text="Sala" />
                                             </columns>
                                           </TableView>
+                                          <Text layoutX="13.0" layoutY="427.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Codigo" />
+                                          <Text layoutX="21.0" layoutY="473.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ano" />
+                                          <TextField fx:id="codigosdaTurma" layoutX="59.0" layoutY="410.0" />
+                                          <TextField fx:id="anodaTurma" layoutX="59.0" layoutY="456.0" />
+                                          <ComboBox fx:id="cursosTurmas" layoutX="289.0" layoutY="410.0" prefWidth="150.0" />
+                                          <Text layoutX="243.0" layoutY="427.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Curso" />
+                                          <Button fx:id="AdicionarTurmas" layoutX="725.0" layoutY="456.0" mnemonicParsing="false" onAction="#handleAddTurma" text="Adicionar" />
+                                          <Button fx:id="ListarTurmas" layoutX="748.0" layoutY="410.0" mnemonicParsing="false" onAction="#handleListarTurmas" text="Listar" />
+                                          <Text layoutX="233.0" layoutY="473.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Disciplina" />
+                                          <ComboBox fx:id="disciplinaDaTurma" layoutX="289.0" layoutY="456.0" prefWidth="150.0" />
+                                          <ComboBox fx:id="salasdaTurma" layoutX="516.0" layoutY="410.0" prefWidth="150.0" />
+                                          <Text layoutX="457.0" layoutY="427.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sala" />
+                                          <Text layoutX="457.0" layoutY="473.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Professor" />
+                                          <ComboBox fx:id="professordaTurma" layoutX="516.0" layoutY="456.0" prefWidth="150.0" />
                                        </children>
                                     </AnchorPane>
                                 </content>
@@ -144,20 +180,79 @@
                                  <content>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                        <children>
-                                          <TableView fx:id="TabelaTurmas1" prefHeight="320.0" prefWidth="600.0">
+                                          <TableView fx:id="TabelaAlunos" prefHeight="400.0" prefWidth="806.0">
                                              <columns>
-                                                <TableColumn prefWidth="106.0" text="Numero de Aluno" />
-                                                <TableColumn fx:id="anoTurma1" prefWidth="44.0" text="Nome" />
-                                                <TableColumn prefWidth="75.0" text="Apelido" />
-                                                <TableColumn prefWidth="75.0" text="Data Nascimento" />
-                                                <TableColumn prefWidth="75.0" text="Turmas" />
-                                                <TableColumn prefWidth="75.0" text="Horario" />
-                                                <TableColumn prefWidth="75.0" text="Disciplinas" />
+                                                <TableColumn fx:id="numeroAluno" prefWidth="106.0" text="Numero de Aluno" />
+                                                <TableColumn fx:id="nomeAluno" prefWidth="44.0" text="Nome" />
+                                                <TableColumn fx:id="apelidoAluno" prefWidth="75.0" text="Apelido" />
+                                                <TableColumn fx:id="dataAluno" prefWidth="75.0" text="Data Nascimento" />
+                                                <TableColumn fx:id="turmasAluno" prefWidth="75.0" text="Turmas" />
+                                                <TableColumn fx:id="horarioAluno" prefWidth="75.0" text="Horario" />
+                                                <TableColumn fx:id="disciplinasAluno" prefWidth="75.0" text="Disciplinas" />
                                              </columns>
                                           </TableView>
+                                          <Text layoutX="14.0" layoutY="425.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome" />
+                                          <Text layoutX="14.0" layoutY="463.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Apelido" />
+                                          <Text layoutX="14.0" layoutY="496.0" strokeType="OUTSIDE" strokeWidth="0.0" text="nrAluno" />
+                                          <TextField fx:id="nomedoAluno" layoutX="64.0" layoutY="408.0" />
+                                          <TextField fx:id="apelidodoAluno" layoutX="64.0" layoutY="446.0" />
+                                          <TextField fx:id="nrdoAluno" layoutX="64.0" layoutY="479.0" />
+                                          <Text layoutX="232.0" layoutY="425.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dia" />
+                                          <Text layoutX="230.0" layoutY="463.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mes" />
+                                          <Text layoutX="230.0" layoutY="496.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ano" />
+                                          <TextField fx:id="dianascimentoAluno" layoutX="264.0" layoutY="408.0" />
+                                          <TextField fx:id="mesnascimentoAluno" layoutX="264.0" layoutY="446.0" />
+                                          <TextField fx:id="anonascimentoAluno" layoutX="264.0" layoutY="479.0" />
+                                          <Text layoutX="434.0" layoutY="425.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Turmas" />
+                                          <ListView fx:id="turmasdoAluno" layoutX="483.0" layoutY="407.0" prefHeight="98.0" prefWidth="77.0" />
+                                          <Button fx:id="AdicionarAlunos" layoutX="572.0" layoutY="408.0" mnemonicParsing="false" onAction="#handleAdicionarAlunos" text="Adicionar" />
+                                          <Button fx:id="listarAlunos" layoutX="667.0" layoutY="408.0" mnemonicParsing="false" onAction="#handleListarAlunos" text="Listar" />
                                        </children>
                                     </AnchorPane>
                                  </content>
+                              </Tab>
+                              <Tab text="Disciplina">
+                                <content>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TableView fx:id="TabelaDisciplinas" prefHeight="400.0" prefWidth="806.0">
+                                            <columns>
+                                              <TableColumn fx:id="nomeDisciplina" prefWidth="75.0" text="Nome" />
+                                              <TableColumn fx:id="ectsDisciplina" prefWidth="75.0" text="ECTS" />
+                                                <TableColumn fx:id="semestreDisciplina" prefWidth="75.0" text="Semestre" />
+                                                <TableColumn fx:id="professorDisciplina" prefWidth="75.0" text="Professores" />
+                                                <TableColumn fx:id="turmasDisciplinas" prefWidth="75.0" text="Turmas" />
+                                            </columns>
+                                          </TableView>
+                                          <Text layoutX="14.0" layoutY="420.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome" />
+                                          <Text layoutX="14.0" layoutY="462.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Apelido" />
+                                          <Text layoutX="14.0" layoutY="502.0" strokeType="OUTSIDE" strokeWidth="0.0" text="nrAluno" />
+                                          <TextField layoutX="66.0" layoutY="403.0" />
+                                          <TextField layoutX="66.0" layoutY="445.0" />
+                                          <TextField layoutX="66.0" layoutY="485.0" />
+                                       </children>
+                                    </AnchorPane>
+                                </content>
+                              </Tab>
+                              <Tab text="Professores">
+                                <content>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="393.0" prefWidth="697.0">
+                                       <children>
+                                          <TableView fx:id="TabelaProfessores" layoutY="1.0" prefHeight="400.0" prefWidth="806.0">
+                                            <columns>
+                                              <TableColumn fx:id="nomeProfessor" prefWidth="75.0" text="Nome" />
+                                              <TableColumn fx:id="apelidoProfessor" prefWidth="75.0" text="Apelido" />
+                                                <TableColumn fx:id="dataProfessor" prefWidth="107.0" text="DataNascimento" />
+                                                <TableColumn fx:id="emailProfessor" prefWidth="75.0" text="Email" />
+                                                <TableColumn fx:id="disciplinasProfessor" prefWidth="82.0" text="Disciplinas" />
+                                                <TableColumn fx:id="turmasProfessor" prefWidth="65.0" text="Turmas" />
+                                                <TableColumn prefWidth="93.0" text="Horario" />
+                                                <TableColumn prefWidth="75.0" text="Horario Atendimento" />
+                                            </columns>
+                                          </TableView>
+                                       </children>
+                                    </AnchorPane>
+                                </content>
                               </Tab>
                           </tabs>
                         </TabPane>

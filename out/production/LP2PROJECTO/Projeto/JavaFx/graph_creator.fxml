@@ -31,13 +31,22 @@
                    <content>
                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                               <VBox prefHeight="545.0" prefWidth="932.0">
+                               <VBox prefHeight="534.0" prefWidth="932.0">
                                    <children>
                                        <Pane fx:id="graphPane" prefHeight="571.0" prefWidth="932.0">
                                            <VBox.margin>
                                                <Insets bottom="10.0" top="20.0" />
                                            </VBox.margin>
                                        </Pane>
+                                       <HBox layoutY="589.0" prefHeight="40.0" prefWidth="865.0">
+                                           <children>
+                                               <Button mnemonicParsing="false" onAction="#buttonSave" text="Save">
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="10.0" />
+                                       </HBox.margin></Button>
+                                               <Button mnemonicParsing="false" onAction="#buttonLoad" text="Load" />
+                                           </children>
+                                       </HBox>
                                    </children>
                                    <opaqueInsets>
                                        <Insets />

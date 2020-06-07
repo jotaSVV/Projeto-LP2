@@ -56,6 +56,7 @@ public class GraphCreatorFXMLController implements Initializable {
     public TableColumn dadosAluno;
 
     private String pdpSalastxt = ".//data//salasPdp.txt";
+    private String pdpSalasBinFile = ".//data//SalasPdpBinFile.bin";
 
     Graph_project<Point> gi = new Graph_project<>();
 
@@ -1230,4 +1231,13 @@ public class GraphCreatorFXMLController implements Initializable {
         handleGerarGrafoSalas(null); // atualiza o grafo
     }
 
+    public void buttonSave(ActionEvent event) {
+        gi.saveBinGraph(graph_pdpSalas,pdpSalasBinFile);
+    }
+
+    public void buttonLoad(ActionEvent event) {
+        graph_pdpSalas = gi.readBinGraph(graph_pdpSalas,pdpSalasBinFile);
+        gi.writeSalasPdpTxt(graph_pdpSalas,pdpSalastxt);
+        handleGerarGrafoSalas(null);
+    }
 }

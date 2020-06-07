@@ -9,6 +9,8 @@
 
 package edu.princeton.cs.algs4;
 
+import java.io.Serializable;
+
 /**
  *  The {@code Edge} class represents a weighted edge in an 
  *  {@link EdgeWeightedGraph}. Each edge consists of two integers
@@ -23,7 +25,7 @@ package edu.princeton.cs.algs4;
  *  @author Robert Sedgewick
  *  @author Kevin Wayne
  */
-public class Edge implements Comparable<Edge> { 
+public class Edge implements Comparable<Edge>, Serializable {
 
     private final int v;
     private final int w;

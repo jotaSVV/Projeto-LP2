@@ -68,7 +68,7 @@ package edu.princeton.cs.algs4;
 public class SymbolGraph {
     private ST<String, Integer> st;  // string -> index
     private String[] keys;           // index  -> string
-    private Graph graph;             // the underlying graph
+    private Graph graph;             // the underlying graph            ////substituir por EdgeWheihted graph
 
     /**  
      * Initializes a graph from a file using the specified delimiter.
@@ -193,7 +193,6 @@ public class SymbolGraph {
         if (v < 0 || v >= V)
             throw new IllegalArgumentException("vertex " + v + " is not between 0 and " + (V-1));
     }
-
 
     /**
      * Unit tests the {@code SymbolGraph} data type.

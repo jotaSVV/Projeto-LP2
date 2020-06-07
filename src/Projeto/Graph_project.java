@@ -2,6 +2,8 @@ package Projeto;
 import edu.princeton.cs.algs4.DirectedEdge;
 import edu.princeton.cs.algs4.Out;
 
+import java.io.*;
+
 import static Projeto.Faculdade.*;
 
 public class Graph_project <T extends Point> {
@@ -166,6 +168,32 @@ public class Graph_project <T extends Point> {
             System.out.println("maluco comecou em um pdp ");
             pdp.get(cod_pdp).distAlunoPdpProx = dist_pdp;
             return pdp.get(cod_pdp);
+        }
+        return null;
+    }
+
+    /**
+     * FILES
+     */
+    public void saveBinGraph(SymbolDigraphWeighted g, String path) {
+        ObjectOutputStream oos = null;
+        try {
+            oos = new ObjectOutputStream(new FileOutputStream(new File(path)));
+            oos.writeObject(g);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public SymbolDigraphWeighted readBinGraph(SymbolDigraphWeighted g, String path) {
+        ObjectInputStream ios = null;
+        try {
+            ios = new ObjectInputStream(new FileInputStream(new File(path)));
+            g = (SymbolDigraphWeighted) ios.readObject();
+            return g;
+//            System.out.println(g.digraph());
+        } catch (ClassNotFoundException | IOException e) {
+            e.printStackTrace();
         }
         return null;
     }

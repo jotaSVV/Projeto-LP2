@@ -18,6 +18,9 @@
 
 package Projeto;
 
+import edu.princeton.cs.algs4.EdgeWeightedDigraph;
+import edu.princeton.cs.algs4.ST;
+
 import java.io.Serializable;
 
 /**
@@ -43,9 +46,9 @@ import java.io.Serializable;
  *  @author Kevin Wayne
  */
 public class SymbolDigraphWeighted implements Serializable {
-    private edu.princeton.cs.algs4.ST<String, Integer> st;  // string -> index
+    private ST<String, Integer> st;  // string -> index
     private String[] keys;           // index  -> string
-    private edu.princeton.cs.algs4.EdgeWeightedDigraph graph;           // the underlying digraph
+    private EdgeWeightedDigraph graph;           // the underlying digraph
 
     /**
      * Initializes a digraph from a file using the specified delimiter.

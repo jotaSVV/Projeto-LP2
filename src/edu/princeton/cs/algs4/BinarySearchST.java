@@ -151,7 +151,7 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
      * @return the number of keys in the symbol table strictly less than {@code key}
      * @throws IllegalArgumentException if {@code key} is {@code null}
      */
-    public int rank(Key key) { /// quantas chaves menores que a que lhe passo existem
+    public int rank(Key key) {
         if (key == null) throw new IllegalArgumentException("argument to rank() is null"); 
 
         int lo = 0, hi = n-1; 
@@ -185,18 +185,18 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
             return;
         }
 
-        int i = rank(key); /// Dá-no quantas chaves temos antes do valor da chave
+        int i = rank(key);
 
         // key is already in table
-        if (i < n && keys[i].compareTo(key) == 0) { /// verifico se a posicao aonde quero inserir é menor que o tamanho maximo e se a chave j'a existe ou não
+        if (i < n && keys[i].compareTo(key) == 0) {
             vals[i] = val;
             return;
         }
 
         // insert new key-value pair
-        if (n == keys.length) resize(2*keys.length); /// se n já atingiu o tamanho max ( tamanho max duplica )
+        if (n == keys.length) resize(2*keys.length);
 
-        for (int j = n; j > i; j--)  { /// de tamanho máximo até aonde pretendo inserir
+        for (int j = n; j > i; j--)  {
             keys[j] = keys[j-1];
             vals[j] = vals[j-1];
         }

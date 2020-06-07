@@ -24,6 +24,8 @@
 
 package edu.princeton.cs.algs4;
 
+import java.io.Serializable;
+
 /**
  *  The {@code EdgeWeightedGraph} class represents an edge-weighted
  *  graph of vertices named 0 through <em>V</em> – 1, where each
@@ -49,7 +51,7 @@ package edu.princeton.cs.algs4;
  *  @author Robert Sedgewick
  *  @author Kevin Wayne
  */
-public class EdgeWeightedGraph {
+public class EdgeWeightedGraph implements Serializable {
     private static final String NEWLINE = System.getProperty("line.separator");
 
     private final int V;

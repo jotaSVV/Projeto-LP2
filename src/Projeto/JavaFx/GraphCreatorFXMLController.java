@@ -31,7 +31,7 @@ import static Projeto.JavaFx.GraphCreator.f1;
 import static Projeto.JavaFx.GraphCreator.graph_pdpSalas;
 public class GraphCreatorFXMLController implements Initializable {
 
-    /// MEU CODIGO ///////////////////////////////////
+
     public Pane graphPane;
     private static final int radius = 25;
     public HBox addSearchBox12;
@@ -39,7 +39,7 @@ public class GraphCreatorFXMLController implements Initializable {
     public HBox addSearchBox121;
     public TextField printConexo;
 
-    // ADD GRAFOS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // ADD GRAFOS
     public ComboBox<String> salasComboBox;
     public ComboBox<String> alunosComboBox;
     public ComboBox<String> comboSala;
@@ -52,8 +52,18 @@ public class GraphCreatorFXMLController implements Initializable {
     public ComboBox<String> comboSalaSala;
     public ComboBox<String> comboSalaSala1;
     public TextField resultDistance;
-
+    /// para colocar a distancia de sala para sala
+    public TableColumn<Object, Integer> distToSalas;
+    public TableColumn dadosAluno;
+    public Button saidaEmergencia;
+    public TextField resultSaidaEmergencia;
+    public ComboBox<String> selectAlunoSEmergencia;
+    //// ADD SUB GRAPH ////////////////////////////////////////////////////////////// AINDA POR FAZER !!!!!!!!!!!!!!!!!!!!!!
+    public ListView listViewAddGraph;
+    public Pane graphPane1;
+    //////
     private String pdpSalastxt = ".//data//salasPdp.txt";
+    private String pdpSalasBinFile = ".//data//SalasPdpBinFile.bin";
 
     Graph_project<Point> gi = new Graph_project<>();
     /////////////////////////////////////////////////7
@@ -125,7 +135,7 @@ public class GraphCreatorFXMLController implements Initializable {
     private TextField nrCadeirasSalaTextfield;
 
     @FXML
-    private ComboBox edificiosSala;
+    private ComboBox<Projeto.Edificio> edificiosSala;
 
     @FXML
     private Button listarSalas;
@@ -157,12 +167,11 @@ public class GraphCreatorFXMLController implements Initializable {
     @FXML
     private TextField nomeDoCurso;
     @FXML
-    private ComboBox faculdadeDoCurso;
+    private ComboBox<Faculdade> faculdadeDoCurso;
 
-/*
-TABELA DISCIPLINAS
- */
-
+    /*
+    TABELA DISCIPLINAS
+     */
 
     @FXML
     private javafx.scene.control.TableView<Disciplina> TabelaDisciplinas;
@@ -185,16 +194,12 @@ TABELA DISCIPLINAS
     @FXML
     private TextField semestredaDisciplina;
     @FXML
-    private ListView professoresdaDisciplina;
+    private ListView<Professor> professoresdaDisciplina;
     @FXML
     private Button listarDisciplinas;
     @FXML
     private Button adicionarDisciplinas;
-
-
     ///FIM TABELA Disciplinas
-
-
 
     /*
     TABELA DAS TURMAS
@@ -219,7 +224,7 @@ TABELA DISCIPLINAS
     @FXML
     private TableColumn<Turma, String> salaTurma;
     @FXML
-    private ComboBox cursosTurmas;
+    private ComboBox<Curso> cursosTurmas;
     @FXML
     private TextField codigosdaTurma;
     @FXML
@@ -229,11 +234,11 @@ TABELA DISCIPLINAS
     @FXML
     private Button AdicionarTurmas;
     @FXML
-    private ComboBox disciplinaDaTurma;
+    private ComboBox<Disciplina> disciplinaDaTurma;
     @FXML
-    private ComboBox salasdaTurma;
+    private ComboBox<Sala> salasdaTurma;
     @FXML
-    private ComboBox professordaTurma;
+    private ComboBox<Professor> professordaTurma;
 
     ///Fim Tabela Turmas
     /// TABLE VIEW EDIFICIO
@@ -249,7 +254,7 @@ TABELA DISCIPLINAS
     private TableColumn<Edificio, String> salasEdificio;
 
     @FXML
-    private ComboBox comboBoxFaculdadesEdificio ;
+    private ComboBox<Faculdade> comboBoxFaculdadesEdificio ;
 
     @FXML
     private Button adicionarEdificio;
@@ -297,7 +302,7 @@ TABELA DISCIPLINAS
     @FXML
     private TextField anonascimentoAluno;
     @FXML
-    private ListView turmasdoAluno;
+    private ListView<Turma> turmasdoAluno;
     @FXML
     private Button listarAlunos;
     @FXML
@@ -340,16 +345,12 @@ TABELA DISCIPLINAS
     @FXML
     private TextField anonascProfessor;
     @FXML
-    private ListView discProfessor;
+    private ListView<Disciplina> discProfessor;
     @FXML
-    private ListView turmasdoProfessor;
+    private ListView<Turma> turmasdoProfessor;
 
 
     /// FIM TABELA PROFESSORES
-
-
-
-
 
     @FXML
     private javafx.scene.control.TableView<Faculdade> TableView;
@@ -687,8 +688,6 @@ TABELA DISCIPLINAS
                 }
             }
         });
-
-
         TabelaDisciplinas.setItems(getDisciplinas());
         professoresdaDisciplina.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         professoresdaDisciplina.setItems(getProfessores());
@@ -810,8 +809,6 @@ TABELA DISCIPLINAS
             }
         }
     }
-
-
 
     /*
     HANDLERS DAS TURMAS
@@ -1029,9 +1026,6 @@ TABELA DISCIPLINAS
         }
     }
 
-
-
-
     /*
          HANDLERS DA SALA
      */
@@ -1168,7 +1162,7 @@ TABELA DISCIPLINAS
     }
 
     public void handleListarEdificios(ActionEvent actionEvent){
-///Tabela Edificio
+    ///Tabela Edificio
         nomeEdificio.setCellValueFactory(new PropertyValueFactory<Edificio,String>("Nome"));
         faculdadeEdificio.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Edificio, String>, ObservableValue<String>>() {
             @Override
@@ -1225,7 +1219,6 @@ TABELA DISCIPLINAS
     public void handleAddTurma() {
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void gerarVerticesSalasGraph(String v)
     {
         int codSala = Integer.parseInt(v);
@@ -1243,6 +1236,7 @@ TABELA DISCIPLINAS
         stack.getChildren().addAll(c,text);
         graphPane.getChildren().add(stack);
     }
+
     public void gerarVerticesPdpGraph(String v)
     {
         int codPdp = Integer.parseInt(v);
@@ -1320,18 +1314,15 @@ TABELA DISCIPLINAS
             printConexo.setText("Not Conexo");
     }
 
-    public void handleSelectAlunos(ActionEvent event) {
-    }
-
-    public void handleSelectSalas(ActionEvent event) {
-    }
-
     public void showSalasComboBox(){
         for (Integer s:salas.keys()) {
             salasComboBox.getItems().addAll(salas.get(s).getName());
             comboSala.getItems().addAll(salas.get(s).getName());
             comboSalaSala.getItems().addAll(salas.get(s).getName());
             comboSalaSala1.getItems().addAll(salas.get(s).getName());
+        }
+        for (Integer p:pdp.keys()) {
+            salasComboBox.getItems().addAll(pdp.get(p).getName()+ " (" +pdp.get(p).getCod()+")");
         }
     }
 
@@ -1347,24 +1338,39 @@ TABELA DISCIPLINAS
         for (int c : alunos.keys()) {
             Aluno a = alunos.get(c);
             alunosComboBox.getItems().addAll(a.getNome() + " (" + a.getNumeroAluno() + ")");
+            selectAlunoSEmergencia.getItems().addAll(a.getNome() + " (" + a.getNumeroAluno() + ")");
         }
     }
 
-    public void handleCalculeDistance(ActionEvent event){ // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    public void handleCalculeDistance(ActionEvent event){ // FALTA IMPRIMIR PASSO POR PASSO PARA QUE SALA/PDP O ALUNO PASSOU ATÉ CHEGAR AO DESTINO, COM OS RESPECTIVOS CUSTOS
         String nomeSala=salasComboBox.getValue();
         String nomeAluno=alunosComboBox.getValue();
 
         int numAluno = Integer.parseInt(nomeAluno.replaceAll("[\\D]", "")); // para pegar apenas na parte inteira
-        int numSala = Integer.parseInt(nomeSala.replaceAll("[\\D]", "")); // para pegar apenas na parte inteira
+        int num = Integer.parseInt(nomeSala.replaceAll("[\\D]", "")); // para pegar apenas na parte inteira
 
-        if(salas.contains(numSala)){
-            Sala sala = salas.get(numSala);
+
+        if(!salas.contains(num)){ // É porque é um pdp
+            String[] numbers = nomeSala.split(" ");
+            int aux= 0;
+            num = 0; // como nao vai ser uma sala, vou ter de atualizar a variavel num
+            // Para pegar apenas no cod do PDP
+            for (String s : numbers) {
+                if(aux == 1){
+                    num = Integer.parseInt(s.replaceAll("[\\D]", "")); // para pegar apenas na parte inteira
+                }
+                aux++;
+            }
+        }
+
+        // Se for o ponto aonde quero ir for uma sala
+        if(salas.contains(num)){
+            Sala sala = salas.get(num);
             if(alunos.contains(numAluno)){
                 Aluno a1 = alunos.get(numAluno);
                 Point p = gi.pdpOuSalaMaisProxima(alunos.get(numAluno));
                 if ( p instanceof PontosDePassagem){
                     PontosDePassagem p1 = (PontosDePassagem)p;
-                    System.out.println("RETORNOU UM PDP " +p1.getName());
                     for (int v = 0; v < graph_pdpSalas.digraph().V();v++){
                         if(pdp.get(p1.getCod()).getCod() == Integer.parseInt(graph_pdpSalas.nameOf(v))){
                             for (int vi = 0; vi < graph_pdpSalas.digraph().V(); vi++){
@@ -1376,9 +1382,11 @@ TABELA DISCIPLINAS
                                         a1.setZ(sala.getZ());
                                         f1.guardar_STALUNOS();
                                         double dist = sp.distTo(vi)+p1.distAlunoPdpProx;
-                                        System.out.println(dist);
-                                        System.out.println("Aluno POS:" +a1.getX() +" "+ a1.getY() +" "+a1.getZ());
                                         resultDistance.setText(String.valueOf(dist));
+                                     //   distToSalas.setText("test");
+                                      //  distToSalas.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+                                     //   distToSalas;
+                                      //  public TableColumn dadosAluno;
                                     }else {
                                         resultDistance.setText("Sem Caminho Possivel");
                                     }
@@ -1388,7 +1396,6 @@ TABELA DISCIPLINAS
                     }
                 }else if( p instanceof Sala){
                     Sala s1 = (Sala)p;
-                    System.out.println("RETORNOU UMA SALA " +s1.getCodigo());
                     for (int v = 0; v < graph_pdpSalas.digraph().V();v++){
                         if(salas.get(s1.getCodigo()).getCodigo() == Integer.parseInt(graph_pdpSalas.nameOf(v))){
                             for (int vi = 0; vi < graph_pdpSalas.digraph().V(); vi++){
@@ -1401,6 +1408,64 @@ TABELA DISCIPLINAS
                                         f1.guardar_STALUNOS();
                                         double dist = sp.distTo(vi)+s1.distAlunoSalaProx;
                                         resultDistance.setText(String.valueOf(dist));
+                                    }else {
+                                        resultDistance.setText("Sem Caminho Possivel");
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }else {
+                    System.out.println("Erro !!!!!!");
+                }
+            }
+        }
+        // se for um pdp
+        if(pdp.contains(num)){
+            PontosDePassagem pontoPassagem = pdp.get(num);
+            if(alunos.contains(numAluno)){
+                Aluno a1 = alunos.get(numAluno);
+                Point p = gi.pdpOuSalaMaisProxima(alunos.get(numAluno));
+                if ( p instanceof PontosDePassagem){
+                    PontosDePassagem p1 = (PontosDePassagem)p;
+                    for (int v = 0; v < graph_pdpSalas.digraph().V();v++){
+                        if(pdp.get(p1.getCod()).getCod() == Integer.parseInt(graph_pdpSalas.nameOf(v))){
+                            for (int vi = 0; vi < graph_pdpSalas.digraph().V(); vi++){
+                                if(pontoPassagem.getCod() == Integer.parseInt(graph_pdpSalas.nameOf(vi))){
+                                    DijkstraSP_Projeto sp = new DijkstraSP_Projeto(graph_pdpSalas, v);
+                                    if(sp.hasPathTo(vi)){
+                                        a1.setX(pontoPassagem.getX());
+                                        a1.setY(pontoPassagem.getY());
+                                        a1.setZ(pontoPassagem.getZ());
+                                        f1.guardar_STALUNOS();
+                                        double dist = sp.distTo(vi)+p1.distAlunoPdpProx;
+                                        resultDistance.setText(String.valueOf(dist));
+                                        //   distToSalas.setText("test");
+                                        //  distToSalas.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+                                        //   distToSalas;
+                                        //  public TableColumn dadosAluno;
+                                    }else {
+                                        resultDistance.setText("Sem Caminho Possivel");
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }else if( p instanceof Sala){
+                    Sala s1 = (Sala)p;
+                    for (int v = 0; v < graph_pdpSalas.digraph().V();v++){
+                        if(salas.get(s1.getCodigo()).getCodigo() == Integer.parseInt(graph_pdpSalas.nameOf(v))){
+                            for (int vi = 0; vi < graph_pdpSalas.digraph().V(); vi++){
+                                if(pontoPassagem.getCod() == Integer.parseInt(graph_pdpSalas.nameOf(vi))){
+                                    DijkstraSP_Projeto sp = new DijkstraSP_Projeto(graph_pdpSalas, v);
+                                    if(sp.hasPathTo(vi)){
+                                        a1.setX(pontoPassagem.getX());
+                                        a1.setY(pontoPassagem.getY());
+                                        a1.setZ(pontoPassagem.getZ());
+                                        f1.guardar_STALUNOS();
+                                        double dist = sp.distTo(vi)+s1.distAlunoSalaProx;
+                                        resultDistance.setText(String.valueOf(dist));
+                                        distToSalas.setText("test");
                                     }else {
                                         resultDistance.setText("Sem Caminho Possivel");
                                     }
@@ -1460,9 +1525,7 @@ TABELA DISCIPLINAS
             Sala sala1 = salas.get(numSala1);
 
             gi.conectGraphs(sala,sala1,graph_pdpSalas,pdpSalastxt,i);
-
         }
-        handleGerarGrafoSalas(null); // atualiza o grafo
     }
 
     public void handlerButtonConnectPdpPdp(ActionEvent event) {
@@ -1500,9 +1563,30 @@ TABELA DISCIPLINAS
         handleGerarGrafoSalas(null); // atualiza o grafo
     }
 
-    public void buttonSave(ActionEvent actionEvent) {
+    public void buttonSave(ActionEvent event) {
+        gi.saveBinGraph(graph_pdpSalas,pdpSalasBinFile);
     }
 
-    public void buttonLoad(ActionEvent actionEvent) {
+    public void buttonLoad(ActionEvent event) {
+        graph_pdpSalas = gi.readBinGraph(graph_pdpSalas,pdpSalasBinFile);
+        gi.writeSalasPdpTxt(graph_pdpSalas,pdpSalastxt);
+        handleGerarGrafoSalas(null);
+    }
+
+    public void handlerSaidaEmergencia(ActionEvent event) { ///// FALTA MELHORAR O IMPRIMIR, COLOCAR A IMPRIMIR DE QUE SALA PARA QUE PDP FOI E O CUSTO TOTAL
+        String nomeAluno = selectAlunoSEmergencia.getValue();
+        int numAluno = Integer.parseInt(nomeAluno.replaceAll("[\\D]", "")); // para pegar apenas na parte inteira
+        Aluno a = alunos.get(numAluno);
+        int []codSaida = gi.saidaDeEmergencia(a);
+        PontosDePassagem p1 = pdp.get(codSaida[1]);
+        a.setX(p1.getX());
+        a.setY(p1.getY());
+        a.setZ(p1.getZ());
+
+        resultSaidaEmergencia.setText(String.valueOf(codSaida[0]));
+
+    }
+
+    public void addSubGraph(ActionEvent event) {
     }
 }

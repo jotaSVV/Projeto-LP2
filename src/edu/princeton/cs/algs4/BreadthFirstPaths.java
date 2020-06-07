@@ -68,6 +68,14 @@ public class BreadthFirstPaths {
     private int[] edgeTo;      // edgeTo[v] = previous edge on shortest s-v path
     private int[] distTo;      // distTo[v] = number of edges shortest s-v path
 
+    public int[] getEdgeTo() {
+        return edgeTo;
+    }
+
+    public void setEdgeTo(int[] edgeTo) {
+        this.edgeTo = edgeTo;
+    }
+
     /**
      * Computes the shortest path between the source vertex {@code s}
      * and every other vertex in the graph {@code G}.

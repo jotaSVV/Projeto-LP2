@@ -5,10 +5,16 @@ Pdp:
 4;escadasP3;Informatica
 
 Pdp:
+8;Saida2;Informatica
+
+Pdp:
 1;escadasP1;Informatica
 
 Pdp:
 5;biblioteca;Informatica
+
+Pdp:
+9;Saida1;Informatica
 
 Pdp:
 2;escadasP2;Informatica
@@ -18,4 +24,7 @@ Pdp:
 
 Pdp:
 3;escadasP0;Informatica
+
+Pdp:
+7;Saida1;Informatica
 

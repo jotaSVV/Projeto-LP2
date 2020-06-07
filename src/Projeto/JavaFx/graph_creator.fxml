@@ -1,26 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="617.0" prefWidth="925.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Projeto.JavaFx.GraphCreatorFXMLController">
+<AnchorPane prefHeight="617.0" prefWidth="925.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Projeto.JavaFx.GraphCreatorFXMLController">
    <children>
        <MenuBar layoutX="-7.0" layoutY="-3.0" prefHeight="34.0" prefWidth="932.0">
            <menus>
@@ -56,9 +41,9 @@
                                        <HBox layoutY="589.0" prefHeight="40.0" prefWidth="865.0">
                                            <children>
                                                <Button mnemonicParsing="false" onAction="#buttonSave" text="Save">
-                                       <HBox.margin>
-                                          <Insets bottom="10.0" left="10.0" />
-                                       </HBox.margin></Button>
+                                                   <HBox.margin>
+                                                       <Insets bottom="10.0" left="10.0" />
+                                                   </HBox.margin></Button>
                                                <Button mnemonicParsing="false" onAction="#buttonLoad" text="Load" />
                                            </children>
                                        </HBox>
@@ -70,109 +55,163 @@
                            </children></AnchorPane>
                    </content>
                </Tab>
+               <Tab text="AddSubGraph">
+                   <content>
+                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                               <VBox prefHeight="534.0" prefWidth="932.0">
+                                   <children>
+                                       <HBox layoutY="589.0" prefHeight="104.0" prefWidth="932.0">
+                                           <children>
+                                    <ListView fx:id="listViewAddGraph" prefHeight="31.0" prefWidth="175.0">
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="200.0" top="10.0" />
+                                       </HBox.margin>
+                                    </ListView>
+                                               <Button mnemonicParsing="false" onAction="#addSubGraph" text="addGraph">
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="200.0" top="15.0" />
+                                       </HBox.margin></Button>
+                                           </children>
+                                       </HBox>
+                                       <Pane fx:id="graphPane1" prefHeight="517.0" prefWidth="0.0">
+                                           <VBox.margin>
+                                               <Insets bottom="10.0" top="20.0" />
+                                           </VBox.margin>
+                                       </Pane>
+                                   </children>
+                                   <opaqueInsets>
+                                       <Insets />
+                                   </opaqueInsets>
+                               </VBox>
+                           </children></AnchorPane>
+                   </content>
+               </Tab>
+
                <Tab text="searchGraph">
                    <content>
-                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="582.0" prefWidth="865.0">
-                           <children>
-                               <VBox prefHeight="690.0" prefWidth="871.0">
-                                   <children>
-                                       <Label prefHeight="42.0" prefWidth="833.0" text="Graphs">
-                                           <VBox.margin>
-                                               <Insets left="20.0" />
-                                           </VBox.margin>
-                                       </Label>
-                                       <HBox fx:id="addSearchBox12" prefHeight="72.0" prefWidth="871.0">
-                                           <children>
-                                               <Button mnemonicParsing="false" onAction="#handleBipartite" text="Graph Persons Companies is bipartite?">
-                                                   <HBox.margin>
-                                                       <Insets left="10.0" top="15.0" />
-                                                   </HBox.margin>
-                                               </Button>
-                                               <TextField fx:id="bipartiteTextField" prefHeight="31.0" prefWidth="138.0">
-                                                   <HBox.margin>
-                                                       <Insets left="250.0" top="15.0" />
-                                                   </HBox.margin>
-                                               </TextField>
-                                           </children>
-                                       </HBox>
-                                       <HBox fx:id="addSearchBox121" layoutX="10.0" layoutY="52.0" prefHeight="72.0" prefWidth="871.0">
-                                           <children>
-                                               <Button mnemonicParsing="false" onAction="#handleConexo" prefHeight="31.0" prefWidth="274.0" text="Graph Persons Companies is conexo?">
-                                                   <HBox.margin>
-                                                       <Insets left="10.0" top="15.0" />
-                                                   </HBox.margin>
-                                               </Button>
-                                               <TextField fx:id="printConexo" prefHeight="31.0" prefWidth="141.0">
-                                                   <HBox.margin>
-                                                       <Insets left="250.0" top="15.0" />
-                                                   </HBox.margin>
-                                               </TextField>
-                                           </children>
-                                       </HBox>
-                                       <HBox prefHeight="63.0" prefWidth="871.0">
-                                           <children>
-                                               <ComboBox fx:id="salasComboBox" prefWidth="150.0" promptText="select Salas">
-                                                   <HBox.margin>
-                                                       <Insets left="100.0" top="15.0" />
-                                                   </HBox.margin>
-                                               </ComboBox>
-                                               <ComboBox fx:id="alunosComboBox" prefWidth="150.0" promptText="select Alunos">
-                                                   <HBox.margin>
-                                                       <Insets left="140.0" top="15.0" />
-                                                   </HBox.margin>
-                                               </ComboBox>
-                                               <Button mnemonicParsing="false" onAction="#handleCalculeDistance" text="Calcule Dist">
-                                                   <HBox.margin>
-                                                       <Insets left="100.0" top="15.0" />
-                                                   </HBox.margin>
-                                               </Button>
-                                           </children>
-                                       </HBox>
-                                       <HBox prefHeight="100.0" prefWidth="200.0">
-                                           <children>
-                                               <TableView fx:id="tabelaparadistancia" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="286.0" prefWidth="283.0">
-                                                   <columns>
-                                                       <TableColumn fx:id="distToSalas" prefWidth="198.0" text="Sala" />
-                                                   </columns>
-                                                   <columnResizePolicy>
-                                                       <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                                   </columnResizePolicy>
-                                                   <HBox.margin>
-                                                       <Insets left="20.0" />
-                                                   </HBox.margin>
-                                               </TableView>
-                                               <TableView fx:id="tabelaparadistancia1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="286.0" prefWidth="293.0">
-                                                   <columnResizePolicy>
-                                                       <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                                   </columnResizePolicy>
-                                                   <columns>
-                                                       <TableColumn fx:id="dadosAluno" prefWidth="198.0" text="Aluno" />
-                                                   </columns>
-                                                   <HBox.margin>
-                                                       <Insets left="20.0" />
-                                                   </HBox.margin>
-                                               </TableView>
-                                               <HBox prefHeight="205.0" prefWidth="280.0">
-                                                   <children>
-                                                       <TextField fx:id="resultDistance" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="199.0" promptText="Result">
-                                                           <HBox.margin>
-                                                               <Insets left="50.0" top="100.0" />
-                                                           </HBox.margin>
-                                                           <padding>
-                                                               <Insets right="20.0" />
-                                                           </padding>
-                                                       </TextField>
-                                                   </children>
-                                                   <HBox.margin>
-                                                       <Insets right="20.0" />
-                                                   </HBox.margin>
-                                               </HBox>
-                                           </children>
-                                       </HBox>
-                                   </children>
-                               </VBox>
-                           </children>
-                       </AnchorPane>
+                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TabPane prefHeight="546.0" prefWidth="926.0" tabClosingPolicy="UNAVAILABLE">
+                          <tabs>
+                              <Tab text="searchGraph">
+                                  <content>
+                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="582.0" prefWidth="865.0">
+                                          <children>
+                                              <VBox prefHeight="690.0" prefWidth="871.0">
+                                                  <children>
+                                                      <Label prefHeight="42.0" prefWidth="833.0" text="Graphs">
+                                                          <VBox.margin>
+                                                              <Insets left="20.0" />
+                                                          </VBox.margin>
+                                                      </Label>
+                                                      <HBox fx:id="addSearchBox12" prefHeight="72.0" prefWidth="871.0">
+                                                          <children>
+                                                              <Button mnemonicParsing="false" onAction="#handleBipartite" text="Graph Persons Companies is bipartite?">
+                                                                  <HBox.margin>
+                                                                      <Insets left="10.0" top="15.0" />
+                                                                  </HBox.margin>
+                                                              </Button>
+                                                              <TextField fx:id="bipartiteTextField" prefHeight="31.0" prefWidth="138.0">
+                                                                  <HBox.margin>
+                                                                      <Insets left="250.0" top="15.0" />
+                                                                  </HBox.margin>
+                                                              </TextField>
+                                                          </children>
+                                                      </HBox>
+                                                      <HBox fx:id="addSearchBox121" layoutX="10.0" layoutY="52.0" prefHeight="72.0" prefWidth="871.0">
+                                                          <children>
+                                                              <Button mnemonicParsing="false" onAction="#handleConexo" prefHeight="31.0" prefWidth="274.0" text="Graph Persons Companies is conexo?">
+                                                                  <HBox.margin>
+                                                                      <Insets left="10.0" top="15.0" />
+                                                                  </HBox.margin>
+                                                              </Button>
+                                                              <TextField fx:id="printConexo" prefHeight="31.0" prefWidth="141.0">
+                                                                  <HBox.margin>
+                                                                      <Insets left="250.0" top="15.0" />
+                                                                  </HBox.margin>
+                                                              </TextField>
+                                                          </children>
+                                                      </HBox>
+                                                      <HBox prefHeight="63.0" prefWidth="871.0">
+                                                          <children>
+                                                              <ComboBox fx:id="salasComboBox" prefWidth="150.0" promptText="select Salas/Pdp">
+                                                                  <HBox.margin>
+                                                                      <Insets left="100.0" top="15.0" />
+                                                                  </HBox.margin>
+                                                              </ComboBox>
+                                                              <ComboBox fx:id="alunosComboBox" prefWidth="150.0" promptText="select Alunos">
+                                                                  <HBox.margin>
+                                                                      <Insets left="140.0" top="15.0" />
+                                                                  </HBox.margin>
+                                                              </ComboBox>
+                                                              <Button mnemonicParsing="false" onAction="#handleCalculeDistance" text="Calcule Dist">
+                                                                  <HBox.margin>
+                                                                      <Insets left="100.0" top="15.0" />
+                                                                  </HBox.margin>
+                                                              </Button>
+                                                          </children>
+                                                      </HBox>
+                                                      <HBox prefHeight="100.0" prefWidth="200.0">
+                                                          <children>
+                                                              <TableView fx:id="tabelaparadistancia" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="286.0" prefWidth="283.0">
+                                                                  <columns>
+                                                                      <TableColumn fx:id="distToSalas" prefWidth="198.0" text="Sala" />
+                                                                  </columns>
+                                                                  <columnResizePolicy>
+                                                                      <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                                  </columnResizePolicy>
+                                                                  <HBox.margin>
+                                                                      <Insets left="20.0" />
+                                                                  </HBox.margin>
+                                                              </TableView>
+                                                              <TableView fx:id="tabelaparadistancia1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="286.0" prefWidth="293.0">
+                                                                  <columnResizePolicy>
+                                                                      <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                                  </columnResizePolicy>
+                                                                  <columns>
+                                                                      <TableColumn fx:id="dadosAluno" prefWidth="198.0" text="Aluno" />
+                                                                  </columns>
+                                                                  <HBox.margin>
+                                                                      <Insets left="20.0" />
+                                                                  </HBox.margin>
+                                                              </TableView>
+                                                              <HBox prefHeight="205.0" prefWidth="280.0">
+                                                                  <children>
+                                                                      <TextField fx:id="resultDistance" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="199.0" promptText="Result">
+                                                                          <HBox.margin>
+                                                                              <Insets left="50.0" top="100.0" />
+                                                                          </HBox.margin>
+                                                                          <padding>
+                                                                              <Insets right="20.0" />
+                                                                          </padding>
+                                                                      </TextField>
+                                                                  </children>
+                                                                  <HBox.margin>
+                                                                      <Insets right="20.0" />
+                                                                  </HBox.margin>
+                                                              </HBox>
+                                                          </children>
+                                                      </HBox>
+                                                  </children>
+                                              </VBox>
+                                          </children>
+                                      </AnchorPane>
+                                  </content>
+                              </Tab>
+                            <Tab text="Saída Emergência">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <Button fx:id="saidaEmergencia" layoutX="290.0" layoutY="50.0" mnemonicParsing="false" onAction="#handlerSaidaEmergencia" prefHeight="26.0" prefWidth="131.0" text="Saída de Emergencia" />
+                                          <TextField fx:id="resultSaidaEmergencia" layoutX="531.0" layoutY="50.0" prefHeight="26.0" prefWidth="281.0" />
+                                          <ComboBox fx:id="selectAlunoSEmergencia" layoutX="28.0" layoutY="50.0" prefHeight="26.0" prefWidth="190.0" promptText="Select Aluno" />
+                                       </children></AnchorPane>
+                              </content>
+                            </Tab>
+                          </tabs>
+                        </TabPane>
+                     </children></AnchorPane>
                    </content>
                </Tab>
                <Tab text="Connect">

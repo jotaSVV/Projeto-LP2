@@ -55,6 +55,9 @@ public class GraphCreatorFXMLController implements Initializable {
     /// para colocar a distancia de sala para sala
     public TableColumn<Object, Integer> distToSalas;
     public TableColumn dadosAluno;
+    public Button saidaEmergencia;
+    public TextField resultSaidaEmergencia;
+    public ComboBox<String> selectAlunoSEmergencia;
 
     private String pdpSalastxt = ".//data//salasPdp.txt";
     private String pdpSalasBinFile = ".//data//SalasPdpBinFile.bin";
@@ -300,9 +303,9 @@ public class GraphCreatorFXMLController implements Initializable {
     @FXML
     private TextField anonascProfessor;
     @FXML
-    private ListView discProfessor;
+    private ListView<Disciplina> discProfessor;
     @FXML
-    private ListView turmasdoProfessor;
+    private ListView<Turma> turmasdoProfessor;
 
 
     /// FIM TABELA PROFESSORES
@@ -1211,10 +1214,11 @@ public class GraphCreatorFXMLController implements Initializable {
         for (int c : alunos.keys()) {
             Aluno a = alunos.get(c);
             alunosComboBox.getItems().addAll(a.getNome() + " (" + a.getNumeroAluno() + ")");
+            selectAlunoSEmergencia.getItems().addAll(a.getNome() + " (" + a.getNumeroAluno() + ")");
         }
     }
 
-    public void handleCalculeDistance(ActionEvent event){ // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! falta tentar para o dist -x
+    public void handleCalculeDistance(ActionEvent event){ // FALTA IMPRIMIR PASSO POR PASSO PARA QUE SALA/PDP O ALUNO PASSOU ATÉ CHEGAR AO DESTINO, COM OS RESPECTIVOS CUSTOS
         String nomeSala=salasComboBox.getValue();
         String nomeAluno=alunosComboBox.getValue();
 
@@ -1233,9 +1237,6 @@ public class GraphCreatorFXMLController implements Initializable {
                 }
                 aux++;
             }
-            System.out.println("sou um pdp" + num);
-        }else {
-            System.out.println("sou uma sala" + num);
         }
 
         // Se for o ponto aonde quero ir for uma sala
@@ -1246,7 +1247,6 @@ public class GraphCreatorFXMLController implements Initializable {
                 Point p = gi.pdpOuSalaMaisProxima(alunos.get(numAluno));
                 if ( p instanceof PontosDePassagem){
                     PontosDePassagem p1 = (PontosDePassagem)p;
-                    System.out.println("RETORNOU UM PDP " +p1.getName());
                     for (int v = 0; v < graph_pdpSalas.digraph().V();v++){
                         if(pdp.get(p1.getCod()).getCod() == Integer.parseInt(graph_pdpSalas.nameOf(v))){
                             for (int vi = 0; vi < graph_pdpSalas.digraph().V(); vi++){
@@ -1258,8 +1258,6 @@ public class GraphCreatorFXMLController implements Initializable {
                                         a1.setZ(sala.getZ());
                                         f1.guardar_STALUNOS();
                                         double dist = sp.distTo(vi)+p1.distAlunoPdpProx;
-                                        System.out.println(dist);
-                                        System.out.println("Aluno POS:" +a1.getX() +" "+ a1.getY() +" "+a1.getZ());
                                         resultDistance.setText(String.valueOf(dist));
                                      //   distToSalas.setText("test");
                                       //  distToSalas.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
@@ -1274,7 +1272,6 @@ public class GraphCreatorFXMLController implements Initializable {
                     }
                 }else if( p instanceof Sala){
                     Sala s1 = (Sala)p;
-                    System.out.println("RETORNOU UMA SALA " +s1.getCodigo());
                     for (int v = 0; v < graph_pdpSalas.digraph().V();v++){
                         if(salas.get(s1.getCodigo()).getCodigo() == Integer.parseInt(graph_pdpSalas.nameOf(v))){
                             for (int vi = 0; vi < graph_pdpSalas.digraph().V(); vi++){
@@ -1287,7 +1284,6 @@ public class GraphCreatorFXMLController implements Initializable {
                                         f1.guardar_STALUNOS();
                                         double dist = sp.distTo(vi)+s1.distAlunoSalaProx;
                                         resultDistance.setText(String.valueOf(dist));
-                                        distToSalas.setText("test");
                                     }else {
                                         resultDistance.setText("Sem Caminho Possivel");
                                     }
@@ -1308,7 +1304,6 @@ public class GraphCreatorFXMLController implements Initializable {
                 Point p = gi.pdpOuSalaMaisProxima(alunos.get(numAluno));
                 if ( p instanceof PontosDePassagem){
                     PontosDePassagem p1 = (PontosDePassagem)p;
-                    System.out.println("RETORNOU UM PDP " +p1.getName());
                     for (int v = 0; v < graph_pdpSalas.digraph().V();v++){
                         if(pdp.get(p1.getCod()).getCod() == Integer.parseInt(graph_pdpSalas.nameOf(v))){
                             for (int vi = 0; vi < graph_pdpSalas.digraph().V(); vi++){
@@ -1320,8 +1315,6 @@ public class GraphCreatorFXMLController implements Initializable {
                                         a1.setZ(pontoPassagem.getZ());
                                         f1.guardar_STALUNOS();
                                         double dist = sp.distTo(vi)+p1.distAlunoPdpProx;
-                                        System.out.println(dist);
-                                        System.out.println("Aluno POS:" +a1.getX() +" "+ a1.getY() +" "+a1.getZ());
                                         resultDistance.setText(String.valueOf(dist));
                                         //   distToSalas.setText("test");
                                         //  distToSalas.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
@@ -1336,7 +1329,6 @@ public class GraphCreatorFXMLController implements Initializable {
                     }
                 }else if( p instanceof Sala){
                     Sala s1 = (Sala)p;
-                    System.out.println("RETORNOU UMA SALA " +s1.getCodigo());
                     for (int v = 0; v < graph_pdpSalas.digraph().V();v++){
                         if(salas.get(s1.getCodigo()).getCodigo() == Integer.parseInt(graph_pdpSalas.nameOf(v))){
                             for (int vi = 0; vi < graph_pdpSalas.digraph().V(); vi++){
@@ -1455,5 +1447,19 @@ public class GraphCreatorFXMLController implements Initializable {
         graph_pdpSalas = gi.readBinGraph(graph_pdpSalas,pdpSalasBinFile);
         gi.writeSalasPdpTxt(graph_pdpSalas,pdpSalastxt);
         handleGerarGrafoSalas(null);
+    }
+
+    public void handlerSaidaEmergencia(ActionEvent event) { ///// FALTA MELHORAR O IMPRIMIR, COLOCAR A IMPRIMIR DE QUE SALA PARA QUE PDP FOI E O CUSTO TOTAL
+        String nomeAluno = selectAlunoSEmergencia.getValue();
+        int numAluno = Integer.parseInt(nomeAluno.replaceAll("[\\D]", "")); // para pegar apenas na parte inteira
+        Aluno a = alunos.get(numAluno);
+        int []codSaida = gi.saidaDeEmergencia(a);
+        PontosDePassagem p1 = pdp.get(codSaida[1]);
+        a.setX(p1.getX());
+        a.setY(p1.getY());
+        a.setZ(p1.getZ());
+
+        resultSaidaEmergencia.setText(String.valueOf(codSaida[0]));
+
     }
 }

@@ -5,6 +5,7 @@ import edu.princeton.cs.algs4.Out;
 import java.io.*;
 
 import static Projeto.Faculdade.*;
+import static Projeto.JavaFx.GraphCreator.graph_pdpSalas;
 
 public class Graph_project <T extends Point> {
 
@@ -170,6 +171,68 @@ public class Graph_project <T extends Point> {
             return pdp.get(cod_pdp);
         }
         return null;
+    }
+
+    public int[] saidaDeEmergencia(Aluno a){ // dá a localizacao da sala ou pdp mais proxima do aluno
+        // se for um pdp
+        double aux = 1000;
+        int[] arrayRetorno = new int[2]; // array que vai passar a distancia percorrida e o cod da saida de emergencia
+        for (Integer pontosPdp:pdp.keys()) {
+            if(pontosPdp == 0 || pontosPdp == 7 || pontosPdp == 8 || pontosPdp == 9){ // Códigos das saídas
+                PontosDePassagem pontoPassagem = pdp.get(pontosPdp); // Pontos de passagem para aonde tenho de ir
+                if (alunos.contains(a.getNumeroAluno())) {
+                    Point p = pdpOuSalaMaisProxima(alunos.get(a.getNumeroAluno())); // retorna o pdp mais proximo do alunos (isto se ele nao tiver em nenhuma sala ou pdp)
+                    if (p instanceof PontosDePassagem) {
+                        PontosDePassagem p1 = (PontosDePassagem) p; // p1 = pdp ou sala aonde o aluno se encontra
+                        System.out.println("RETORNOU UM PDP " + p1.getName());
+                        for (int v = 0; v < graph_pdpSalas.digraph().V(); v++) {
+                            if (pdp.get(p1.getCod()).getCod() == Integer.parseInt(graph_pdpSalas.nameOf(v))) { // vamos ver o vertice que corresponde ao pdp/sala que o aluno está
+                                for (int vi = 0; vi < graph_pdpSalas.digraph().V(); vi++) {
+                                    if (pontoPassagem.getCod() == Integer.parseInt(graph_pdpSalas.nameOf(vi))) {
+                                        DijkstraSP_Projeto sp = new DijkstraSP_Projeto(graph_pdpSalas, v);
+                                        if (sp.hasPathTo(vi)) {
+                                            //f1.guardar_STALUNOS();
+                                            double dist = sp.distTo(vi) + p1.distAlunoPdpProx; // distancia entre o ponto em que o aluno se encontra e as saidas
+                                            if (dist < aux) {
+                                                aux = dist;
+                                                arrayRetorno[0] = (int) dist;
+                                                arrayRetorno[1] = pontoPassagem.getCod();
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }else if( p instanceof Sala){
+                        Sala s1 = (Sala)p;
+                        System.out.println("RETORNOU UMA SALA " +s1.getCodigo());
+                        for (int v = 0; v < graph_pdpSalas.digraph().V();v++){
+                            if(salas.get(s1.getCodigo()).getCodigo() == Integer.parseInt(graph_pdpSalas.nameOf(v))){ // vamos ver o vertice que corresponde ao pdp/sala que o aluno está
+                                for (int vi = 0; vi < graph_pdpSalas.digraph().V(); vi++){
+                                    if(pontoPassagem.getCod() == Integer.parseInt(graph_pdpSalas.nameOf(vi))){
+                                        DijkstraSP_Projeto sp = new DijkstraSP_Projeto(graph_pdpSalas, v);
+                                        if (sp.hasPathTo(vi)) {
+                                            //f1.guardar_STALUNOS();
+                                            double dist = sp.distTo(vi) + s1.distAlunoSalaProx; // distancia entre o ponto em que o aluno se encontra e as saidas
+                                            if (dist < aux) {
+                                                aux = dist;
+                                                arrayRetorno[0] = (int) dist;
+                                                arrayRetorno[1] = pontoPassagem.getCod();
+                                            }
+                                        }else {
+                                            System.out.println("Sem Caminho Possivel");
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }else {
+                        System.out.println("Erro !!!!!!");
+                    }
+                }
+            }
+        }
+        return arrayRetorno;
     }
 
     /**

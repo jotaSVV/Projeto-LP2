@@ -1,5 +1,5 @@
 package Projeto;
-public abstract class Pessoa {
+public abstract class Pessoa extends Point{
 
   private String nome;
 
@@ -8,16 +8,6 @@ public abstract class Pessoa {
   private Data dataNascimento;
 
   private String email;
-
-  private Point point;
-
-  public Point getPoint() {
-    return point;
-  }
-
-  public void setPoint(Point point) {
-    this.point = point;
-  }
 
   public String getNome() {
     return nome;

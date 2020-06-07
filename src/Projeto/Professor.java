@@ -13,8 +13,11 @@ public class Professor extends Pessoa {
     private ArrayList<Horario> horario_professor = new ArrayList<>();
 
     public Professor(String nome, String apelido, Data dataNascimento) {
-      super(nome, apelido, dataNascimento);
-      email();
+        super(nome, apelido, dataNascimento);
+        email();
+        this.setX(30); // para "nascer" na entrada da faculdade
+        this.setY(20);
+        this.setZ(0);
     }
 
     public ArrayList<Horario_Atendimento> getHorario_atendimento() {
@@ -31,11 +34,10 @@ public class Professor extends Pessoa {
 
     public String email(){
         this.setEmail(this.getNome()+this.getApelido()+"@ufp.edu.pt");
-        Point pos = new Point(0,0,0); // crio a localização do professor (pos 0,0,0)
-        this.setPoint(pos);
+        Point pos = new Point(0,0,0,this.getNome()); // crio a localização do professor (pos 0,0,0)
         return this.getNome()+this.getApelido()+"@ufp.edu.pt";
 
-     }
+    }
 
     /**
      *
@@ -106,6 +108,6 @@ public class Professor extends Pessoa {
 
     @Override
     public String toString() {
-      return this.getEmail();
+        return this.getEmail();
     }
 }

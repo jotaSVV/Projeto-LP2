@@ -1,7 +1,7 @@
 /**
  Pedro Pinheiro nº 36763
  João Silvestre nº 36431
-**/
+ **/
 
 package Projeto.JavaFx;
 import Projeto.*;
@@ -13,12 +13,11 @@ import javafx.stage.Stage;
 
 
 public class GraphCreator extends Application {
-    public static SymbolGraphWheighted graph_salas ;    //cria o symbol graph de salas
-    // Faculdades
-    public static Faculdade f1 = new Faculdade("Unisersidade Fernando Pessoa");
+    public static SymbolDigraphWeighted graph_pdpSalas ;    // cria o symbol graph de pdp
+    private static final double floorSize = 90;
+    public static final Faculdade f1 = new Faculdade("Unisersidade Fernando Pessoa");;
+
     public static void main(String[] args) {
-        // Localizaçao
-        Point point1 = new Point(12,123,1);
         // Datas
         Data d1 = new Data(7,10,1999);
         Data d2 = new Data(9,3,1997);
@@ -75,7 +74,6 @@ public class GraphCreator extends Application {
 //        // Cursos
 //          Curso c1 = new Curso("INF");
 //        Curso c2 = new Curso("CBL");
-//
 //
 //
 //        //Regista alunos na base de dados
@@ -218,6 +216,7 @@ public class GraphCreator extends Application {
         //R6- CARREGAR DE TXT
         f1.carregaredificiosST();
         f1.carregarsalasST();
+        f1.carregarPdpST();
         f1.carregarcursosST();
         f1.carregarTURMASST();
         f1.carregar_STPROFESSORES();
@@ -301,6 +300,7 @@ public class GraphCreator extends Application {
 
         //R7- GUARDAR EM TXT
         f1.guardarsalasST();
+        f1.guardarpdpST();
         f1.guardaredificiosST();
         f1.guardarcursosST();
         f1.guardar_turmasST();
@@ -308,14 +308,7 @@ public class GraphCreator extends Application {
         f1.guardardisciplinasST();
         f1.guardar_STALUNOS();
 
-        // GRAFO DE SALAS
-        Graph_project g = new Graph_project();                          //para aceder a classe
-        String salas_txt = ".//data//salasGraph.txt";
-        g.guardar_salas_txt_graph(salas_txt);
-        graph_salas = new SymbolGraphWheighted(salas_txt,";");
-        g.conect_2_salas(f1.salas.get(109),f1.salas.get(111),graph_salas,salas_txt,10);
-        g.conect_2_salas(f1.salas.get(111),f1.salas.get(112),graph_salas,salas_txt,10);
-        g.conect_2_salas(f1.salas.get(112),f1.salas.get(113),graph_salas,salas_txt,10);
+        // f1.listarPdp();
 
         // Listar os cursos da faculdade
 //        Curso c3 = new Curso("TEST");
@@ -338,9 +331,81 @@ public class GraphCreator extends Application {
 //
 //        f1.removerTurma(t4);
 //        f1.listarTurmas();
+
+        // Adicionar as Localizações das salas
+        f1.addPosiSala(100.0, floorSize * 1, f1.salas.get(109).getPiso(), f1.salas.get(109));
+        f1.addPosiSala(200.0, floorSize * 1, f1.salas.get(111).getPiso(), f1.salas.get(111));
+        f1.addPosiSala(300.0, floorSize * 1, f1.salas.get(112).getPiso(), f1.salas.get(112));
+        f1.addPosiSala(400.0, floorSize * 1, f1.salas.get(113).getPiso(), f1.salas.get(113));
+        f1.addPosiSala(500.0, floorSize * 1, f1.salas.get(114).getPiso(), f1.salas.get(114));
+        f1.addPosiSala(600.0, floorSize * 2, f1.salas.get(220).getPiso(), f1.salas.get(220));
+        f1.addPosiSala(500.0, floorSize * 2, f1.salas.get(221).getPiso(), f1.salas.get(221));
+        f1.addPosiSala(400.0, floorSize * 2, f1.salas.get(222).getPiso(), f1.salas.get(222));
+        f1.addPosiSala(300.0, floorSize * 2, f1.salas.get(223).getPiso(), f1.salas.get(223));
+        f1.addPosiSala(200.0, floorSize * 2, f1.salas.get(224).getPiso(), f1.salas.get(224));
+        f1.addPosiSala(100.0, floorSize * 3, f1.salas.get(330).getPiso(), f1.salas.get(330));
+        f1.addPosiSala(200.0, floorSize * 3, f1.salas.get(331).getPiso(), f1.salas.get(331));
+        f1.addPosiSala(300.0, floorSize * 3, f1.salas.get(332).getPiso(), f1.salas.get(332));
+        f1.addPosiSala(400.0, floorSize * 3, f1.salas.get(333).getPiso(), f1.salas.get(333));
+        f1.addPosiSala(500.0, floorSize * 3, f1.salas.get(334).getPiso(), f1.salas.get(334));
+
+        // Adicionar as Localizações dos Pontos de Passagem
+        f1.addPosiPdp(600,floorSize * 1,1,f1.pdp.get(1)); // ESCADAS P1
+        f1.addPosiPdp(100,floorSize * 2,2,f1.pdp.get(2)); // ESCADAS P2
+        f1.addPosiPdp(600,floorSize * 3,3,f1.pdp.get(4)); // ESCADAS P2
+        f1.addPosiPdp(40,floorSize * 1,1,f1.pdp.get(3)); // ESCADAS P0
+
+        // Entrada
+        f1.addPosiPdp(30,20,0,f1.pdp.get(0));
+        // Biblioteca
+        f1.addPosiPdp(600,20,0,f1.pdp.get(5));
+        // BAR
+        f1.addPosiPdp(350,20,0,f1.pdp.get(6));
+
+        Graph_project<Point> g = new Graph_project<>();                          //para aceder a classe
+
+        // GRAFO DE PONTOS DE PASSAGEM E SALAS
+        String pdpSalastxt = ".//data//salasPdp.txt";
+        g.guardar_pdp_txt_graph(pdpSalastxt);
+        graph_pdpSalas = new SymbolDigraphWeighted(pdpSalastxt,";");
+        // CONECTAR SALAS ENTRE SI
+        // 1 PISO
+        g.conectGraphs(f1.salas.get(109),f1.salas.get(111),graph_pdpSalas,pdpSalastxt,10);
+        g.conectGraphs(f1.salas.get(111),f1.salas.get(112),graph_pdpSalas,pdpSalastxt,10);
+        g.conectGraphs(f1.salas.get(112),f1.salas.get(113),graph_pdpSalas,pdpSalastxt,10);
+        g.conectGraphs(f1.salas.get(113),f1.salas.get(114),graph_pdpSalas,pdpSalastxt,10);
+        // 2 PISO
+        g.conectGraphs(f1.salas.get(220),f1.salas.get(221),graph_pdpSalas,pdpSalastxt,10);
+        g.conectGraphs(f1.salas.get(221),f1.salas.get(222),graph_pdpSalas,pdpSalastxt,10);
+        g.conectGraphs(f1.salas.get(222),f1.salas.get(223),graph_pdpSalas,pdpSalastxt,10);
+        g.conectGraphs(f1.salas.get(223),f1.salas.get(224),graph_pdpSalas,pdpSalastxt,10);
+        // 3 PISO
+        g.conectGraphs(f1.salas.get(330),f1.salas.get(331),graph_pdpSalas,pdpSalastxt,10);
+        g.conectGraphs(f1.salas.get(331),f1.salas.get(332),graph_pdpSalas,pdpSalastxt,10);
+        g.conectGraphs(f1.salas.get(332),f1.salas.get(333),graph_pdpSalas,pdpSalastxt,10);
+        g.conectGraphs(f1.salas.get(333),f1.salas.get(334),graph_pdpSalas,pdpSalastxt,10);
+        // CONECTAR SALAS E PDP
+        // ENTRADA
+        g.conectGraphs(f1.pdp.get(3),f1.salas.get(109),graph_pdpSalas,pdpSalastxt,5); // entrada à 1 sala do piso 1
+        // 1 PISO
+        g.conectGraphs(f1.pdp.get(1),f1.salas.get(114),graph_pdpSalas,pdpSalastxt,15); // Ligaçao do piso 1 ao piso 2
+        g.conectGraphs(f1.pdp.get(1),f1.salas.get(220),graph_pdpSalas,pdpSalastxt,25);
+        // 2 PISO
+        g.conectGraphs(f1.pdp.get(2),f1.salas.get(109),graph_pdpSalas,pdpSalastxt,25); // p2 ao piso 1
+        g.conectGraphs(f1.pdp.get(2),f1.salas.get(224),graph_pdpSalas,pdpSalastxt,15); // p2 as escadas
+        g.conectGraphs(f1.pdp.get(2),f1.salas.get(330),graph_pdpSalas,pdpSalastxt,25); // p2 ao piso 3
+        // 3 PISO
+        g.conectGraphs(f1.pdp.get(4),f1.salas.get(334),graph_pdpSalas,pdpSalastxt,15); // p3 as escadas
+        g.conectGraphs(f1.pdp.get(4),f1.salas.get(220),graph_pdpSalas,pdpSalastxt,25); // p3 ao piso 2
+
+        // CONECTAR PONTOS DE PASSAGEM COM PONTOS DE PASSAGEM
+        g.conectGraphs(f1.pdp.get(0),f1.pdp.get(3),graph_pdpSalas,pdpSalastxt,15); // entrada as escadas do P0
+        g.conectGraphs(f1.pdp.get(0),f1.pdp.get(6),graph_pdpSalas,pdpSalastxt,30); // entrada ao bar
+        g.conectGraphs(f1.pdp.get(6),f1.pdp.get(5),graph_pdpSalas,pdpSalastxt,30); // bar à biblioteca
+        g.conectGraphs(f1.pdp.get(5),f1.pdp.get(1),graph_pdpSalas,pdpSalastxt,20); // biblioteca as escadas P1
+
         launch(args);
     }
-
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("graph_creator.fxml"));
@@ -349,4 +414,5 @@ public class GraphCreator extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+
 }

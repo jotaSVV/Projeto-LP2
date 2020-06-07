@@ -87,6 +87,12 @@ public class DirectedEdge {
         DirectedEdge e = new DirectedEdge(12, 34, 5.67);
         StdOut.println(e);
     }
+
+    public int other(int vertex) {
+        if      (vertex == v) return w;
+        else if (vertex == w) return v;
+        else throw new IllegalArgumentException("Illegal endpoint");
+    }
 }
 
 /******************************************************************************

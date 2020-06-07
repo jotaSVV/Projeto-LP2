@@ -1,9 +1,17 @@
 Sala:
+224;2;50;50;Informatica
+TURMAS:
+
+Sala:
 112;1;50;50;Informatica
 TURMAS:
 
 Sala:
 220;2;50;50;Informatica
+TURMAS:
+
+Sala:
+332;3;50;50;Informatica
 TURMAS:
 TUR6
 TYH
@@ -20,7 +28,23 @@ Sala:
 TURMAS:
 
 Sala:
+221;2;50;50;Informatica
+TURMAS:
+
+Sala:
+333;3;50;50;Informatica
+TURMAS:
+
+Sala:
 109;1;50;50;Informatica
+TURMAS:
+
+Sala:
+330;3;50;50;Informatica
+TURMAS:
+
+Sala:
+334;3;50;50;Informatica
 TURMAS:
 
 Sala:
@@ -28,6 +52,18 @@ Sala:
 TURMAS:
 
 Sala:
+222;2;50;50;Informatica
+TURMAS:
+
+Sala:
+331;3;50;50;Informatica
+TURMAS:
+
+Sala:
 111;1;50;50;Informatica
+TURMAS:
+
+Sala:
+223;2;50;50;Informatica
 TURMAS:
 

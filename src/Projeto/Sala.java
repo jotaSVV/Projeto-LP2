@@ -1,7 +1,7 @@
 package Projeto;
 import java.util.ArrayList;
 
-public class Sala{
+public class Sala extends Point{
 
   private int codigo;
 
@@ -19,24 +19,17 @@ public class Sala{
     this.nrTomadas = nrTomadas;
   }
 
-
-  @Override
-  public String toString() {
-    return Integer.toString(this.codigo);
-  }
-
   private int piso;
 
   private int nrTomadas;
+
+  public double distAlunoSalaProx = 0;
 
   private ArrayList<Turma> turmas = new ArrayList<>();
 
   private Edificio edificio;
 
   ArrayList<Horario>  Horarios = new ArrayList<>();
-
-  public Point point;
-
 
   public ArrayList<Turma> getTurmas() {
     return turmas;
@@ -55,12 +48,9 @@ public class Sala{
   }
   public String getNomeEdificio(){
     if(edificio==null){
-        return "Sem edificio";
+      return "Sem edificio";
     }
     return edificio.getNome();
-  }
-  public Point getPoint() {
-    return point;
   }
 
   public int getCodigo() {
@@ -80,10 +70,16 @@ public class Sala{
   }
 
   public Sala(int codigo, int nrCadeiras) {
+    super(0,0,0,"sala"); // apenas para iniciar ( para nao dar erro )
     this.codigo = codigo;
     this.nrCadeiras = nrCadeiras;
     this.piso = codigo / 100;
     this.nrTomadas = nrCadeiras;
+  }
+
+  @Override
+  public String toString() {
+    return Integer.toString(this.codigo);
   }
 
   public int getPiso() {

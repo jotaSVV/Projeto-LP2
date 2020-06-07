@@ -1,22 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8c55197f-5a22-4f2f-9095-09cd0bc29e84" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/alunosST.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/alunosST.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/cursosST.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/cursosST.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/disciplinasST.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/disciplinasST.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/edificiosST.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/edificiosST.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/pdpST.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/pdpST.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/professoresST.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/professoresST.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/salasHistorico.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/salasHistorico.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/salasPdp.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/salasPdp.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/salasST.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/salasST.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/turmasST.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/turmasST.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/LP2PROJECTO/Projeto/JavaFx/graph_creator.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LP2PROJECTO/Projeto/JavaFx/graph_creator.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Projeto/JavaFx/GraphCreatorFXMLController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Projeto/JavaFx/GraphCreatorFXMLController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Projeto/JavaFx/graph_creator.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Projeto/JavaFx/graph_creator.fxml" afterDir="false" />
-    </list>
+    <list default="true" id="8c55197f-5a22-4f2f-9095-09cd0bc29e84" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -33,8 +18,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Projeto/JavaFx/GraphCreatorFXMLController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="269">
-              <caret line="1021" column="5" lean-forward="true" selection-start-line="1021" selection-start-column="5" selection-end-line="1021" selection-end-column="5" />
+            <state relative-caret-position="218">
+              <caret line="1018" column="79" lean-forward="true" selection-start-line="1018" selection-start-column="79" selection-end-line="1018" selection-end-column="79" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#10627#12820#0" />
@@ -133,8 +118,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Projeto/Faculdade.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17187">
-              <caret line="1017" column="44" selection-start-line="1017" selection-start-column="44" selection-end-line="1017" selection-end-column="44" />
+            <state relative-caret-position="277">
+              <caret line="819" selection-start-line="819" selection-end-line="819" />
             </state>
           </provider>
         </entry>
@@ -359,7 +344,14 @@
       <option name="project" value="LOCAL" />
       <updated>1591528834452</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Funçao de remover sala adicionada">
+      <created>1591533895025</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1591533895025</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -438,7 +430,8 @@
     <MESSAGE value="Aluno Pertence a turma feito" />
     <MESSAGE value="Turmas:&#10;Função alunoPertenceATurma e professorPertenceATurma feitas;&#10;Função mediaDeIdadesTurma feita." />
     <MESSAGE value="Corrigido o bug:&#10;   -&gt;Disciplinas de outro curso poderem ser adicionadas a uma turma;&#10;   -&gt; Ao criar um aluno novo já adiciona na tabela turmas" />
-    <option name="LAST_COMMIT_MESSAGE" value="Corrigido o bug:&#10;   -&gt;Disciplinas de outro curso poderem ser adicionadas a uma turma;&#10;   -&gt; Ao criar um aluno novo já adiciona na tabela turmas" />
+    <MESSAGE value="Funçao de remover sala adicionada" />
+    <option name="LAST_COMMIT_MESSAGE" value="Funçao de remover sala adicionada" />
   </component>
   <component name="WindowStateProjectService">
     <state x="574" y="118" key="#com.intellij.ide.util.MemberChooser" timestamp="1591218888951">
@@ -573,13 +566,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Projeto/Faculdade.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17187">
-          <caret line="1017" column="44" selection-start-line="1017" selection-start-column="44" selection-end-line="1017" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Projeto/Edificio.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
@@ -609,10 +595,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Projeto/Faculdade.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="277">
+          <caret line="819" selection-start-line="819" selection-end-line="819" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Projeto/JavaFx/GraphCreatorFXMLController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="1021" column="5" lean-forward="true" selection-start-line="1021" selection-start-column="5" selection-end-line="1021" selection-end-column="5" />
+        <state relative-caret-position="218">
+          <caret line="1018" column="79" lean-forward="true" selection-start-line="1018" selection-start-column="79" selection-end-line="1018" selection-end-column="79" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#10627#12820#0" />

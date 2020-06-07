@@ -710,33 +710,40 @@ TABELA DISCIPLINAS
 //            Sala s = f1.salas.get(Integer.parseInt(salasdaTurma.getValue().toString()));
 //            for (String cod: d.getProfessores().keys()
 //                 ) {
-//                if(f1.professores.contains(d.getProfessores().get(cod).getEmail())){
-//                    Professor p = f1.professores.get(d.getProfessores().get(cod).getEmail());
+//                if(d.getProfessores().contains(professordaTurma.getValue().toString())){
+//                    Professor p = d.getProfessores().get(professordaTurma.getValue().toString());
+//                    t.setProfessor(p);
+//                    t.setDisciplina(d);
+//                    t.setCurso(c);
+//                    t.setSala(s);
+//                    if(f1.turmas.contains(t.getCodigo())){
+//                        Alert a1 = new Alert(Alert.AlertType.ERROR);
+//                        a1.setTitle("Turma");
+//                        a1.setContentText("Já existe uma turma com esse codigo!");
+//                        a1.setHeaderText(null);
+//                        a1.showAndWait();
+//                    }else{
+//                        //adiciona o curso à ST Cursos da faculdade
+//                        f1.turmas.put(t.getCodigo(),t);
+//                        //Adiciona ao respetivo curso a turma
+//                        f1.cursos.get(t.getCurso().getNome()).getTurmas().put(t.getCodigo(),t);
+//                        f1.professores.get(t.getProfessor().getEmail()).getTurmas().put(t.getCodigo(),t);
+//                        f1.salas.get(t.getSala().getCodigo()).getTurmas().add(t);
+//                        f1.disciplinas.get(t.getDisciplina().getNome()).getTurmas().add(t);
+//                        TabelaTurmas.getItems().add(t);
+//                    }
+//                    break;
+//                }else{
+//                    Alert a1 = new Alert(Alert.AlertType.ERROR);
+//                    a1.setTitle("Turma");
+//                    a1.setContentText("Por favor selecione um professor da disciplina!");
+//                    a1.setHeaderText(null);
+//                    a1.showAndWait();
 //                }
-//
-//
 //            }
 //
-//            t.setDisciplina(d);
-//            t.setCurso(c);
-//            t.setSala(s);
-//            t.setProfessor(p);
-//            if(f1.turmas.contains(t.getCodigo())){
-//                Alert a1 = new Alert(Alert.AlertType.ERROR);
-//                a1.setTitle("Turma");
-//                a1.setContentText("Já existe uma turma com esse codigo!");
-//                a1.setHeaderText(null);
-//                a1.showAndWait();
-//            }else{
-//                //adiciona o curso à ST Cursos da faculdade
-//                f1.turmas.put(t.getCodigo(),t);
-//                //Adiciona ao respetivo curso a turma
-//                f1.cursos.get(t.getCurso().getNome()).getTurmas().put(t.getCodigo(),t);
-//                f1.professores.get(t.getProfessor().getEmail()).getTurmas().put(t.getCodigo(),t);
-//                f1.salas.get(t.getSala().getCodigo()).getTurmas().add(t);
-//                f1.disciplinas.get(t.getDisciplina().getNome()).getTurmas().add(t);
-//                TabelaTurmas.getItems().add(t);
-//            }
+//
+//
 //        }
 //    }
 

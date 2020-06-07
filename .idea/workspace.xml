@@ -2,24 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8c55197f-5a22-4f2f-9095-09cd0bc29e84" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Projeto/Bipartite_Projeto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Projeto/DepthFirstSearch_Project.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Projeto/DijkstraSP_Projeto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/alunosST.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/alunosST.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/cursosST.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/cursosST.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/disciplinasST.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/disciplinasST.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/edificiosST.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/edificiosST.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/pdpST.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/pdpST.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/professoresST.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/professoresST.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/salasGraph.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/salasGraph.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/salasHistorico.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/salasHistorico.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/salasPdp.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/salasPdp.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/salasST.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/salasST.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/turmasST.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/turmasST.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Projeto/JavaFx/GraphCreatorFXMLController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Projeto/JavaFx/GraphCreatorFXMLController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/LP2PROJECTO/Projeto/JavaFx/graph_creator.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LP2PROJECTO/Projeto/JavaFx/graph_creator.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Projeto/JavaFx/FaculdadeSTFXMLController.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Projeto/JavaFx/GraphCreatorFXMLController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Projeto/JavaFx/GraphCreatorFXMLController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Projeto/JavaFx/graph_creator.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Projeto/JavaFx/graph_creator.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/edu/princeton/cs/algs4/DirectedEdge.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/edu/princeton/cs/algs4/DirectedEdge.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,11 +33,24 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Projeto/JavaFx/GraphCreatorFXMLController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="243">
-              <caret line="716" column="34" selection-start-line="716" selection-start-column="34" selection-end-line="716" selection-end-column="34" />
+            <state relative-caret-position="269">
+              <caret line="1021" column="5" lean-forward="true" selection-start-line="1021" selection-start-column="5" selection-end-line="1021" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#12073#14146#0" />
+                <element signature="e#10627#12820#0" />
+                <element signature="e#12251#14328#0" />
+                <element signature="e#14334#15795#0" />
+                <element signature="e#15837#18092#0" />
+                <element signature="e#18098#19884#0" />
+                <element signature="e#19932#23544#0" />
+                <element signature="e#23550#26287#0" />
+                <element signature="e#26395#26791#0" />
+                <element signature="e#26797#28414#0" />
+                <element signature="e#28420#29410#0" />
+                <element signature="e#29419#30796#0" />
+                <element signature="e#30802#32889#0" />
+                <element signature="e#32895#33300#0" />
+                <element signature="e#33305#33708#0" />
               </folding>
             </state>
           </provider>
@@ -50,7 +59,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Projeto/Disciplina.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
+            <state relative-caret-position="39">
               <caret line="26" column="21" selection-start-line="26" selection-start-column="21" selection-end-line="26" selection-end-column="21" />
               <folding>
                 <element signature="e#551#552#0" expanded="true" />
@@ -63,8 +72,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Projeto/Aluno.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="27" selection-start-line="27" selection-end-line="27" />
+            <state relative-caret-position="306">
+              <caret line="26" selection-start-line="26" selection-end-line="26" />
             </state>
           </provider>
         </entry>
@@ -102,8 +111,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Projeto/Sala.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="24" column="40" selection-start-line="24" selection-start-column="40" selection-end-line="24" selection-end-column="40" />
+            <state relative-caret-position="323">
+              <caret line="19" column="3" selection-start-line="19" selection-start-column="3" selection-end-line="19" selection-end-column="3" />
             </state>
           </provider>
         </entry>
@@ -111,11 +120,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Projeto/Professor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1666">
-              <caret line="108" column="28" selection-start-line="108" selection-start-column="28" selection-end-line="108" selection-end-column="28" />
+            <state relative-caret-position="1717">
+              <caret line="110" column="28" selection-start-line="110" selection-start-column="28" selection-end-line="110" selection-end-column="28" />
               <folding>
-                <element signature="e#4267#4268#0" expanded="true" />
-                <element signature="e#4303#4304#0" expanded="true" />
+                <element signature="e#4366#4367#0" expanded="true" />
+                <element signature="e#4404#4405#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -124,8 +133,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Projeto/Faculdade.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="16932">
-              <caret line="1010" column="44" selection-start-line="1010" selection-start-column="44" selection-end-line="1010" selection-end-column="44" />
+            <state relative-caret-position="17187">
+              <caret line="1017" column="44" selection-start-line="1017" selection-start-column="44" selection-end-line="1017" selection-end-column="44" />
             </state>
           </provider>
         </entry>
@@ -133,8 +142,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Projeto/Edificio.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="27" column="26" selection-start-line="27" selection-start-column="26" selection-end-line="27" selection-end-column="26" />
+            <state relative-caret-position="374">
+              <caret line="22" column="26" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -171,6 +180,13 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/Projeto/JavaFx/GraphCreatorFXMLController.java" />
+      </list>
+    </option>
   </component>
   <component name="ProjectId" id="1brGYNRinVLGKGrJMf0rVyHfdEK" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -239,6 +255,18 @@
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="Projeto" />
     </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
   </component>
   <component name="RunManager" selected="Application.GraphCreator">
     <configuration name="GraphCreator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -324,7 +352,14 @@
       <option name="project" value="LOCAL" />
       <updated>1586103309828</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Corrigido o bug:&#10;   -&gt;Disciplinas de outro curso poderem ser adicionadas a uma turma;&#10;   -&gt; Ao criar um aluno novo já adiciona na tabela turmas">
+      <created>1591528834452</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1591528834452</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -340,14 +375,14 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3289689" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49924356" visible="true" weight="0.3289689" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Terminal" order="8" />
-      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50075644" side_tool="true" weight="0.3289689" />
       <window_info anchor="bottom" id="Flutter Performance" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="11" weight="0.3289689" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -367,7 +402,14 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -386,7 +428,6 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
@@ -396,7 +437,8 @@
     <MESSAGE value="associacoes entre classes" />
     <MESSAGE value="Aluno Pertence a turma feito" />
     <MESSAGE value="Turmas:&#10;Função alunoPertenceATurma e professorPertenceATurma feitas;&#10;Função mediaDeIdadesTurma feita." />
-    <option name="LAST_COMMIT_MESSAGE" value="Turmas:&#10;Função alunoPertenceATurma e professorPertenceATurma feitas;&#10;Função mediaDeIdadesTurma feita." />
+    <MESSAGE value="Corrigido o bug:&#10;   -&gt;Disciplinas de outro curso poderem ser adicionadas a uma turma;&#10;   -&gt; Ao criar um aluno novo já adiciona na tabela turmas" />
+    <option name="LAST_COMMIT_MESSAGE" value="Corrigido o bug:&#10;   -&gt;Disciplinas de outro curso poderem ser adicionadas a uma turma;&#10;   -&gt; Ao criar um aluno novo já adiciona na tabela turmas" />
   </component>
   <component name="WindowStateProjectService">
     <state x="574" y="118" key="#com.intellij.ide.util.MemberChooser" timestamp="1591218888951">
@@ -491,32 +533,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Projeto/JavaFx/GraphCreatorFXMLController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="716" column="34" selection-start-line="716" selection-start-column="34" selection-end-line="716" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#12073#14146#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Projeto/Disciplina.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="26" column="21" selection-start-line="26" selection-start-column="21" selection-end-line="26" selection-end-column="21" />
-          <folding>
-            <element signature="e#551#552#0" expanded="true" />
-            <element signature="e#577#578#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Projeto/Aluno.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="27" selection-start-line="27" selection-end-line="27" />
+        <state relative-caret-position="306">
+          <caret line="26" selection-start-line="26" selection-end-line="26" />
         </state>
       </provider>
     </entry>
@@ -548,33 +568,68 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Projeto/Sala.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="24" column="40" selection-start-line="24" selection-start-column="40" selection-end-line="24" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Projeto/Professor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1666">
-          <caret line="108" column="28" selection-start-line="108" selection-start-column="28" selection-end-line="108" selection-end-column="28" />
-          <folding>
-            <element signature="e#4267#4268#0" expanded="true" />
-            <element signature="e#4303#4304#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="323">
+          <caret line="19" column="3" selection-start-line="19" selection-start-column="3" selection-end-line="19" selection-end-column="3" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Projeto/Faculdade.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16932">
-          <caret line="1010" column="44" selection-start-line="1010" selection-start-column="44" selection-end-line="1010" selection-end-column="44" />
+        <state relative-caret-position="17187">
+          <caret line="1017" column="44" selection-start-line="1017" selection-start-column="44" selection-end-line="1017" selection-end-column="44" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Projeto/Edificio.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="27" column="26" selection-start-line="27" selection-start-column="26" selection-end-line="27" selection-end-column="26" />
+        <state relative-caret-position="374">
+          <caret line="22" column="26" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Projeto/Professor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1717">
+          <caret line="110" column="28" selection-start-line="110" selection-start-column="28" selection-end-line="110" selection-end-column="28" />
+          <folding>
+            <element signature="e#4366#4367#0" expanded="true" />
+            <element signature="e#4404#4405#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Projeto/Disciplina.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="39">
+          <caret line="26" column="21" selection-start-line="26" selection-start-column="21" selection-end-line="26" selection-end-column="21" />
+          <folding>
+            <element signature="e#551#552#0" expanded="true" />
+            <element signature="e#577#578#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Projeto/JavaFx/GraphCreatorFXMLController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="269">
+          <caret line="1021" column="5" lean-forward="true" selection-start-line="1021" selection-start-column="5" selection-end-line="1021" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#10627#12820#0" />
+            <element signature="e#12251#14328#0" />
+            <element signature="e#14334#15795#0" />
+            <element signature="e#15837#18092#0" />
+            <element signature="e#18098#19884#0" />
+            <element signature="e#19932#23544#0" />
+            <element signature="e#23550#26287#0" />
+            <element signature="e#26395#26791#0" />
+            <element signature="e#26797#28414#0" />
+            <element signature="e#28420#29410#0" />
+            <element signature="e#29419#30796#0" />
+            <element signature="e#30802#32889#0" />
+            <element signature="e#32895#33300#0" />
+            <element signature="e#33305#33708#0" />
+          </folding>
         </state>
       </provider>
     </entry>

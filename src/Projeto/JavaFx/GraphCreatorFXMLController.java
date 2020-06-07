@@ -22,6 +22,7 @@ import javafx.scene.text.Text;
 import javafx.util.Callback;
 import javafx.util.converter.IntegerStringConverter;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -56,7 +57,9 @@ public class GraphCreatorFXMLController implements Initializable {
 
     Graph_project<Point> gi = new Graph_project<>();
     /////////////////////////////////////////////////7
-    ///TABLE VIEW SALAS
+    /*
+    TABELA DAS SALAS
+     */
     @FXML
     private javafx.scene.control.TableView<Sala> TabelaSalas;
 
@@ -87,6 +90,8 @@ public class GraphCreatorFXMLController implements Initializable {
 
     @FXML
     private Button listarSalas;
+    @FXML
+    private Button removerSalas;
 
 
     /// FIM TABLE VIEW SALAS
@@ -262,7 +267,9 @@ TABELA DISCIPLINAS
 
     /// FIM TABELA ALUNOS
 
-    /// TABLE VIEW PROFESSORES
+   /*
+   TABELA PROFESSORES
+    */
 
     @FXML
     private javafx.scene.control.TableView<Professor> TabelaProfessores;
@@ -279,6 +286,24 @@ TABELA DISCIPLINAS
     private TableColumn<Professor, String> disciplinasProfessor;
     @FXML
     private TableColumn<Professor, String> turmasProfessor;
+    @FXML
+    private Button listarProfessores;
+    @FXML
+    private Button AdicionarProfessores;
+    @FXML
+    private TextField nomedoProfessor;
+    @FXML
+    private TextField apelidodoProfessor;
+    @FXML
+    private TextField dianascProfessor;
+    @FXML
+    private TextField mesnscProfessor;
+    @FXML
+    private TextField anonascProfessor;
+    @FXML
+    private ListView discProfessor;
+    @FXML
+    private ListView turmasdoProfessor;
 
 
     /// FIM TABELA PROFESSORES
@@ -391,6 +416,17 @@ TABELA DISCIPLINAS
         ///Tabela Faculdade
         ColNome.setCellValueFactory(new PropertyValueFactory<Faculdade,String>("Name"));
         TableView.setItems(getLista());
+
+    }
+
+
+
+
+    /*
+    HANDLER DOS PROFESSORES
+     */
+
+    public void handleListarProfessores(ActionEvent actionEvent){
         ///Tabela Professores
         nomeProfessor.setCellValueFactory(new PropertyValueFactory<Professor,String>("Nome"));
         apelidoProfessor.setCellValueFactory(new PropertyValueFactory<Professor,String>("Apelido"));
@@ -429,7 +465,69 @@ TABELA DISCIPLINAS
             }
         });
         TabelaProfessores.setItems(getProfessores());
+        discProfessor.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        discProfessor.setItems(getDisciplinas());
+        turmasdoProfessor.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        turmasdoProfessor.setItems(getTurmas());
     }
+
+ /*
+ Funçao adicionar professor por acabar , falta verificar as ligaçoes , por ex um professor nao pode ser adicionado a uma turma que já tem um professor, entre outros
+  */
+//    public void handleAdicionarProfessor(ActionEvent actionEvent){
+//        if(nomedoProfessor.getText().isEmpty()  || apelidodoAluno.getText().isEmpty() || dianascProfessor.getText().isEmpty()|| mesnscProfessor.getText().isEmpty()|| anonascProfessor.getText().isEmpty() ){
+//            Alert a1 = new Alert(Alert.AlertType.ERROR);
+//            a1.setTitle("Professor");
+//            a1.setContentText("Por favor preencha o campo que se encontra vazio!");
+//            a1.setHeaderText(null);
+//            a1.showAndWait();
+//        }else{
+//            ///Crio um objeto Professor com os dados
+//            Data d = new Data(Integer.parseInt(dianascProfessor.getText()),Integer.parseInt(mesnscProfessor.getText()),Integer.parseInt(anonascProfessor.getText()));
+//            Professor p = new Professor(nomedoProfessor.getText(),apelidodoProfessor.getText(),d);
+//            ObservableList<Disciplina> disciplinas = discProfessor.getSelectionModel().getSelectedItems();
+//            ObservableList<Turma> turmas = turmasdoProfessor.getSelectionModel().getSelectedItems();
+//            ///Vou percorrer as disciplinas selecionadas e verificar junto das turmas selecionadas e ver se coincidem , se sim adiciona a informaçao
+//            for(Disciplina d : disciplinas){
+//                ///Percorro as turmas selecionadas
+//                for(Turma t : turmas){
+//                    ///Vamos percorrer as turmas dentro da disciplina atual e ver se existe um match entre a turma selecionada e a turma da disciplina , caso sim podemos adicionar tudo
+//                    for(Turma aux : d.getTurmas()){
+//                        ///Caso exista um match entao adicionamos o professor, caso contrario nao e mandamos o aviso
+//                        if(t.getCodigo().compareTo(aux.getCodigo())==0){
+//                            p.getTurmas().put(aux.getCodigo(),aux);
+//                            f1.turmas.get(aux.getCodigo()).
+//                            f1.professores.put(p.getEmail(),p);
+//
+//                            TabelaProfessores.getItems().add(p);
+//                        }
+//                    }
+//
+//                }
+//            }
+//
+//
+//
+//
+//
+//
+//
+//            if(f1.disciplinas.contains(d.getNome())){
+//                Alert a1 = new Alert(Alert.AlertType.ERROR);
+//                a1.setTitle("Disciplina");
+//                a1.setContentText("Já existe uma disciplina com esse codigo!");
+//                a1.setHeaderText(null);
+//                a1.showAndWait();
+//            }else{
+//                //adiciona o curso à ST Cursos da faculdade
+//                f1.disciplinas.put(d.getNome(),d);
+//                //Adiciona ao respetivo curso a turma
+//
+//
+//            }
+//        }
+//    }
+
 
     /*
     HANDLERS DISCIPLINAS
@@ -475,7 +573,10 @@ TABELA DISCIPLINAS
 
 
         TabelaDisciplinas.setItems(getDisciplinas());
+        professoresdaDisciplina.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         professoresdaDisciplina.setItems(getProfessores());
+
+
     }
 
     public void handleAdicionarDisciplina(ActionEvent actionEvent){
@@ -910,6 +1011,13 @@ TABELA DISCIPLINAS
             String aux = editedcell.getNewValue().toString();
             f1.salas.get(s.getCodigo()).setNrTomadas(Integer.parseInt(aux));
         }
+    }
+
+
+    public void handleRemoverSala(ActionEvent actionEvent) throws IOException {
+        ///Recebo o codigo da sala a remover
+        Sala s = f1.salas.get(Integer.parseInt(codigoSalaTextfield.getText()));
+        f1.removerSalas(s);
     }
 
 

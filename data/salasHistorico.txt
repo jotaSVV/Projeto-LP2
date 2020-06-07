@@ -389,3 +389,7 @@ Sala:
 224;2;50;50;Informatica
 TURMAS:
 
+Sala:
+109;1;50;50;Informatica
+TURMAS:
+

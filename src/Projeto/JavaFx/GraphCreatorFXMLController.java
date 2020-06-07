@@ -57,6 +57,45 @@ public class GraphCreatorFXMLController implements Initializable {
 
     Graph_project<Point> gi = new Graph_project<>();
     /////////////////////////////////////////////////7
+
+
+
+    /*
+    TABELA DOS PONTOS DE PASSAGEM
+     */
+    @FXML
+    private TableView TabelaPdps;
+    @FXML
+    private TableColumn<PontosDePassagem,String> nomePDP;
+    @FXML
+    private TableColumn<PontosDePassagem,Integer> xPDP;
+    @FXML
+    private TableColumn<PontosDePassagem,Integer> yPDP;
+    @FXML
+    private TableColumn<PontosDePassagem,Integer> zPDP;
+    @FXML
+    private TableColumn<PontosDePassagem,Integer> codPDP;
+    @FXML
+    private TableColumn<PontosDePassagem, String> edificioPDP;
+    @FXML
+    private Button listarPDPS;
+    @FXML
+    private Button adicionarPDPS;
+    @FXML
+    private Button removerPDPS;
+    @FXML
+    private ComboBox edificiosPDPcombo;
+    @FXML
+    private TextField coddoPDP;
+    @FXML
+    private TextField nomedoPDP;
+    @FXML
+    private TextField xdoPDP;
+    @FXML
+    private TextField ydoPDP;
+    @FXML
+    private TextField zdoPDP;
+
     /*
     TABELA DAS SALAS
      */
@@ -404,6 +443,17 @@ TABELA DISCIPLINAS
         return lista;
     }
 
+    public ObservableList<PontosDePassagem> getPdps(){
+        ObservableList<PontosDePassagem> lista = FXCollections.observableArrayList(
+        );
+        for (Integer cod: f1.pdp.keys()
+        ) {
+            PontosDePassagem p = f1.pdp.get(cod);
+            lista.add(p);
+        }
+
+        return lista;
+    }
 
 
 
@@ -420,7 +470,74 @@ TABELA DISCIPLINAS
     }
 
 
+    /*
+    HANDLERS DOS PDPS
+     */
 
+    public void handleListarPDPS(ActionEvent actionEvent){
+        codPDP.setCellValueFactory(new PropertyValueFactory<PontosDePassagem,Integer>("Cod"));
+        edificioPDP.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<PontosDePassagem, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<PontosDePassagem, String> p) {
+                if (p.getValue() != null) {
+                    return new SimpleStringProperty(p.getValue().getEdificio().getNome());
+                } else {
+                    return new SimpleStringProperty("<no info>");
+                }
+            }
+        });
+        nomePDP.setCellValueFactory(new PropertyValueFactory<PontosDePassagem,String>("Name"));
+        xPDP.setCellValueFactory(new PropertyValueFactory<PontosDePassagem,Integer>("X"));
+        yPDP.setCellValueFactory(new PropertyValueFactory<PontosDePassagem,Integer>("Y"));
+        zPDP.setCellValueFactory(new PropertyValueFactory<PontosDePassagem,Integer>("Z"));
+        TabelaPdps.setItems(getPdps());
+        edificiosPDPcombo.setItems(getEdificios());
+    }
+
+    public void handleAdicionarPDP(ActionEvent actionEvent){
+        if(codPDP.getText().isEmpty()  || xdoPDP.getText().isEmpty() || ydoPDP.getText().isEmpty()|| zdoPDP.getText().isEmpty()|| nomedoPDP.getText().isEmpty() || edificiosPDPcombo.getSelectionModel().isEmpty() ){
+            Alert a1 = new Alert(Alert.AlertType.ERROR);
+            a1.setTitle("Ponto de Passagem");
+            a1.setContentText("Por favor preencha o campo que se encontra vazio!");
+            a1.setHeaderText(null);
+            a1.showAndWait();
+        }else {
+            PontosDePassagem p = new PontosDePassagem(Integer.parseInt(coddoPDP.getText()),Integer.parseInt(xdoPDP.getText()),Integer.parseInt(ydoPDP.getText()),Integer.parseInt(zdoPDP.getText()),nomedoPDP.getText() );
+            Edificio e = f1.edificios.get(edificiosPDPcombo.getSelectionModel().getSelectedItem().toString());
+            p.addEdificio(e);
+            if(f1.pdp.contains(p.getCod())){
+                Alert a1 = new Alert(Alert.AlertType.ERROR);
+                a1.setTitle("Ponto de Passagem");
+                a1.setContentText("Já existe um Ponto de Passagem com esse codigo!");
+                a1.setHeaderText(null);
+                a1.showAndWait();
+            }else{
+                for (Integer c : f1.pdp.keys()
+                     ) {
+                    PontosDePassagem aux = f1.pdp.get(c);
+                    if(p.getX() == aux.getX() && p.getY() == aux.getY() && p.getZ() == aux.getZ() ){
+                        Alert a1 = new Alert(Alert.AlertType.ERROR);
+                        a1.setTitle("Ponto de Passagem");
+                        a1.setContentText("Por favor altere as coordenadas!");
+                        a1.setHeaderText(null);
+                        a1.showAndWait();
+                        break;
+                    }else{
+                        f1.pdp.put(p.getCod(),p);
+                        TabelaPdps.getItems().add(p);
+                        break;
+                    }
+                }
+
+
+
+            }
+        }
+
+
+
+
+    }
 
     /*
     HANDLER DOS PROFESSORES
@@ -1383,4 +1500,9 @@ TABELA DISCIPLINAS
         handleGerarGrafoSalas(null); // atualiza o grafo
     }
 
+    public void buttonSave(ActionEvent actionEvent) {
+    }
+
+    public void buttonLoad(ActionEvent actionEvent) {
+    }
 }

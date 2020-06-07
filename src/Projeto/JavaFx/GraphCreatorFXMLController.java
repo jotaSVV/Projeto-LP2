@@ -58,7 +58,10 @@ public class GraphCreatorFXMLController implements Initializable {
     public Button saidaEmergencia;
     public TextField resultSaidaEmergencia;
     public ComboBox<String> selectAlunoSEmergencia;
-
+    //// ADD SUB GRAPH ////////////////////////////////////////////////////////////// AINDA POR FAZER !!!!!!!!!!!!!!!!!!!!!!
+    public ListView listViewAddGraph;
+    public Pane graphPane1;
+    //////
     private String pdpSalastxt = ".//data//salasPdp.txt";
     private String pdpSalasBinFile = ".//data//SalasPdpBinFile.bin";
 
@@ -1461,5 +1464,8 @@ public class GraphCreatorFXMLController implements Initializable {
 
         resultSaidaEmergencia.setText(String.valueOf(codSaida[0]));
 
+    }
+
+    public void addSubGraph(ActionEvent event) {
     }
 }

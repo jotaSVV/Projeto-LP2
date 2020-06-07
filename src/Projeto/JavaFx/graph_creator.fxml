@@ -41,9 +41,9 @@
                                        <HBox layoutY="589.0" prefHeight="40.0" prefWidth="865.0">
                                            <children>
                                                <Button mnemonicParsing="false" onAction="#buttonSave" text="Save">
-                                       <HBox.margin>
-                                          <Insets bottom="10.0" left="10.0" />
-                                       </HBox.margin></Button>
+                                                   <HBox.margin>
+                                                       <Insets bottom="10.0" left="10.0" />
+                                                   </HBox.margin></Button>
                                                <Button mnemonicParsing="false" onAction="#buttonLoad" text="Load" />
                                            </children>
                                        </HBox>
@@ -55,6 +55,39 @@
                            </children></AnchorPane>
                    </content>
                </Tab>
+               <Tab text="AddSubGraph">
+                   <content>
+                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                               <VBox prefHeight="534.0" prefWidth="932.0">
+                                   <children>
+                                       <HBox layoutY="589.0" prefHeight="104.0" prefWidth="932.0">
+                                           <children>
+                                    <ListView fx:id="listViewAddGraph" prefHeight="31.0" prefWidth="175.0">
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="200.0" top="10.0" />
+                                       </HBox.margin>
+                                    </ListView>
+                                               <Button mnemonicParsing="false" onAction="#addSubGraph" text="addGraph">
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="200.0" top="15.0" />
+                                       </HBox.margin></Button>
+                                           </children>
+                                       </HBox>
+                                       <Pane fx:id="graphPane1" prefHeight="517.0" prefWidth="0.0">
+                                           <VBox.margin>
+                                               <Insets bottom="10.0" top="20.0" />
+                                           </VBox.margin>
+                                       </Pane>
+                                   </children>
+                                   <opaqueInsets>
+                                       <Insets />
+                                   </opaqueInsets>
+                               </VBox>
+                           </children></AnchorPane>
+                   </content>
+               </Tab>
+
                <Tab text="searchGraph">
                    <content>
                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">

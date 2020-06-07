@@ -47,6 +47,11 @@ public class Turma {
     this.disciplina = disciplina;
   }
 
+
+  public void setAno(int ano) {
+    this.ano = ano;
+  }
+
   public Horario getHorario() {
     if(horario == null){
       return null;
@@ -87,14 +92,10 @@ public class Turma {
 
   @Override
   public String toString() {
-    return "Turma{" +
-            "ano=" + ano +
-            ", codigo='" + codigo + '\'' +
-            ", professor=" + professor +
-            ", disciplina=" + disciplina +
-            ", sala=" + sala +
-            '}';
+    return this.codigo;
   }
+
+
 
   public void imprimeTodosAlunos (){
     System.out.println("Turma:" + this.getAno() + this.getCodigo());

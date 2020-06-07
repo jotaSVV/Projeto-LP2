@@ -1,26 +1,26 @@
 Sala:
-220;2;50;50;Informatica
+112;1;50;50;Informatica
 TURMAS:
 
 Sala:
-112;1;50;50;Informatica
+220;2;50;50;Informatica
 TURMAS:
 TUR6
-WRTH
+TYH
+ERT
 TUR1
 TUR2
-ERT
-TYH
+WRTH
 TUR3
 TUR4
 TUR5
 
 Sala:
-109;1;50;50;Informatica
+113;1;50;50;Informatica
 TURMAS:
 
 Sala:
-113;1;50;50;Informatica
+109;1;50;50;Informatica
 TURMAS:
 
 Sala:

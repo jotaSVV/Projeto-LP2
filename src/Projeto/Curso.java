@@ -30,6 +30,11 @@ public class Curso {
         this.nome = nome;
     }
 
+    @Override
+    public String toString() {
+        return this.nome;
+    }
+
     /**
      *
      * @param professores bd de professores

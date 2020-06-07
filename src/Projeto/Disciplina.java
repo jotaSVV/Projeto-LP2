@@ -22,6 +22,11 @@ public class Disciplina {
     this.semestre = semestre;
   }
 
+  @Override
+  public String toString() {
+    return this.nome;
+  }
+
   public String getNome() {
     return nome;
   }

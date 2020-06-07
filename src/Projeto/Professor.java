@@ -106,10 +106,6 @@ public class Professor extends Pessoa {
 
     @Override
     public String toString() {
-      return "Professor:\n"+ "Nome: " + this.getNome() + '\n' +
-            "Apelido: " + this.getApelido()+ '\n' +
-            "Data de nascimento: " + this.getDataNascimento().getDay()+"/"+this.getDataNascimento().getMonth()+"/"+this.getDataNascimento().getYear() + '\n' +
-            "Idade: " +age() + "\n" +
-            "Email: " + email() + '\n';
+      return this.getEmail();
     }
 }

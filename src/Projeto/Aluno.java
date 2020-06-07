@@ -24,6 +24,10 @@ public class Aluno extends  Pessoa {
   }
 
 
+
+
+
+
   public Aluno(String nome, String apelido, Data dataNascimento, int numeroAluno) {
     super(nome, apelido, dataNascimento);
     this.numeroAluno = numeroAluno;

@@ -10,7 +10,7 @@ Diogo;Martins;3/10/1999;20;12111@ufp.edu.pt;12111
 TURMAS:
 2020;TUR3;CUR2;DIS3;224;
 POSICAO(XYZ):
-300.0;90.0;1;
+200.0;180.0;2;
 
 ALUNO:
 Joana;Moreira;3/10/1999;20;13111@ufp.edu.pt;13111

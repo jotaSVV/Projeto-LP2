@@ -64,6 +64,9 @@ public class GraphCreatorFXMLController implements Initializable {
     public static SymbolDigraphWeighted subGraphSalasPdp ;    // cria o symbol graph de pdp
     ///////////////////////////////////////////////////
     public ComboBox<String> selectGraph1;
+    public TextField grafoAtual1;
+    public TextField grafoAtual;
+    boolean auxSubGraph = false;
     ///////////////////////////////////////////////////
     private String pdpSalastxt = ".//data//salasPdp.txt";
     private String pdpSalasBinFile = ".//data//SalasPdpBinFile.bin";
@@ -1619,7 +1622,6 @@ TABELA DISCIPLINAS
         }
         in.close();
     }
-///////////////////////////////////////////////////////////////////////
     public void handleGerarGrafoSalas(ActionEvent actionEvent) {
         graphPane.getChildren().clear();
         drawGraph();
@@ -1642,18 +1644,35 @@ TABELA DISCIPLINAS
         in.close();
     }
 
+    public void atualizarTextGraph(){ // Para mostrar em que grafo estamos a realizar as pesquisas
+        grafoAtual.setText(String.valueOf(selectGraph1.getValue()));
+        grafoAtual1.setText(String.valueOf(selectGraph1.getValue()));
+    }
     /// Graph Bipartite
     public void handleBipartite(ActionEvent event) {
-        Bipartite_Projeto bp = new Bipartite_Projeto(graph_pdpSalas);
-        bipartiteTextField.setText(""+bp.isBipartite());
+        if(selectGraph1.getValue().equals("Graph")){
+            Bipartite_Projeto bp = new Bipartite_Projeto(graph_pdpSalas);
+            bipartiteTextField.setText(""+bp.isBipartite());
+        }else if(selectGraph1.getValue().equals("Sub Graph")){
+            Bipartite_Projeto bp = new Bipartite_Projeto(subGraphSalasPdp);
+            bipartiteTextField.setText(""+bp.isBipartite());
+        }
     }
     /// Graph Conexo
     public void handleConexo(ActionEvent event) {
-        DepthFirstSearch_Project dfs = new DepthFirstSearch_Project(graph_pdpSalas,1);
-        if (dfs.count() != graph_pdpSalas.digraph().V())
-            printConexo.setText("Conexo");
-        else
-            printConexo.setText("Not Conexo");
+        if(selectGraph1.getValue().equals("Graph")){
+            DepthFirstSearch_Project dfs = new DepthFirstSearch_Project(graph_pdpSalas,1);
+            if (dfs.count() != graph_pdpSalas.digraph().V())
+                printConexo.setText("Conexo");
+            else
+                printConexo.setText("Not Conexo");
+        }else if(selectGraph1.getValue().equals("Sub Graph")){
+            DepthFirstSearch_Project dfs = new DepthFirstSearch_Project(subGraphSalasPdp,1);
+            if (dfs.count() != subGraphSalasPdp.digraph().V())
+                printConexo.setText("Conexo");
+            else
+                printConexo.setText("Not Conexo");
+        }
     }
 
     public void showSalasComboBox(){
@@ -1685,31 +1704,16 @@ TABELA DISCIPLINAS
     }
 
     public void showSelectGraph(){
+        selectGraph1.getItems().clear();
         selectGraph1.getItems().add("Graph");
-        selectGraph1.getItems().add("Sub Graph");
+        if(auxSubGraph) { // se o 2 graph ja foi criado entao pode aparecer na opçao
+            selectGraph1.getItems().add("Sub Graph");
+        }
+        selectGraph1.getSelectionModel().selectFirst();
+        atualizarTextGraph();
     }
 
-    public void handleCalculeDistance(ActionEvent event){ // FALTA IMPRIMIR PASSO POR PASSO PARA QUE SALA/PDP O ALUNO PASSOU ATÉ CHEGAR AO DESTINO, COM OS RESPECTIVOS CUSTOS
-        String nomeSala=salasComboBox.getValue();
-        String nomeAluno=alunosComboBox.getValue();
-
-        int numAluno = Integer.parseInt(nomeAluno.replaceAll("[\\D]", "")); // para pegar apenas na parte inteira
-        int num = Integer.parseInt(nomeSala.replaceAll("[\\D]", "")); // para pegar apenas na parte inteira
-
-
-        if(!salas.contains(num)){ // É porque é um pdp
-            String[] numbers = nomeSala.split(" ");
-            int aux= 0;
-            num = 0; // como nao vai ser uma sala, vou ter de atualizar a variavel num
-            // Para pegar apenas no cod do PDP
-            for (String s : numbers) {
-                if(aux == 1){
-                    num = Integer.parseInt(s.replaceAll("[\\D]", "")); // para pegar apenas na parte inteira
-                }
-                aux++;
-            }
-        }
-
+    public void calculeDistance(int numAluno,int num,SymbolDigraphWeighted graph){
         // Se for o ponto aonde quero ir for uma sala
         if(salas.contains(num)){
             Sala sala = salas.get(num);
@@ -1718,11 +1722,11 @@ TABELA DISCIPLINAS
                 Point p = gi.pdpOuSalaMaisProxima(alunos.get(numAluno));
                 if ( p instanceof PontosDePassagem){
                     PontosDePassagem p1 = (PontosDePassagem)p;
-                    for (int v = 0; v < graph_pdpSalas.digraph().V();v++){
-                        if(pdp.get(p1.getCod()).getCod() == Integer.parseInt(graph_pdpSalas.nameOf(v))){
-                            for (int vi = 0; vi < graph_pdpSalas.digraph().V(); vi++){
-                                if(sala.getCodigo() == Integer.parseInt(graph_pdpSalas.nameOf(vi))){
-                                    DijkstraSP_Projeto sp = new DijkstraSP_Projeto(graph_pdpSalas, v);
+                    for (int v = 0; v < graph.digraph().V();v++){
+                        if(pdp.get(p1.getCod()).getCod() == Integer.parseInt(graph.nameOf(v))){
+                            for (int vi = 0; vi < graph.digraph().V(); vi++){
+                                if(sala.getCodigo() == Integer.parseInt(graph.nameOf(vi))){
+                                    DijkstraSP_Projeto sp = new DijkstraSP_Projeto(graph, v);
                                     if(sp.hasPathTo(vi)){
                                         a1.setX(sala.getX());
                                         a1.setY(sala.getY());
@@ -1730,10 +1734,10 @@ TABELA DISCIPLINAS
                                         f1.guardar_STALUNOS();
                                         double dist = sp.distTo(vi)+p1.distAlunoPdpProx;
                                         resultDistance.setText(String.valueOf(dist));
-                                     //   distToSalas.setText("test");
-                                      //  distToSalas.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
-                                     //   distToSalas;
-                                      //  public TableColumn dadosAluno;
+                                        //   distToSalas.setText("test");
+                                        //  distToSalas.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+                                        //   distToSalas;
+                                        //  public TableColumn dadosAluno;
                                     }else {
                                         resultDistance.setText("Sem Caminho Possivel");
                                     }
@@ -1743,11 +1747,11 @@ TABELA DISCIPLINAS
                     }
                 }else if( p instanceof Sala){
                     Sala s1 = (Sala)p;
-                    for (int v = 0; v < graph_pdpSalas.digraph().V();v++){
-                        if(salas.get(s1.getCodigo()).getCodigo() == Integer.parseInt(graph_pdpSalas.nameOf(v))){
-                            for (int vi = 0; vi < graph_pdpSalas.digraph().V(); vi++){
-                                if(sala.getCodigo() == Integer.parseInt(graph_pdpSalas.nameOf(vi))){
-                                    DijkstraSP_Projeto sp = new DijkstraSP_Projeto(graph_pdpSalas, v);
+                    for (int v = 0; v < graph.digraph().V();v++){
+                        if(salas.get(s1.getCodigo()).getCodigo() == Integer.parseInt(graph.nameOf(v))){
+                            for (int vi = 0; vi < graph.digraph().V(); vi++){
+                                if(sala.getCodigo() == Integer.parseInt(graph.nameOf(vi))){
+                                    DijkstraSP_Projeto sp = new DijkstraSP_Projeto(graph, v);
                                     if(sp.hasPathTo(vi)){
                                         a1.setX(sala.getX());
                                         a1.setY(sala.getY());
@@ -1775,11 +1779,11 @@ TABELA DISCIPLINAS
                 Point p = gi.pdpOuSalaMaisProxima(alunos.get(numAluno));
                 if ( p instanceof PontosDePassagem){
                     PontosDePassagem p1 = (PontosDePassagem)p;
-                    for (int v = 0; v < graph_pdpSalas.digraph().V();v++){
-                        if(pdp.get(p1.getCod()).getCod() == Integer.parseInt(graph_pdpSalas.nameOf(v))){
-                            for (int vi = 0; vi < graph_pdpSalas.digraph().V(); vi++){
-                                if(pontoPassagem.getCod() == Integer.parseInt(graph_pdpSalas.nameOf(vi))){
-                                    DijkstraSP_Projeto sp = new DijkstraSP_Projeto(graph_pdpSalas, v);
+                    for (int v = 0; v < graph.digraph().V();v++){
+                        if(pdp.get(p1.getCod()).getCod() == Integer.parseInt(graph.nameOf(v))){
+                            for (int vi = 0; vi < graph.digraph().V(); vi++){
+                                if(pontoPassagem.getCod() == Integer.parseInt(graph.nameOf(vi))){
+                                    DijkstraSP_Projeto sp = new DijkstraSP_Projeto(graph, v);
                                     if(sp.hasPathTo(vi)){
                                         a1.setX(pontoPassagem.getX());
                                         a1.setY(pontoPassagem.getY());
@@ -1800,11 +1804,11 @@ TABELA DISCIPLINAS
                     }
                 }else if( p instanceof Sala){
                     Sala s1 = (Sala)p;
-                    for (int v = 0; v < graph_pdpSalas.digraph().V();v++){
-                        if(salas.get(s1.getCodigo()).getCodigo() == Integer.parseInt(graph_pdpSalas.nameOf(v))){
-                            for (int vi = 0; vi < graph_pdpSalas.digraph().V(); vi++){
-                                if(pontoPassagem.getCod() == Integer.parseInt(graph_pdpSalas.nameOf(vi))){
-                                    DijkstraSP_Projeto sp = new DijkstraSP_Projeto(graph_pdpSalas, v);
+                    for (int v = 0; v < graph.digraph().V();v++){
+                        if(salas.get(s1.getCodigo()).getCodigo() == Integer.parseInt(graph.nameOf(v))){
+                            for (int vi = 0; vi < graph.digraph().V(); vi++){
+                                if(pontoPassagem.getCod() == Integer.parseInt(graph.nameOf(vi))){
+                                    DijkstraSP_Projeto sp = new DijkstraSP_Projeto(graph, v);
                                     if(sp.hasPathTo(vi)){
                                         a1.setX(pontoPassagem.getX());
                                         a1.setY(pontoPassagem.getY());
@@ -1826,11 +1830,33 @@ TABELA DISCIPLINAS
             }
         }
     }
+    public void handleCalculeDistance(ActionEvent event){ // FALTA IMPRIMIR PASSO POR PASSO PARA QUE SALA/PDP O ALUNO PASSOU ATÉ CHEGAR AO DESTINO, COM OS RESPECTIVOS CUSTOS
+        String nomeSala=salasComboBox.getValue();
+        String nomeAluno=alunosComboBox.getValue();
 
-    /**
-     *
-     * FALTA GUARDAR ISTO PARA TXT, E NO GRAPH CREATOR SO TENHO DE CARREGAR !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-     */
+        int numAluno = Integer.parseInt(nomeAluno.replaceAll("[\\D]", "")); // para pegar apenas na parte inteira
+        int num = Integer.parseInt(nomeSala.replaceAll("[\\D]", "")); // para pegar apenas na parte inteira
+
+
+        if(!salas.contains(num)){ // É porque é um pdp
+            String[] numbers = nomeSala.split(" ");
+            int aux= 0;
+            num = 0; // como nao vai ser uma sala, vou ter de atualizar a variavel num
+            // Para pegar apenas no cod do PDP
+            for (String s : numbers) {
+                if(aux == 1){
+                    num = Integer.parseInt(s.replaceAll("[\\D]", "")); // para pegar apenas na parte inteira
+                }
+                aux++;
+            }
+        }
+        if(selectGraph1.getValue().equals("Graph")){
+            calculeDistance(numAluno,num,graph_pdpSalas); // calcula a distancia no graph original
+        }else if(selectGraph1.getValue().equals("Sub Graph")){
+            calculeDistance(numAluno,num,subGraphSalasPdp); // calcula a distancia no subGraph
+        }
+    }
+
     public void handlerButtonConnectPdpSala(ActionEvent event) {
         String p1 = comboPdp.getValue();
         String s1 = comboSala.getValue();
@@ -1853,10 +1879,15 @@ TABELA DISCIPLINAS
             Sala sala = salas.get(numSala);
             if(pdp.contains(numPdp)){
                 PontosDePassagem pontosDePassagem = pdp.get(numPdp);
-                gi.conectGraphs(pontosDePassagem,sala,graph_pdpSalas,pdpSalastxt,i);
+                if(selectGraph1.getValue().equals("Graph")){
+                    gi.conectGraphs(pontosDePassagem,sala,graph_pdpSalas,pdpSalastxt,i);
+                    handleGerarGrafoSalas(null); // atualiza o grafo
+                }else if(selectGraph1.getValue().equals("Sub Graph")){
+                    gi.conectGraphs(pontosDePassagem,sala,subGraphSalasPdp,subGraphTxt,i);
+                    createSubGraph(); // atualiza o grafo
+                }
             }
         }
-        handleGerarGrafoSalas(null); // atualiza o grafo
     }
 
     public void handlerButtonConnectSalas(ActionEvent event) {
@@ -1871,7 +1902,13 @@ TABELA DISCIPLINAS
             Sala sala = salas.get(numSala);
             Sala sala1 = salas.get(numSala1);
 
-            gi.conectGraphs(sala,sala1,graph_pdpSalas,pdpSalastxt,i);
+            if(selectGraph1.getValue().equals("Graph")){
+                gi.conectGraphs(sala,sala1,graph_pdpSalas,pdpSalastxt,i);
+                handleGerarGrafoSalas(null); // atualiza o grafo
+            }else if(selectGraph1.getValue().equals("Sub Graph")){
+                gi.conectGraphs(sala,sala1,subGraphSalasPdp,subGraphTxt,i);
+                createSubGraph(); // atualiza o grafo
+            }
         }
     }
 
@@ -1904,7 +1941,13 @@ TABELA DISCIPLINAS
             PontosDePassagem pontosDePassagem = pdp.get(numPdp);
             if(pdp.contains(numPdp1)){
                 PontosDePassagem pontosDePassagem1 = pdp.get(numPdp1);
-                gi.conectGraphs(pontosDePassagem,pontosDePassagem1,graph_pdpSalas,pdpSalastxt,i);
+                if(selectGraph1.getValue().equals("Graph")){
+                    gi.conectGraphs(pontosDePassagem,pontosDePassagem1,graph_pdpSalas,pdpSalastxt,i);
+                    handleGerarGrafoSalas(null); // atualiza o grafo
+                }else if(selectGraph1.getValue().equals("Sub Graph")){
+                    gi.conectGraphs(pontosDePassagem,pontosDePassagem1,subGraphSalasPdp,subGraphTxt,i);
+                    createSubGraph(); // atualiza o grafo
+                }
             }
         }
         handleGerarGrafoSalas(null); // atualiza o grafo
@@ -1924,7 +1967,13 @@ TABELA DISCIPLINAS
         String nomeAluno = selectAlunoSEmergencia.getValue();
         int numAluno = Integer.parseInt(nomeAluno.replaceAll("[\\D]", "")); // para pegar apenas na parte inteira
         Aluno a = alunos.get(numAluno);
-        int []codSaida = gi.saidaDeEmergencia(a);
+        int []codSaida = new int[2];
+        if(selectGraph1.getValue().equals("Graph")){
+            codSaida = gi.saidaDeEmergencia(a,graph_pdpSalas);
+        }else if(selectGraph1.getValue().equals("Sub Graph")){
+            codSaida = gi.saidaDeEmergencia(a,subGraphSalasPdp);
+        }
+
         PontosDePassagem p1 = pdp.get(codSaida[1]);
         a.setX(p1.getX());
         a.setY(p1.getY());
@@ -1953,6 +2002,8 @@ TABELA DISCIPLINAS
         subGraphSalasPdp = new SymbolDigraphWeighted(subGraphTxt,";"); // crio o subGraph
         gi.conexoesDoSubGraph(subGraphTxt,s,pontosDePassagem,graph_pdpSalas,subGraphSalasPdp);
         //gi.printSubGraph(subGraphSalasPdp); // APENAS PARA TESTAR SE O SUBGRAPH ESTA OU NAO CORRETO
+        auxSubGraph = true; // subgraph ja foi criado
+        showSelectGraph();  // subgraph ja foi criado
         createSubGraph();
     }
 

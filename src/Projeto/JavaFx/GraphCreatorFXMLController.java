@@ -38,45 +38,38 @@ public class GraphCreatorFXMLController implements Initializable {
     public TextField bipartiteTextField;
     public HBox addSearchBox121;
     public TextField printConexo;
-
-    // ADD GRAFOS
     public ComboBox<String> salasComboBox;
     public ComboBox<String> alunosComboBox;
+    public ComboBox<String> professorComboBox;
     public ComboBox<String> comboSala;
     public ComboBox<String> comboPdp;
-    public TextField pesosPdp; ///////////////////
-    public TextField pesosPdpSalas;////////////////////
-    public TextField pesosSalas;///////////////////
+    public TextField pesosPdp;
+    public TextField pesosPdpSalas;
+    public TextField pesosSalas;
     public ComboBox<String> comboPdpPdp;
     public ComboBox<String> comboPdpPdp1;
     public ComboBox<String> comboSalaSala;
     public ComboBox<String> comboSalaSala1;
     public TextField resultDistance;
-    /// para colocar a distancia de sala para sala
     public TableColumn<Object, Integer> distToSalas;
     public TableColumn dadosAluno;
     public Button saidaEmergencia;
     public TextField resultSaidaEmergencia;
     public ComboBox<String> selectAlunoSEmergencia;
+    public ComboBox<String> selectProfessorEmergencia;
     public ListView<Sala> listViewAddGraph;
     public Pane graphPane1;
     public ListView<String> listViewAddGraph1;
     public static SymbolDigraphWeighted subGraphSalasPdp ;    // cria o symbol graph de pdp
-    ///////////////////////////////////////////////////
     public ComboBox<String> selectGraph1;
     public TextField grafoAtual1;
     public TextField grafoAtual;
     boolean auxSubGraph = false;
-    ///////////////////////////////////////////////////
     private String pdpSalastxt = ".//data//salasPdp.txt";
     private String pdpSalasBinFile = ".//data//SalasPdpBinFile.bin";
     private String subGraphTxt = ".//data//subGraph.txt";
 
     Graph_project<Point> gi = new Graph_project<>();
-    /////////////////////////////////////////////////
-
-
-
     /*
     TABELA DOS PONTOS DE PASSAGEM
      */
@@ -112,13 +105,11 @@ public class GraphCreatorFXMLController implements Initializable {
     private TextField ydoPDP;
     @FXML
     private TextField zdoPDP;
-
     /*
     TABELA DAS SALAS
      */
     @FXML
     private javafx.scene.control.TableView<Sala> TabelaSalas;
-
     @FXML
     private TableColumn<Sala, Integer> codigoSala;
     @FXML
@@ -131,63 +122,46 @@ public class GraphCreatorFXMLController implements Initializable {
     private TableColumn<Sala, String> Turmas;
     @FXML
     private TableColumn<Sala, String> Edificio;
-
     @FXML
     private Button adicionarSala;
-
     @FXML
     private TextField codigoSalaTextfield;
-
     @FXML
     private TextField nrCadeirasSalaTextfield;
-
     @FXML
     private ComboBox<Projeto.Edificio> edificiosSala;
-
     @FXML
     private Button listarSalas;
     @FXML
     private Button removerSalas;
     @FXML
     private Button pesquisarSalas;
-
-
     /// FIM TABLE VIEW SALAS
+
     /*
     TABELA DOS CURSOS
      */
-
     @FXML
     private javafx.scene.control.TableView<Curso> TabelaCursos;
-
     @FXML
     private TableColumn<Curso, String> nomeCurso;
     @FXML
     private TableColumn<Curso, String> faculdadeCurso;
     @FXML
     private TableColumn<Curso, String> turmaCurso;
-
     @FXML
     private Button listarCursos;
-
     @FXML
     private Button AdicionarCurso;
-
     @FXML
     private TextField nomeDoCurso;
     @FXML
     private ComboBox<Faculdade> faculdadeDoCurso;
     @FXML
     private Button pesquisarCursos;
-
-/*
-TABELA DISCIPLINAS
- */
-
     /*
     TABELA DISCIPLINAS
      */
-
     @FXML
     private javafx.scene.control.TableView<Disciplina> TabelaDisciplinas;
 
@@ -197,7 +171,6 @@ TABELA DISCIPLINAS
     private TableColumn<Disciplina, Integer> ectsDisciplina;
     @FXML
     private TableColumn<Disciplina, Integer> semestreDisciplina;
-
     @FXML
     private TableColumn<Disciplina, String> professorDisciplina;
     @FXML
@@ -214,9 +187,6 @@ TABELA DISCIPLINAS
     private Button listarDisciplinas;
     @FXML
     private Button adicionarDisciplinas;
-
-
-
     ///FIM TABELA Disciplinas
 
     /*
@@ -261,10 +231,9 @@ TABELA DISCIPLINAS
     private Button pesquisarTurmas;
     @FXML
     private Button limparTabelaTurmas;
-
     ///Fim Tabela Turmas
-    /// TABLE VIEW EDIFICIO
 
+    /// TABLE VIEW EDIFICIO
     @FXML
     private javafx.scene.control.TableView<Edificio> TabelaEdificio;
 
@@ -286,17 +255,13 @@ TABELA DISCIPLINAS
 
     @FXML
     private Button listarEdificios;
-
-
     /// FIM TABELA EDIFICIO
 
     /*
     TABELA ALUNOS
      */
-
     @FXML
     private javafx.scene.control.TableView<Aluno> TabelaAlunos;
-
     @FXML
     private TableColumn<Aluno, String> nomeAluno;
     @FXML
@@ -329,14 +294,11 @@ TABELA DISCIPLINAS
     private Button listarAlunos;
     @FXML
     private Button AdicionarAlunos;
-
-
     /// FIM TABELA ALUNOS
 
    /*
    TABELA PROFESSORES
     */
-
     @FXML
     private javafx.scene.control.TableView<Professor> TabelaProfessores;
 
@@ -374,13 +336,10 @@ TABELA DISCIPLINAS
     private ListView<Disciplina> discProfessor;
     @FXML
     private ListView<Turma> turmasdoProfessor;
-
-
     /// FIM TABELA PROFESSORES
 
     @FXML
     private javafx.scene.control.TableView<Faculdade> TableView;
-
     @FXML
     private TableColumn<Faculdade, String> ColNome;
 
@@ -495,6 +454,7 @@ TABELA DISCIPLINAS
     public void initialize(URL location, ResourceBundle resources) {
         showSalasComboBox();
         showAlunosComboBox();
+        showProfessoresComboBox();
         showPdpComboBox();
         ///Tabela Faculdade
 
@@ -750,7 +710,6 @@ TABELA DISCIPLINAS
     /*
     HANDLERS DISCIPLINAS
      */
-
     public void handleListarDisciplinas(ActionEvent actionEvent){
     ///Tabela Disciplinas
 
@@ -886,12 +845,9 @@ TABELA DISCIPLINAS
                 }
             }
         });
-
-
         TabelaAlunos.setItems(getAlunos());
         turmasdoAluno.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         turmasdoAluno.setItems(getTurmas());
-
     }
 
     public void handleAdicionarAlunos(ActionEvent actionEvent){
@@ -930,8 +886,6 @@ TABELA DISCIPLINAS
     /*
     HANDLERS DAS TURMAS
      */
-
-
     public void handlePesquisarTurmas(ActionEvent actionEvent){
         ObservableList<Turma> results = FXCollections.observableArrayList(
         );
@@ -962,8 +916,7 @@ TABELA DISCIPLINAS
                 }
             }else{
                 ///Só entramos aqui se o results tiver algo lá dentro
-                for (Turma t: results
-                     ) {
+                for (Turma t: results) {
                     //Se o ano da turma atual for diferente do ano a procurar , removemos do results
                     if(t.getAno() != Integer.parseInt(anodaTurma.getText())){
                         results.remove(t);
@@ -1575,13 +1528,15 @@ TABELA DISCIPLINAS
         ///Recebo o codigo da sala a remover
         Sala s = f1.salas.get(Integer.parseInt(codigoSalaTextfield.getText()));
         f1.removerSalas(s);
+
+//        gi.removerSalasGraph(pdpSalastxt,s,graph_pdpSalas);
+//        if(auxSubGraph){ // se o auxGraph foi criado tb alteramos
+//            gi.removerSalasGraph(subGraphTxt,s,subGraphSalasPdp);
+//        }
     }
-
-
     /*
         HANDLERS EDIFICIO
      */
-
     public void handleAddEdificio(ActionEvent actionEvent){
 
         Edificio e = new Edificio(nomeEdificioTextField.getText(),f1);
@@ -1809,6 +1764,13 @@ TABELA DISCIPLINAS
             selectAlunoSEmergencia.getItems().addAll(a.getNome() + " (" + a.getNumeroAluno() + ")");
         }
     }
+    public void showProfessoresComboBox(){
+        for (String c : professores.keys()) {
+            Professor p = professores.get(c);
+            professorComboBox.getItems().addAll(p.getEmail());
+            selectProfessorEmergencia.getItems().addAll(p.getEmail());
+        }
+    }
 
     public void showSelectGraph(){
         selectGraph1.getItems().clear();
@@ -1841,7 +1803,7 @@ TABELA DISCIPLINAS
                                         f1.guardar_STALUNOS();
                                         double dist = sp.distTo(vi)+p1.distAlunoPdpProx;
                                         resultDistance.setText(String.valueOf(dist));
-                                        //   distToSalas.setText("test");
+                                        //   distToSalas.setText("test"); ////////////////////////////////////////// FALTA METER OS DADOS NAS TABELAS TB
                                         //  distToSalas.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
                                         //   distToSalas;
                                         //  public TableColumn dadosAluno;
@@ -1898,7 +1860,7 @@ TABELA DISCIPLINAS
                                         f1.guardar_STALUNOS();
                                         double dist = sp.distTo(vi)+p1.distAlunoPdpProx;
                                         resultDistance.setText(String.valueOf(dist));
-                                        //   distToSalas.setText("test");
+                                        //   distToSalas.setText("test"); ////////////////////////////////////////// FALTA METER OS DADOS NAS TABELAS TB
                                         //  distToSalas.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
                                         //   distToSalas;
                                         //  public TableColumn dadosAluno;
@@ -1937,127 +1899,318 @@ TABELA DISCIPLINAS
             }
         }
     }
-    public void handleCalculeDistance(ActionEvent event){ // FALTA IMPRIMIR PASSO POR PASSO PARA QUE SALA/PDP O ALUNO PASSOU ATÉ CHEGAR AO DESTINO, COM OS RESPECTIVOS CUSTOS
-        String nomeSala=salasComboBox.getValue();
-        String nomeAluno=alunosComboBox.getValue();
 
-        int numAluno = Integer.parseInt(nomeAluno.replaceAll("[\\D]", "")); // para pegar apenas na parte inteira
-        int num = Integer.parseInt(nomeSala.replaceAll("[\\D]", "")); // para pegar apenas na parte inteira
-
-
-        if(!salas.contains(num)){ // É porque é um pdp
-            String[] numbers = nomeSala.split(" ");
-            int aux= 0;
-            num = 0; // como nao vai ser uma sala, vou ter de atualizar a variavel num
-            // Para pegar apenas no cod do PDP
-            for (String s : numbers) {
-                if(aux == 1){
-                    num = Integer.parseInt(s.replaceAll("[\\D]", "")); // para pegar apenas na parte inteira
+    public void calculeDistanceProfessor(String email,int num,SymbolDigraphWeighted graph){
+        // Se for o ponto aonde quero ir for uma sala
+        if(salas.contains(num)){
+            Sala sala = salas.get(num);
+            if(professores.contains(email)){
+                Professor a1 = professores.get(email);
+                Point p = gi.pdpOuSalaMaisProxima(professores.get(email));
+                if ( p instanceof PontosDePassagem){
+                    PontosDePassagem p1 = (PontosDePassagem)p;
+                    for (int v = 0; v < graph.digraph().V();v++){
+                        if(pdp.get(p1.getCod()).getCod() == Integer.parseInt(graph.nameOf(v))){
+                            for (int vi = 0; vi < graph.digraph().V(); vi++){
+                                if(sala.getCodigo() == Integer.parseInt(graph.nameOf(vi))){
+                                    DijkstraSP_Projeto sp = new DijkstraSP_Projeto(graph, v);
+                                    if(sp.hasPathTo(vi)){
+                                        a1.setX(sala.getX());
+                                        a1.setY(sala.getY());
+                                        a1.setZ(sala.getZ());
+                                        f1.guardar_STPROFESSORES();
+                                        double dist = sp.distTo(vi)+p1.distAlunoPdpProx;
+                                        resultDistance.setText(String.valueOf(dist));
+                                        //   distToSalas.setText("test"); ////////////////////////////////////////// FALTA METER OS DADOS NAS TABELAS TB
+                                        //  distToSalas.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+                                        //  public TableColumn dadosAluno;
+                                    }else {
+                                        resultDistance.setText("Sem Caminho Possivel");
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }else if( p instanceof Sala){
+                    Sala s1 = (Sala)p;
+                    for (int v = 0; v < graph.digraph().V();v++){
+                        if(salas.get(s1.getCodigo()).getCodigo() == Integer.parseInt(graph.nameOf(v))){
+                            for (int vi = 0; vi < graph.digraph().V(); vi++){
+                                if(sala.getCodigo() == Integer.parseInt(graph.nameOf(vi))){
+                                    DijkstraSP_Projeto sp = new DijkstraSP_Projeto(graph, v);
+                                    if(sp.hasPathTo(vi)){
+                                        a1.setX(sala.getX());
+                                        a1.setY(sala.getY());
+                                        a1.setZ(sala.getZ());
+                                        f1.guardar_STPROFESSORES();
+                                        double dist = sp.distTo(vi)+s1.distAlunoSalaProx; ////////////////////////////////////////// FALTA METER OS DADOS NAS TABELAS TB
+                                        resultDistance.setText(String.valueOf(dist));
+                                    }else {
+                                        resultDistance.setText("Sem Caminho Possivel");
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }else {
+                    System.out.println("Erro !!!!!!");
                 }
-                aux++;
             }
         }
-        if(selectGraph1.getValue().equals("Graph")){
-            calculeDistance(numAluno,num,graph_pdpSalas); // calcula a distancia no graph original
-        }else if(selectGraph1.getValue().equals("Sub Graph")){
-            calculeDistance(numAluno,num,subGraphSalasPdp); // calcula a distancia no subGraph
+        // se for um pdp
+        if(pdp.contains(num)){
+            PontosDePassagem pontoPassagem = pdp.get(num);
+            if(professores.contains(email)){
+                Professor a1 = professores.get(email);
+                Point p = gi.pdpOuSalaMaisProxima(professores.get(email));
+                if ( p instanceof PontosDePassagem){
+                    PontosDePassagem p1 = (PontosDePassagem)p;
+                    for (int v = 0; v < graph.digraph().V();v++){
+                        if(pdp.get(p1.getCod()).getCod() == Integer.parseInt(graph.nameOf(v))){
+                            for (int vi = 0; vi < graph.digraph().V(); vi++){
+                                if(pontoPassagem.getCod() == Integer.parseInt(graph.nameOf(vi))){
+                                    DijkstraSP_Projeto sp = new DijkstraSP_Projeto(graph, v);
+                                    if(sp.hasPathTo(vi)){
+                                        a1.setX(pontoPassagem.getX());
+                                        a1.setY(pontoPassagem.getY());
+                                        a1.setZ(pontoPassagem.getZ());
+                                        f1.guardar_STPROFESSORES();
+                                        double dist = sp.distTo(vi)+p1.distAlunoPdpProx; ////////////////////////////////////////// FALTA METER OS DADOS NAS TABELAS TB
+                                        resultDistance.setText(String.valueOf(dist));
+                                        //   distToSalas.setText("test");
+                                        //  distToSalas.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+                                        //   distToSalas;
+                                        //  public TableColumn dadosAluno;
+                                    }else {
+                                        resultDistance.setText("Sem Caminho Possivel");
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }else if( p instanceof Sala){
+                    Sala s1 = (Sala)p;
+                    for (int v = 0; v < graph.digraph().V();v++){
+                        if(salas.get(s1.getCodigo()).getCodigo() == Integer.parseInt(graph.nameOf(v))){
+                            for (int vi = 0; vi < graph.digraph().V(); vi++){
+                                if(pontoPassagem.getCod() == Integer.parseInt(graph.nameOf(vi))){
+                                    DijkstraSP_Projeto sp = new DijkstraSP_Projeto(graph, v);
+                                    if(sp.hasPathTo(vi)){
+                                        a1.setX(pontoPassagem.getX());
+                                        a1.setY(pontoPassagem.getY());
+                                        a1.setZ(pontoPassagem.getZ());
+                                        f1.guardar_STPROFESSORES();
+                                        double dist = sp.distTo(vi)+s1.distAlunoSalaProx; // tb da para professores
+                                        resultDistance.setText(String.valueOf(dist));
+                                      //  distToSalas.setText("test");
+                                    }else {
+                                        resultDistance.setText("Sem Caminho Possivel");
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }else {
+                    System.out.println("Erro !!!!!!");
+                }
+            }
         }
     }
 
-    public void handlerButtonConnectPdpSala(ActionEvent event) {
-        String p1 = comboPdp.getValue();
-        String s1 = comboSala.getValue();
-        Integer i = Integer.parseInt(pesosPdpSalas.getText());
-
-        String[] numbers = p1.split(" ");
-        int aux= 0;
-        int numPdp = 0;
-        // Para pegar apenas no cod do PDP
-        for (String s : numbers) {
-            if(aux == 1){
-                numPdp = Integer.parseInt(s.replaceAll("[\\D]", "")); // para pegar apenas na parte inteira
-            }
-            aux++;
+    public void handleCalculeDistance(ActionEvent event) { // FALTA IMPRIMIR PASSO POR PASSO PARA QUE SALA/PDP O ALUNO PASSOU ATÉ CHEGAR AO DESTINO, COM OS RESPECTIVOS CUSTOS
+        if (salasComboBox.getSelectionModel().isEmpty()) {
+            Alert a1 = new Alert(Alert.AlertType.ERROR);
+            a1.setTitle("Sala");
+            a1.setContentText("Por favor selecione a sala !");
+            a1.setHeaderText(null);
+            a1.showAndWait();
+        } else if (alunosComboBox.getSelectionModel().isEmpty() && professorComboBox.getSelectionModel().isEmpty()){
+            Alert a1 = new Alert(Alert.AlertType.ERROR);
+            a1.setTitle("Alunos/Professores");
+            a1.setContentText("Por favor selecione um aluno/professor !");
+            a1.setHeaderText(null);
+            a1.showAndWait();
+        } else if(!alunosComboBox.getSelectionModel().isEmpty() && !professorComboBox.getSelectionModel().isEmpty()){
+            Alert a1 = new Alert(Alert.AlertType.ERROR);
+            a1.setTitle("ERRO !!");
+            a1.setContentText("Só pode selecionar um aluno ou um professor !");
+            a1.setHeaderText(null);
+            a1.showAndWait();
         }
+        else {
+            if(!alunosComboBox.getSelectionModel().isEmpty()) {
+                String nomeSala = salasComboBox.getValue();
+                String nomeAluno = alunosComboBox.getValue();
 
-        int numSala = Integer.parseInt(s1.replaceAll("[\\D]", "")); // para pegar apenas na parte inteira
+                int numAluno = Integer.parseInt(nomeAluno.replaceAll("[\\D]", "")); // para pegar apenas na parte inteira
+                int num = Integer.parseInt(nomeSala.replaceAll("[\\D]", "")); // para pegar apenas na parte inteira
 
-        if(salas.contains(numSala)){
-            Sala sala = salas.get(numSala);
-            if(pdp.contains(numPdp)){
-                PontosDePassagem pontosDePassagem = pdp.get(numPdp);
-                if(selectGraph1.getValue().equals("Graph")){
-                    gi.conectGraphs(pontosDePassagem,sala,graph_pdpSalas,pdpSalastxt,i);
-                    handleGerarGrafoSalas(null); // atualiza o grafo
-                }else if(selectGraph1.getValue().equals("Sub Graph")){
-                    gi.conectGraphs(pontosDePassagem,sala,subGraphSalasPdp,subGraphTxt,i);
-                    createSubGraph(); // atualiza o grafo
+
+                if (!salas.contains(num)) { // É porque é um pdp
+                    String[] numbers = nomeSala.split(" ");
+                    int aux = 0;
+                    num = 0; // como nao vai ser uma sala, vou ter de atualizar a variavel num
+                    // Para pegar apenas no cod do PDP
+                    for (String s : numbers) {
+                        if (aux == 1) {
+                            num = Integer.parseInt(s.replaceAll("[\\D]", "")); // para pegar apenas na parte inteira
+                        }
+                        aux++;
+                    }
+                }
+                if (selectGraph1.getValue().equals("Graph")) {
+                    calculeDistance(numAluno, num, graph_pdpSalas); // calcula a distancia no graph original
+                } else if (selectGraph1.getValue().equals("Sub Graph")) {
+                    calculeDistance(numAluno, num, subGraphSalasPdp); // calcula a distancia no subGraph
+                }
+            }else if(!professorComboBox.getSelectionModel().isEmpty()){ // Caso queira andar com o prof
+                String nomeSala = salasComboBox.getValue();
+                String emailProf = professorComboBox.getValue();
+                int num = Integer.parseInt(nomeSala.replaceAll("[\\D]", "")); // para pegar apenas na parte inteira
+
+                if (!salas.contains(num)) { // É porque é um pdp
+                    String[] numbers = nomeSala.split(" ");
+                    int aux = 0;
+                    num = 0; // como nao vai ser uma sala, vou ter de atualizar a variavel num
+                    // Para pegar apenas no cod do PDP
+                    for (String s : numbers) {
+                        if (aux == 1) {
+                            num = Integer.parseInt(s.replaceAll("[\\D]", "")); // para pegar apenas na parte inteira
+                        }
+                        aux++;
+                    }
+                }
+
+                if (selectGraph1.getValue().equals("Graph")) {
+                    calculeDistanceProfessor(emailProf, num, graph_pdpSalas); // calcula a distancia no graph original
+                } else if (selectGraph1.getValue().equals("Sub Graph")) {
+                    calculeDistanceProfessor(emailProf, num, subGraphSalasPdp); // calcula a distancia no subGraph
+                }
+            }
+        }
+        alunosComboBox.getItems().clear();
+        professorComboBox.getItems().clear();
+        showAlunosComboBox();
+        showProfessoresComboBox();
+    }
+
+    public void handlerButtonConnectPdpSala(ActionEvent event) { //////////////////////////////////////////////////////////////////
+        if (comboPdp.getSelectionModel().isEmpty() || comboSala.getSelectionModel().isEmpty() || pesosPdpSalas.getText().isEmpty() ) {
+            Alert a1 = new Alert(Alert.AlertType.ERROR);
+            a1.setTitle("EROO");
+            a1.setContentText("Por favor preencha os campos todos !");
+            a1.setHeaderText(null);
+            a1.showAndWait();
+        }else {
+            String p1 = comboPdp.getValue();
+            String s1 = comboSala.getValue();
+            Integer i = Integer.parseInt(pesosPdpSalas.getText());
+
+            String[] numbers = p1.split(" ");
+            int aux = 0;
+            int numPdp = 0;
+            // Para pegar apenas no cod do PDP
+            for (String s : numbers) {
+                if (aux == 1) {
+                    numPdp = Integer.parseInt(s.replaceAll("[\\D]", "")); // para pegar apenas na parte inteira
+                }
+                aux++;
+            }
+
+            int numSala = Integer.parseInt(s1.replaceAll("[\\D]", "")); // para pegar apenas na parte inteira
+
+            if (salas.contains(numSala)) {
+                Sala sala = salas.get(numSala);
+                if (pdp.contains(numPdp)) {
+                    PontosDePassagem pontosDePassagem = pdp.get(numPdp);
+                    if (selectGraph1.getValue().equals("Graph")) {
+                        gi.conectGraphs(pontosDePassagem, sala, graph_pdpSalas, pdpSalastxt, i);
+                        handleGerarGrafoSalas(null); // atualiza o grafo
+                    } else if (selectGraph1.getValue().equals("Sub Graph")) {
+                        gi.conectGraphs(pontosDePassagem, sala, subGraphSalasPdp, subGraphTxt, i);
+                        createSubGraph(); // atualiza o grafo
+                    }
                 }
             }
         }
     }
 
     public void handlerButtonConnectSalas(ActionEvent event) {
-        String s1 = comboSalaSala.getValue();
-        String s2 = comboSalaSala1.getValue();
-        Integer i = Integer.parseInt(pesosSalas.getText());
+        if (comboSalaSala.getSelectionModel().isEmpty() || comboSalaSala1.getSelectionModel().isEmpty() || pesosSalas.getText().isEmpty() ) {
+            Alert a1 = new Alert(Alert.AlertType.ERROR);
+            a1.setTitle("EROO");
+            a1.setContentText("Por favor preencha os campos todos !");
+            a1.setHeaderText(null);
+            a1.showAndWait();
+        }else {
+            String s1 = comboSalaSala.getValue();
+            String s2 = comboSalaSala1.getValue();
+            Integer i = Integer.parseInt(pesosSalas.getText());
 
-        int numSala = Integer.parseInt(s1.replaceAll("[\\D]", "")); // para pegar apenas na parte inteira
-        int numSala1 = Integer.parseInt(s2.replaceAll("[\\D]", "")); // para pegar apenas na parte inteira
+            int numSala = Integer.parseInt(s1.replaceAll("[\\D]", "")); // para pegar apenas na parte inteira
+            int numSala1 = Integer.parseInt(s2.replaceAll("[\\D]", "")); // para pegar apenas na parte inteira
 
-        if(salas.contains(numSala) && salas.contains(numSala1)){
-            Sala sala = salas.get(numSala);
-            Sala sala1 = salas.get(numSala1);
+            if (salas.contains(numSala) && salas.contains(numSala1)) {
+                Sala sala = salas.get(numSala);
+                Sala sala1 = salas.get(numSala1);
 
-            if(selectGraph1.getValue().equals("Graph")){
-                gi.conectGraphs(sala,sala1,graph_pdpSalas,pdpSalastxt,i);
-                handleGerarGrafoSalas(null); // atualiza o grafo
-            }else if(selectGraph1.getValue().equals("Sub Graph")){
-                gi.conectGraphs(sala,sala1,subGraphSalasPdp,subGraphTxt,i);
-                createSubGraph(); // atualiza o grafo
+                if (selectGraph1.getValue().equals("Graph")) {
+                    gi.conectGraphs(sala, sala1, graph_pdpSalas, pdpSalastxt, i);
+                    handleGerarGrafoSalas(null); // atualiza o grafo
+                } else if (selectGraph1.getValue().equals("Sub Graph")) {
+                    gi.conectGraphs(sala, sala1, subGraphSalasPdp, subGraphTxt, i);
+                    createSubGraph(); // atualiza o grafo
+                }
             }
         }
     }
 
     public void handlerButtonConnectPdpPdp(ActionEvent event) {
-        String p1 = comboPdpPdp.getValue();
-        String p2 = comboPdpPdp1.getValue();
-        Integer i = Integer.parseInt(pesosPdp.getText());
+        if (comboPdpPdp.getSelectionModel().isEmpty() || comboPdpPdp1.getSelectionModel().isEmpty() || pesosPdp.getText().isEmpty() ) {
+            Alert a1 = new Alert(Alert.AlertType.ERROR);
+            a1.setTitle("EROO");
+            a1.setContentText("Por favor preencha os campos todos !");
+            a1.setHeaderText(null);
+            a1.showAndWait();
+        }else {
+            String p1 = comboPdpPdp.getValue();
+            String p2 = comboPdpPdp1.getValue();
+            Integer i = Integer.parseInt(pesosPdp.getText());
 
-        String[] numbers = p1.split(" ");
-        int aux= 0;
-        int numPdp = 0;
-        // Para pegar apenas no cod do PDP
-        for (String s : numbers) {
-            if(aux == 1){
-                numPdp = Integer.parseInt(s.replaceAll("[\\D]", "")); // para pegar apenas na parte inteira
+            String[] numbers = p1.split(" ");
+            int aux = 0;
+            int numPdp = 0;
+            // Para pegar apenas no cod do PDP
+            for (String s : numbers) {
+                if (aux == 1) {
+                    numPdp = Integer.parseInt(s.replaceAll("[\\D]", "")); // para pegar apenas na parte inteira
+                }
+                aux++;
             }
-            aux++;
-        }
-        String[] numbers1 = p2.split(" ");
-        int aux1= 0;
-        int numPdp1 = 0;
-        // Para pegar apenas no cod do PDP
-        for (String si : numbers1) {
-            if(aux1 == 1){
-                numPdp1 = Integer.parseInt(si.replaceAll("[\\D]", "")); // para pegar apenas na parte inteira
+            String[] numbers1 = p2.split(" ");
+            int aux1 = 0;
+            int numPdp1 = 0;
+            // Para pegar apenas no cod do PDP
+            for (String si : numbers1) {
+                if (aux1 == 1) {
+                    numPdp1 = Integer.parseInt(si.replaceAll("[\\D]", "")); // para pegar apenas na parte inteira
+                }
+                aux1++;
             }
-            aux1++;
-        }
-        if(pdp.contains(numPdp)){
-            PontosDePassagem pontosDePassagem = pdp.get(numPdp);
-            if(pdp.contains(numPdp1)){
-                PontosDePassagem pontosDePassagem1 = pdp.get(numPdp1);
-                if(selectGraph1.getValue().equals("Graph")){
-                    gi.conectGraphs(pontosDePassagem,pontosDePassagem1,graph_pdpSalas,pdpSalastxt,i);
-                    handleGerarGrafoSalas(null); // atualiza o grafo
-                }else if(selectGraph1.getValue().equals("Sub Graph")){
-                    gi.conectGraphs(pontosDePassagem,pontosDePassagem1,subGraphSalasPdp,subGraphTxt,i);
-                    createSubGraph(); // atualiza o grafo
+            if (pdp.contains(numPdp)) {
+                PontosDePassagem pontosDePassagem = pdp.get(numPdp);
+                if (pdp.contains(numPdp1)) {
+                    PontosDePassagem pontosDePassagem1 = pdp.get(numPdp1);
+                    if (selectGraph1.getValue().equals("Graph")) {
+                        gi.conectGraphs(pontosDePassagem, pontosDePassagem1, graph_pdpSalas, pdpSalastxt, i);
+                        handleGerarGrafoSalas(null); // atualiza o grafo
+                    } else if (selectGraph1.getValue().equals("Sub Graph")) {
+                        gi.conectGraphs(pontosDePassagem, pontosDePassagem1, subGraphSalasPdp, subGraphTxt, i);
+                        createSubGraph(); // atualiza o grafo
+                    }
                 }
             }
         }
-        handleGerarGrafoSalas(null); // atualiza o grafo
     }
 
     public void buttonSave(ActionEvent event) {
@@ -2071,23 +2224,48 @@ TABELA DISCIPLINAS
     }
 
     public void handlerSaidaEmergencia(ActionEvent event) { ///// FALTA MELHORAR O IMPRIMIR, COLOCAR A IMPRIMIR DE QUE SALA PARA QUE PDP FOI E O CUSTO TOTAL
-        String nomeAluno = selectAlunoSEmergencia.getValue();
-        int numAluno = Integer.parseInt(nomeAluno.replaceAll("[\\D]", "")); // para pegar apenas na parte inteira
-        Aluno a = alunos.get(numAluno);
-        int []codSaida = new int[2];
-        if(selectGraph1.getValue().equals("Graph")){
-            codSaida = gi.saidaDeEmergencia(a,graph_pdpSalas);
-        }else if(selectGraph1.getValue().equals("Sub Graph")){
-            codSaida = gi.saidaDeEmergencia(a,subGraphSalasPdp);
+       if(selectAlunoSEmergencia.getSelectionModel().isEmpty() && selectProfessorEmergencia.getSelectionModel().isEmpty()){
+           Alert a1 = new Alert(Alert.AlertType.ERROR);
+           a1.setTitle("EROO");
+           a1.setContentText("Por favor selecione um aluno ou um professor !");
+           a1.setHeaderText(null);
+           a1.showAndWait();
+       }else if(!selectAlunoSEmergencia.getSelectionModel().isEmpty()){
+            String nomeAluno = selectAlunoSEmergencia.getValue();
+            int numAluno = Integer.parseInt(nomeAluno.replaceAll("[\\D]", "")); // para pegar apenas na parte inteira
+            Aluno a = alunos.get(numAluno);
+            int []codSaida = new int[2];
+            if(selectGraph1.getValue().equals("Graph")){
+                codSaida = gi.saidaDeEmergencia(a,graph_pdpSalas);
+            }else if(selectGraph1.getValue().equals("Sub Graph")){
+                codSaida = gi.saidaDeEmergencia(a,subGraphSalasPdp);
+            }
+            PontosDePassagem p1 = pdp.get(codSaida[1]);
+            a.setX(p1.getX());
+            a.setY(p1.getY());
+            a.setZ(p1.getZ());
+            resultSaidaEmergencia.setText(String.valueOf(codSaida[0]));
+
+        }else if(!selectProfessorEmergencia.getSelectionModel().isEmpty()){
+           String email = selectProfessorEmergencia.getValue();
+           Professor p = professores.get(email);
+           int []codSaida = new int[2];
+           if(selectGraph1.getValue().equals("Graph")){
+               codSaida = gi.saidaDeEmergencia(p,graph_pdpSalas);
+           }else if(selectGraph1.getValue().equals("Sub Graph")){
+               codSaida = gi.saidaDeEmergencia(p,subGraphSalasPdp);
+           }
+           PontosDePassagem p1 = pdp.get(codSaida[1]);
+           p.setX(p1.getX());
+           p.setY(p1.getY());
+           p.setZ(p1.getZ());
+           resultSaidaEmergencia.setText(String.valueOf(codSaida[0]));
         }
 
-        PontosDePassagem p1 = pdp.get(codSaida[1]);
-        a.setX(p1.getX());
-        a.setY(p1.getY());
-        a.setZ(p1.getZ());
-
-        resultSaidaEmergencia.setText(String.valueOf(codSaida[0]));
-
+       selectProfessorEmergencia.getItems().clear();
+       selectAlunoSEmergencia.getItems().clear();
+       showProfessoresComboBox();
+       showAlunosComboBox();
     }
 
     public void viewAddGraph(){

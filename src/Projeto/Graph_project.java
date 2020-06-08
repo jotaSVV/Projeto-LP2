@@ -121,7 +121,58 @@ public class Graph_project <T extends Point> {
 
 
     public void createSubGraph(){
+    }
 
+    public void removerSalasGraph(String path, Point sala,SymbolDigraphWeighted g) {
+//        edu.princeton.cs.algs4.Out out = new edu.princeton.cs.algs4.Out(path);
+//
+//        boolean salasBoolean = false;
+//        boolean salasBoolean1 = false;
+//        Sala s = (Sala) sala; // vou buscar a sala
+//        // Remover salas
+//        for (int v = 0; v < g.digraph().V(); v++) {       //percorre os vertices
+//            if(Integer.parseInt(graph_pdpSalas.nameOf(v)) == s.getCodigo() ) {
+//                salasBoolean = true; //
+//            }
+//            if(!salasBoolean){ // aqui so entrem os grafos que nao sao eliminados
+//                out.print("s" + ";" + v + ";");
+//                for (DirectedEdge d: g.digraph().adj(v)) { // percorro o directed edge para caso o vertice a que este vertice esteja conectado seja eliminado ele o elimine
+//                    if(salasOuPdp(g,d.to()) == 0){ // se a sala estiver ligada a uma sala que vai ser eliminada
+//                        if(Integer.parseInt(graph_pdpSalas.nameOf(d.to()) ) == s.getCodigo()){ // se tiver a sala vou passar à frente
+//                            salasBoolean1 = true;
+//                        }
+//                        if(!salasBoolean1) {
+//                            // g1.digraph().addEdge(new DirectedEdge(d.to(), v, d.weight())); //adiciona ligaçao entre salas e pdp
+//                            out.print(d.to() + ";" + d.weight() + ";");
+//                        }
+//                    }if(salasOuPdp(g,d.to()) == 1){ // para o caso de estar ligado a um pdp que vai ser eliminado
+//                        for (String pdpAux : pontosPdP) {
+//                            String[] numbers = pdpAux.split(" ");
+//                            int aux = 0;
+//                            int numPdp = 0;
+//                            // Para pegar apenas no cod do PDP
+//                            for (String s : numbers) {
+//                                if (aux == 1) {
+//                                    numPdp = Integer.parseInt(s.replaceAll("[\\D]", "")); // para pegar apenas na parte inteira
+//                                    if(Integer.parseInt(graph_pdpSalas.nameOf(d.to()) ) == numPdp){ // se tiver o pdp vou passar à frente
+//                                        salasBoolean1 = true;
+//                                    }
+//                                }
+//                                aux++;
+//                            }
+//                        }
+//                        if(!salasBoolean1) {
+//                            //  g1.digraph().addEdge(new DirectedEdge(d.to(), v, d.weight())); //adiciona ligaçao entre salas e pdp
+//                            out.print(d.to() + ";" + d.weight() + ";");
+//                        }
+//                    }
+//                    salasBoolean1 = false;
+//                }
+//            }
+//            out.print("\n");
+//            salasBoolean = false;
+//        }
+//        out.close();
     }
 
     public void conexoesDoSubGraph(String path, ObservableList<Sala> sala,ObservableList<String> pontosPdP,SymbolDigraphWeighted g,SymbolDigraphWeighted g1) {
@@ -246,7 +297,7 @@ public class Graph_project <T extends Point> {
         out.close();
     }
 
-    public Point pdpOuSalaMaisProxima(Aluno a){ // dá a localizacao da sala ou pdp mais proxima do aluno
+    public Point pdpOuSalaMaisProxima(Point a){ // dá a localizacao da sala ou pdp mais proxima do aluno
         double dist_sala = 1000; // valor aleatorio
         double dist_pdp = 1000;
         int cod_sala = 0;
@@ -297,64 +348,126 @@ public class Graph_project <T extends Point> {
         return null;
     }
 
-    public int[] saidaDeEmergencia(Aluno a, SymbolDigraphWeighted graph){ // dá a localizacao da sala ou pdp mais proxima do aluno
-        // se for um pdp
-        double aux = 1000;
-        int[] arrayRetorno = new int[2]; // array que vai passar a distancia percorrida e o cod da saida de emergencia
-        for (Integer pontosPdp:pdp.keys()) {
-            if(pontosPdp == 0 || pontosPdp == 7 || pontosPdp == 8 || pontosPdp == 9){ // Códigos das saídas
-                PontosDePassagem pontoPassagem = pdp.get(pontosPdp); // Pontos de passagem para aonde tenho de ir
-                if (alunos.contains(a.getNumeroAluno())) {
-                    Point p = pdpOuSalaMaisProxima(alunos.get(a.getNumeroAluno())); // retorna o pdp mais proximo do alunos (isto se ele nao tiver em nenhuma sala ou pdp)
-                    if (p instanceof PontosDePassagem) {
-                        PontosDePassagem p1 = (PontosDePassagem) p; // p1 = pdp ou sala aonde o aluno se encontra
-                        for (int v = 0; v < graph.digraph().V(); v++) {
-                            if (pdp.get(p1.getCod()).getCod() == Integer.parseInt(graph.nameOf(v))) { // vamos ver o vertice que corresponde ao pdp/sala que o aluno está
-                                for (int vi = 0; vi < graph.digraph().V(); vi++) {
-                                    if (pontoPassagem.getCod() == Integer.parseInt(graph.nameOf(vi))) {
-                                        DijkstraSP_Projeto sp = new DijkstraSP_Projeto(graph, v);
-                                        if (sp.hasPathTo(vi)) {
-                                            //f1.guardar_STALUNOS();
-                                            double dist = sp.distTo(vi) + p1.distAlunoPdpProx; // distancia entre o ponto em que o aluno se encontra e as saidas
-                                            if (dist < aux) {
-                                                aux = dist;
-                                                arrayRetorno[0] = (int) dist;
-                                                arrayRetorno[1] = pontoPassagem.getCod();
+    public int[] saidaDeEmergencia(Point a, SymbolDigraphWeighted graph){ // dá a localizacao da sala ou pdp mais proxima do aluno
+        if(a instanceof Aluno) {
+            Aluno a1 = (Aluno) a;
+            // se for um pdp
+            double aux = 1000;
+            int[] arrayRetorno = new int[2]; // array que vai passar a distancia percorrida e o cod da saida de emergencia
+            for (Integer pontosPdp:pdp.keys()) {
+                if(pontosPdp == 0 || pontosPdp == 7 || pontosPdp == 8 || pontosPdp == 9){ // Códigos das saídas
+                    PontosDePassagem pontoPassagem = pdp.get(pontosPdp); // Pontos de passagem para aonde tenho de ir
+                    if (alunos.contains(a1.getNumeroAluno())) {
+                        Point p = pdpOuSalaMaisProxima(alunos.get(a1.getNumeroAluno())); // retorna o pdp mais proximo do alunos (isto se ele nao tiver em nenhuma sala ou pdp)
+                        if (p instanceof PontosDePassagem) {
+                            PontosDePassagem p1 = (PontosDePassagem) p; // p1 = pdp ou sala aonde o aluno se encontra
+                            for (int v = 0; v < graph.digraph().V(); v++) {
+                                if (pdp.get(p1.getCod()).getCod() == Integer.parseInt(graph.nameOf(v))) { // vamos ver o vertice que corresponde ao pdp/sala que o aluno está
+                                    for (int vi = 0; vi < graph.digraph().V(); vi++) {
+                                        if (pontoPassagem.getCod() == Integer.parseInt(graph.nameOf(vi))) {
+                                            DijkstraSP_Projeto sp = new DijkstraSP_Projeto(graph, v);
+                                            if (sp.hasPathTo(vi)) {
+                                                //f1.guardar_STALUNOS();
+                                                double dist = sp.distTo(vi) + p1.distAlunoPdpProx; // distancia entre o ponto em que o aluno se encontra e as saidas
+                                                if (dist < aux) {
+                                                    aux = dist;
+                                                    arrayRetorno[0] = (int) dist;
+                                                    arrayRetorno[1] = pontoPassagem.getCod();
+                                                }
                                             }
                                         }
                                     }
                                 }
                             }
-                        }
-                    }else if( p instanceof Sala){
-                        Sala s1 = (Sala)p;
-                        for (int v = 0; v < graph.digraph().V();v++){
-                            if(salas.get(s1.getCodigo()).getCodigo() == Integer.parseInt(graph.nameOf(v))){ // vamos ver o vertice que corresponde ao pdp/sala que o aluno está
-                                for (int vi = 0; vi < graph.digraph().V(); vi++){
-                                    if(pontoPassagem.getCod() == Integer.parseInt(graph.nameOf(vi))){
-                                        DijkstraSP_Projeto sp = new DijkstraSP_Projeto(graph, v);
-                                        if (sp.hasPathTo(vi)) {
-                                            //f1.guardar_STALUNOS();
-                                            double dist = sp.distTo(vi) + s1.distAlunoSalaProx; // distancia entre o ponto em que o aluno se encontra e as saidas
-                                            if (dist < aux) {
-                                                aux = dist;
-                                                arrayRetorno[0] = (int) dist;
-                                                arrayRetorno[1] = pontoPassagem.getCod();
+                        }else if( p instanceof Sala){
+                            Sala s1 = (Sala)p;
+                            for (int v = 0; v < graph.digraph().V();v++){
+                                if(salas.get(s1.getCodigo()).getCodigo() == Integer.parseInt(graph.nameOf(v))){ // vamos ver o vertice que corresponde ao pdp/sala que o aluno está
+                                    for (int vi = 0; vi < graph.digraph().V(); vi++){
+                                        if(pontoPassagem.getCod() == Integer.parseInt(graph.nameOf(vi))){
+                                            DijkstraSP_Projeto sp = new DijkstraSP_Projeto(graph, v);
+                                            if (sp.hasPathTo(vi)) {
+                                                //f1.guardar_STALUNOS();
+                                                double dist = sp.distTo(vi) + s1.distAlunoSalaProx; // distancia entre o ponto em que o aluno se encontra e as saidas
+                                                if (dist < aux) {
+                                                    aux = dist;
+                                                    arrayRetorno[0] = (int) dist;
+                                                    arrayRetorno[1] = pontoPassagem.getCod();
+                                                }
+                                            }else {
+                                                System.out.println("Sem Caminho Possivel");
                                             }
-                                        }else {
-                                            System.out.println("Sem Caminho Possivel");
                                         }
                                     }
                                 }
                             }
+                        }else {
+                            System.out.println("Erro !!!!!!");
                         }
-                    }else {
-                        System.out.println("Erro !!!!!!");
                     }
                 }
             }
+            return arrayRetorno;
+        }else if(a instanceof Professor){
+            Professor a1 = (Professor) a;
+            // se for um pdp
+            double aux = 1000;
+            int[] arrayRetorno = new int[2]; // array que vai passar a distancia percorrida e o cod da saida de emergencia
+            for (Integer pontosPdp:pdp.keys()) {
+                if(pontosPdp == 0 || pontosPdp == 7 || pontosPdp == 8 || pontosPdp == 9){ // Códigos das saídas
+                    PontosDePassagem pontoPassagem = pdp.get(pontosPdp); // Pontos de passagem para aonde tenho de ir
+                    if (professores.contains(a1.getEmail())) {
+                        Point p = pdpOuSalaMaisProxima(professores.get(a1.getEmail())); // retorna o pdp mais proximo do alunos (isto se ele nao tiver em nenhuma sala ou pdp)
+                        if (p instanceof PontosDePassagem) {
+                            PontosDePassagem p1 = (PontosDePassagem) p; // p1 = pdp ou sala aonde o aluno se encontra
+                            for (int v = 0; v < graph.digraph().V(); v++) {
+                                if (pdp.get(p1.getCod()).getCod() == Integer.parseInt(graph.nameOf(v))) { // vamos ver o vertice que corresponde ao pdp/sala que o aluno está
+                                    for (int vi = 0; vi < graph.digraph().V(); vi++) {
+                                        if (pontoPassagem.getCod() == Integer.parseInt(graph.nameOf(vi))) {
+                                            DijkstraSP_Projeto sp = new DijkstraSP_Projeto(graph, v);
+                                            if (sp.hasPathTo(vi)) {
+                                                double dist = sp.distTo(vi) + p1.distAlunoPdpProx; // distancia entre o ponto em que o aluno se encontra e as saidas
+                                                if (dist < aux) {
+                                                    aux = dist;
+                                                    arrayRetorno[0] = (int) dist;
+                                                    arrayRetorno[1] = pontoPassagem.getCod();
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }else if( p instanceof Sala){
+                            Sala s1 = (Sala)p;
+                            for (int v = 0; v < graph.digraph().V();v++){
+                                if(salas.get(s1.getCodigo()).getCodigo() == Integer.parseInt(graph.nameOf(v))){ // vamos ver o vertice que corresponde ao pdp/sala que o aluno está
+                                    for (int vi = 0; vi < graph.digraph().V(); vi++){
+                                        if(pontoPassagem.getCod() == Integer.parseInt(graph.nameOf(vi))){
+                                            DijkstraSP_Projeto sp = new DijkstraSP_Projeto(graph, v);
+                                            if (sp.hasPathTo(vi)) {
+                                                //f1.guardar_STALUNOS();
+                                                double dist = sp.distTo(vi) + s1.distAlunoSalaProx; // distancia entre o ponto em que o aluno se encontra e as saidas
+                                                if (dist < aux) {
+                                                    aux = dist;
+                                                    arrayRetorno[0] = (int) dist;
+                                                    arrayRetorno[1] = pontoPassagem.getCod();
+                                                }
+                                            }else {
+                                                System.out.println("Sem Caminho Possivel");
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }else {
+                            System.out.println("Erro !!!!!!");
+                        }
+                    }
+                }
+            }
+            return arrayRetorno;
         }
-        return arrayRetorno;
+        return null;
     }
 
     /**

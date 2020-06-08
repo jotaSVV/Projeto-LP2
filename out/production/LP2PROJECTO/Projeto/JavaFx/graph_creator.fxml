@@ -153,14 +153,19 @@
                                                                       <Insets left="100.0" top="15.0" />
                                                                   </HBox.margin>
                                                               </ComboBox>
-                                                              <ComboBox fx:id="alunosComboBox" prefWidth="150.0" promptText="select Alunos">
+                                                              <ComboBox fx:id="alunosComboBox" prefWidth="150.0" promptText="select Aluno">
                                                                   <HBox.margin>
-                                                                      <Insets left="140.0" top="15.0" />
+                                                                      <Insets left="50.0" top="15.0" />
                                                                   </HBox.margin>
                                                               </ComboBox>
+                                                      <ComboBox fx:id="professorComboBox" prefWidth="150.0" promptText="select Professor">
+                                                         <HBox.margin>
+                                                            <Insets left="40.0" top="15.0" />
+                                                         </HBox.margin>
+                                                      </ComboBox>
                                                               <Button mnemonicParsing="false" onAction="#handleCalculeDistance" text="Calcule Dist">
                                                                   <HBox.margin>
-                                                                      <Insets left="100.0" top="15.0" />
+                                                                      <Insets left="150.0" top="15.0" />
                                                                   </HBox.margin>
                                                               </Button>
                                                           </children>
@@ -183,7 +188,7 @@
                                                                       <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                                                   </columnResizePolicy>
                                                                   <columns>
-                                                                      <TableColumn fx:id="dadosAluno" prefWidth="198.0" text="Aluno" />
+                                                                      <TableColumn fx:id="dadosAluno" prefWidth="198.0" text="Aluno/Professor" />
                                                                   </columns>
                                                                   <HBox.margin>
                                                                       <Insets left="20.0" />
@@ -220,6 +225,7 @@
                                           <TextField fx:id="resultSaidaEmergencia" layoutX="531.0" layoutY="50.0" prefHeight="26.0" prefWidth="281.0" />
                                           <ComboBox fx:id="selectAlunoSEmergencia" layoutX="28.0" layoutY="50.0" prefHeight="26.0" prefWidth="190.0" promptText="Select Aluno" />
                                           <TextField fx:id="grafoAtual" layoutX="37.0" layoutY="14.0" />
+                                          <ComboBox fx:id="selectProfessorEmergencia" layoutX="28.0" layoutY="101.0" prefHeight="26.0" prefWidth="190.0" promptText="Select Professor" />
                                        </children></AnchorPane>
                               </content>
                             </Tab>

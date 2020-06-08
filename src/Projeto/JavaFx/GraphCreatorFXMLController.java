@@ -353,6 +353,10 @@ TABELA DISCIPLINAS
     @FXML
     private TableColumn<Professor, String> turmasProfessor;
     @FXML
+    private TableColumn<Professor,String> horarioprofessor;
+    @FXML
+    private TableColumn<Professor,String> horarioatendimentoprofessor;
+    @FXML
     private Button listarProfessores;
     @FXML
     private Button AdicionarProfessores;
@@ -379,6 +383,12 @@ TABELA DISCIPLINAS
 
     @FXML
     private TableColumn<Faculdade, String> ColNome;
+
+
+    @FXML
+    private TextArea faculdadenow;
+    @FXML
+    private Button faculdadeEstado;
 
     public ObservableList<Faculdade> getLista(){
         ObservableList<Faculdade> lista = FXCollections.observableArrayList(
@@ -487,12 +497,49 @@ TABELA DISCIPLINAS
         showAlunosComboBox();
         showPdpComboBox();
         ///Tabela Faculdade
-        ColNome.setCellValueFactory(new PropertyValueFactory<Faculdade,String>("Name"));
-        TableView.setItems(getLista());
+
+
+
         viewAddGraph();
         showSelectGraph();
     }
 
+
+    /*
+    METODO NOW NA INTERFACE GRAFICA
+     */
+    public void handleMetodoNowFaculdade(ActionEvent actionEvent){
+
+
+        Data d = new Data();
+
+        int salasOcupadas = 0;
+        Horario horar = new Horario(d,d,d.getYear()); // horario do momento que corro o codigo
+        for (Integer s:f1.salas.keys()) {
+            for (Horario hs:f1.salas.get(s).getHorarios()) {
+                if(f1.intersection_hor(hs,horar)){
+                    salasOcupadas++;
+                }
+            }
+        }
+        if(salasOcupadas == 0){
+            faculdadenow.appendText("De momento todas as salas encontram-se livres\n");
+        }else{
+            int aux = salasOcupadas / f1.salas.size();
+            faculdadenow.appendText("A taxa de ocupação das salas neste momento é de " + aux+ "%\n" );
+        }
+
+            Horario horario = new Horario(d,d,d.getYear()); // horario do momento que corro o codigo
+            faculdadenow.appendText("Turmas atualmente em aulas:\n");
+            for (String t:f1.turmas.keys()) { // percorro as turmas
+                if(f1.intersection_hor(f1.turmas.get(t).getHorario(),horario)){ // verifico se o horario da turma "intersecta" a hora em que corro o programa, se sim e como as disciplinas, alunos e professores tem o mesmo horario com a turma, podemos ver quem esta a ter aulas neste momento
+                    faculdadenow.appendText(f1.turmas.get(t).getCodigo()+  "\n" +" Disciplina: " +f1.turmas.get(t).getDisciplina().getNome()+  "\n" +" Professor:"+f1.turmas.get(t).getProfessor().getNome() + "\n");
+                }else { // se o professor nao estiver a dar aula entao está "disponivel"
+                    faculdadenow.appendText("Professor " + f1.turmas.get(t).getProfessor().getNome() +" está disponivel" + "\n");
+                }
+            }
+
+    }
 
     /*
     HANDLERS DOS PDPS
@@ -573,6 +620,36 @@ TABELA DISCIPLINAS
         apelidoProfessor.setCellValueFactory(new PropertyValueFactory<Professor,String>("Apelido"));
         dataProfessor.setCellValueFactory(new PropertyValueFactory<Professor,String>("DataNascimento"));
         emailProfessor.setCellValueFactory(new PropertyValueFactory<Professor,String>("Email"));
+        horarioprofessor.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Professor, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Professor, String> t) {
+                if (t.getValue() != null) {
+                    StringBuilder turmas = new StringBuilder();
+                    for(Horario h :  t.getValue().horario_professor()) {
+                        turmas.append(h.toString() + "\n");
+                        //turmas.append(a.getCodigo()).append("\n");
+                    }
+                    return new SimpleStringProperty(turmas.toString());
+
+                } else {
+                    return new SimpleStringProperty("<no info>");
+                }
+            }
+        });
+        horarioatendimentoprofessor.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Professor, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Professor, String> t) {
+                if (t.getValue() != null) {
+                    StringBuilder turmas = new StringBuilder();
+                    turmas.append(t.getValue().getHorario_atendimento() + "\n");
+
+                    return new SimpleStringProperty(turmas.toString());
+
+                } else {
+                    return new SimpleStringProperty("<no info>");
+                }
+            }
+        });
         turmasProfessor.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Professor, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<Professor, String> p) {
@@ -760,6 +837,23 @@ TABELA DISCIPLINAS
         numeroAluno.setCellValueFactory(new PropertyValueFactory<Aluno,Integer>("NumeroAluno"));
         apelidoAluno.setCellValueFactory(new PropertyValueFactory<Aluno,String>("Apelido"));
         dataAluno.setCellValueFactory(new PropertyValueFactory<Aluno,String>("DataNascimento"));
+        horarioAluno.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Aluno, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Aluno, String> t) {
+                if (t.getValue() != null) {
+                    StringBuilder turmas = new StringBuilder();
+
+                    for(Horario h :  t.getValue().horario_aluno()) {
+                        turmas.append(h.toString() + "\n");
+                        //turmas.append(a.getCodigo()).append("\n");
+                    }
+                    return new SimpleStringProperty(turmas.toString());
+
+                } else {
+                    return new SimpleStringProperty("<no info>");
+                }
+            }
+        });
         turmasAluno.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Aluno, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<Aluno, String> t) {
@@ -1090,6 +1184,19 @@ TABELA DISCIPLINAS
         ///Tabela Turma
         codigoTurma.setCellValueFactory(new PropertyValueFactory<Turma,String>("Codigo"));
         anoTurma.setCellValueFactory(new PropertyValueFactory<Turma,Integer>("Ano"));
+        horarioTurma.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Turma, String>, ObservableValue<String>>() {
+            @Override
+            public ObservableValue<String> call(TableColumn.CellDataFeatures<Turma, String> t) {
+                if (t.getValue() != null) {
+                    StringBuilder turmas = new StringBuilder();
+                    turmas.append(t.getValue().getHorario().toString());
+                    return new SimpleStringProperty(turmas.toString());
+
+                } else {
+                    return new SimpleStringProperty("<no info>");
+                }
+            }
+        });
         cursoTurma.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Turma, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<Turma, String> t) {

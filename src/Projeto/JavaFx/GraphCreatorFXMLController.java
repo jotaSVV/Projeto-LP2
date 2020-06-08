@@ -58,17 +58,19 @@ public class GraphCreatorFXMLController implements Initializable {
     public Button saidaEmergencia;
     public TextField resultSaidaEmergencia;
     public ComboBox<String> selectAlunoSEmergencia;
-    //// ADD SUB GRAPH ////////////////////////////////////////////////////////////// AINDA POR FAZER !!!!!!!!!!!!!!!!!!!!!!
     public ListView<Sala> listViewAddGraph;
     public Pane graphPane1;
     public ListView<String> listViewAddGraph1;
-    //////
+    public static SymbolDigraphWeighted subGraphSalasPdp ;    // cria o symbol graph de pdp
+    ///////////////////////////////////////////////////
+    public ComboBox<String> selectGraph1;
+    ///////////////////////////////////////////////////
     private String pdpSalastxt = ".//data//salasPdp.txt";
     private String pdpSalasBinFile = ".//data//SalasPdpBinFile.bin";
     private String subGraphTxt = ".//data//subGraph.txt";
 
     Graph_project<Point> gi = new Graph_project<>();
-    /////////////////////////////////////////////////7
+    /////////////////////////////////////////////////
 
 
 
@@ -171,7 +173,7 @@ public class GraphCreatorFXMLController implements Initializable {
     @FXML
     private TextField nomeDoCurso;
     @FXML
-    private ComboBox faculdadeDoCurso;
+    private ComboBox<Faculdade> faculdadeDoCurso;
     @FXML
     private Button pesquisarCursos;
 
@@ -251,7 +253,7 @@ TABELA DISCIPLINAS
     @FXML
     private ComboBox<Sala> salasdaTurma;
     @FXML
-    private ComboBox professordaTurma;
+    private ComboBox<Professor> professordaTurma;
     @FXML
     private Button pesquisarTurmas;
     @FXML
@@ -485,6 +487,7 @@ TABELA DISCIPLINAS
         ColNome.setCellValueFactory(new PropertyValueFactory<Faculdade,String>("Name"));
         TableView.setItems(getLista());
         viewAddGraph();
+        showSelectGraph();
     }
 
 
@@ -1616,7 +1619,7 @@ TABELA DISCIPLINAS
         }
         in.close();
     }
-
+///////////////////////////////////////////////////////////////////////
     public void handleGerarGrafoSalas(ActionEvent actionEvent) {
         graphPane.getChildren().clear();
         drawGraph();
@@ -1679,6 +1682,11 @@ TABELA DISCIPLINAS
             alunosComboBox.getItems().addAll(a.getNome() + " (" + a.getNumeroAluno() + ")");
             selectAlunoSEmergencia.getItems().addAll(a.getNome() + " (" + a.getNumeroAluno() + ")");
         }
+    }
+
+    public void showSelectGraph(){
+        selectGraph1.getItems().add("Graph");
+        selectGraph1.getItems().add("Sub Graph");
     }
 
     public void handleCalculeDistance(ActionEvent event){ // FALTA IMPRIMIR PASSO POR PASSO PARA QUE SALA/PDP O ALUNO PASSOU ATÉ CHEGAR AO DESTINO, COM OS RESPECTIVOS CUSTOS
@@ -1941,7 +1949,91 @@ TABELA DISCIPLINAS
         s = listViewAddGraph.getSelectionModel().getSelectedItems();
         pontosDePassagem = listViewAddGraph1.getSelectionModel().getSelectedItems();
 
-        gi.guardarTxtSubGraph(subGraphTxt,s,pontosDePassagem,graph_pdpSalas);
-        // gerarSubGrafoSalas(); // Graph ja está funcionar no txt FALTA COLOCAR NA PARTE GRÁFICA
+        gi.guardar_pdp_txt_graph(subGraphTxt);
+        subGraphSalasPdp = new SymbolDigraphWeighted(subGraphTxt,";"); // crio o subGraph
+        gi.conexoesDoSubGraph(subGraphTxt,s,pontosDePassagem,graph_pdpSalas,subGraphSalasPdp);
+        //gi.printSubGraph(subGraphSalasPdp); // APENAS PARA TESTAR SE O SUBGRAPH ESTA OU NAO CORRETO
+        createSubGraph();
+    }
+
+    public void createSubGraph() {
+        graphPane1.getChildren().clear();
+        drawSubGraph();
+        String delimiter = ";";
+        In in = new In(subGraphTxt);
+        while (in.hasNextLine()) {
+            String[] a = in.readLine().split(delimiter);
+            int v = Integer.parseInt(a[1]);
+            StackPane spv = (StackPane) graphPane1.getChildren().get(v);
+            Circle cv = (Circle) spv.getChildren().get(0);
+            for(int i = 2;i<a.length;i=i+2)
+            {
+                int w=Integer.parseInt(a[i]); // a que grafo estao conectadoss
+                StackPane spw = (StackPane) graphPane1.getChildren().get(w);
+                Circle cw = (Circle) spw.getChildren().get(0);
+                Line line = new Line(cv.getCenterX(),cv.getCenterY(),cw.getCenterX(),cw.getCenterY());
+                graphPane1.getChildren().add(line);
+            }
+        }
+        in.close();
+    }
+
+    public void drawSubGraph()
+    {
+        String delimiter = ";";
+        In in = new In(subGraphTxt);
+        while (in.hasNextLine()) {
+            String[] a = in.readLine().split(delimiter);
+            String type = a[0];
+            int v = Integer.parseInt(a[1]);
+            if(type.compareTo("s")==0)
+            {
+                gerarVerticesSalasSubGraph(subGraphSalasPdp.nameOf(v));
+            }else{
+                if(type.compareTo("pdp")==0){
+                    gerarVerticesPdpSubGraph(subGraphSalasPdp.nameOf(v));
+                }else {
+                    System.out.println("Erro no txt");
+                }
+            }
+        }
+        in.close();
+    }
+
+    public void gerarVerticesSalasSubGraph(String v)
+    {
+        int codSala = Integer.parseInt(v);
+        double posX = salas.get(codSala).getX();
+        double posY = salas.get(codSala).getY();
+        int piso = salas.get(codSala).getZ();
+        Circle c = new Circle(posX,posY,radius);
+        c.setOpacity(0.6);
+        c.setFill(Color.RED);
+        c.setId(""+v);
+        Text text = new Text(""+v);
+        StackPane stack = new StackPane();
+        stack.setLayoutX(posX-radius);
+        stack.setLayoutY(posY-radius);
+        stack.getChildren().addAll(c,text);
+        graphPane1.getChildren().add(stack);
+    }
+
+    public void gerarVerticesPdpSubGraph(String v)
+    {
+        int codPdp = Integer.parseInt(v);
+        String name = pdp.get(codPdp).getName();
+        double posX = pdp.get(codPdp).getX();
+        double posY = pdp.get(codPdp).getY();
+        int piso = pdp.get(codPdp).getZ();
+        Circle c = new Circle(posX,posY,radius);
+        c.setOpacity(0.6);
+        c.setFill(Color.BLACK);
+        c.setId(""+v);
+        Text text = new Text(""+name);
+        StackPane stack = new StackPane();
+        stack.setLayoutX(posX-radius);
+        stack.setLayoutY(posY-radius);
+        stack.getChildren().addAll(c,text);
+        graphPane1.getChildren().add(stack);
     }
 }

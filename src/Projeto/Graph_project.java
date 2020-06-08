@@ -119,19 +119,19 @@ public class Graph_project <T extends Point> {
         out.close();
     }
 
-    public void guardarTxtSubGraph(String path, ObservableList<Sala> sala,ObservableList<String> pontosPdP,SymbolDigraphWeighted g) {
+
+    public void createSubGraph(){
+
+    }
+
+    public void conexoesDoSubGraph(String path, ObservableList<Sala> sala,ObservableList<String> pontosPdP,SymbolDigraphWeighted g,SymbolDigraphWeighted g1) {
         edu.princeton.cs.algs4.Out out = new edu.princeton.cs.algs4.Out(path);
         boolean salasBoolean = false;
         boolean salasBoolean1 = false;
         boolean pdpBoolean = false;
         boolean pdpBoolean1 = false;
 
-        if(pontosPdP.isEmpty() && sala.isEmpty()){
-            guardar_pdp_txt_graph(path); // como nao selecionei nada vai criar um graph igual ao original
-        }
-
-        //////////////// PDP 1
-
+        // PDP 1
         for (int v = 0; v < g.digraph().V(); v++) {       //percorre os vertices
             if (salasOuPdp(g,v) == 1) {
                 for (String pdpAux : pontosPdP) {
@@ -148,19 +148,19 @@ public class Graph_project <T extends Point> {
                         }
                         aux++;
                     }
-                }if(!pdpBoolean){ // aqui so entrem os grafos que nao sao eliminados
-                   // System.out.print("pdp" + ";" + v + ";");
-                    out.print("pdp" + ";" + v + ";");
-                    //  out.print(salas.get(stSalas) + ";" + "\n");
+                }
+                out.print("pdp" + ";" + v + ";"); // escrevo sempre os vertices, pq apenas queremos cortar as ligacoes dos vertices
+                if(!pdpBoolean){ // aqui so entrem os grafos que nao sao eliminados
                     for (DirectedEdge d: g.digraph().adj(v)) { // percorro o directed edge para caso o vertice a que este vertice esteja conectado seja eliminado ele o elimine
                         if(salasOuPdp(g,d.to()) == 0){ // se a sala estiver ligada a uma sala que vai ser eliminada
                             for (Sala sAux1 : sala) { // PERCORREMOS AS SALAS ENVIADAS ( AS QUE NAO QUEREMOS METER NO SUB GRAPH )
                                 if(Integer.parseInt(graph_pdpSalas.nameOf(d.to()) ) == sAux1.getCodigo()){ // se tiver a sala vou passar à frente
-                                    pdpBoolean1 = true;
+                                    pdpBoolean1 = true; // para saber se a ligacao foi cortada ou nao
                                 }
                             }
-                            if(!pdpBoolean1) {
-                               // System.out.print(d.to() + ";" + d.weight() + ";");
+                            if(!pdpBoolean1) { // se nao foi cortada entao pode escrever a ligacao
+                                g1.digraph().addEdge(new DirectedEdge(v, d.to(),d.weight())); //adiciona ligaçao entre salas e pdp
+                               // g1.digraph().addEdge(new DirectedEdge(d.to(), v, d.weight())); //adiciona ligaçao entre salas e pdp
                                 out.print(d.to() + ";" + d.weight() + ";");
                             }
                         }if(salasOuPdp(g,d.to()) == 1){ // para o caso de estar ligado a um pdp que vai ser eliminado
@@ -180,19 +180,19 @@ public class Graph_project <T extends Point> {
                                 }
                             }
                             if(!pdpBoolean1) {
-                               // System.out.print(d.to() + ";" + d.weight() + ";");
+                                g1.digraph().addEdge(new DirectedEdge(v, d.to(),d.weight())); //adiciona ligaçao entre salas e pdp
+                                //g1.digraph().addEdge(new DirectedEdge(d.to(), v, d.weight())); //adiciona ligaçao entre salas e pdp
                                 out.print(d.to() + ";" + d.weight() + ";");
                             }
                         }
                         pdpBoolean1 = false;
                     }
-                    System.out.println();
-                    out.print("\n");
                 }
+                out.print("\n");
                 pdpBoolean = false;
             }
         }
-
+        // Remover salas
         for (int v = 0; v < g.digraph().V(); v++) {       //percorre os vertices
             if (salasOuPdp(g,v) == 0) {
                 for (Sala sAux : sala) { // PERCORREMOS AS SALAS ENVIADAS ( AS QUE NAO QUEREMOS METER NO SUB GRAPH )
@@ -200,10 +200,8 @@ public class Graph_project <T extends Point> {
                         salasBoolean = true;
                     }
                 }
+                out.print("s" + ";" + v + ";");
                 if(!salasBoolean){ // aqui so entrem os grafos que nao sao eliminados
-                   // System.out.print("s" + ";" + v + ";");
-                    out.print("s" + ";" + v + ";");
-                  //  out.print(salas.get(stSalas) + ";" + "\n");
                     for (DirectedEdge d: g.digraph().adj(v)) { // percorro o directed edge para caso o vertice a que este vertice esteja conectado seja eliminado ele o elimine
                         if(salasOuPdp(g,d.to()) == 0){ // se a sala estiver ligada a uma sala que vai ser eliminada
                             for (Sala sAux1 : sala) { // PERCORREMOS AS SALAS ENVIADAS ( AS QUE NAO QUEREMOS METER NO SUB GRAPH )
@@ -212,7 +210,8 @@ public class Graph_project <T extends Point> {
                                 }
                             }
                             if(!salasBoolean1) {
-                               // System.out.print(d.to() + ";" + d.weight() + ";");
+                                g1.digraph().addEdge(new DirectedEdge(v, d.to(),d.weight())); //adiciona ligaçao entre salas e pdp
+                               // g1.digraph().addEdge(new DirectedEdge(d.to(), v, d.weight())); //adiciona ligaçao entre salas e pdp
                                 out.print(d.to() + ";" + d.weight() + ";");
                             }
                         }if(salasOuPdp(g,d.to()) == 1){ // para o caso de estar ligado a um pdp que vai ser eliminado
@@ -232,22 +231,20 @@ public class Graph_project <T extends Point> {
                                 }
                             }
                             if(!salasBoolean1) {
-                               // System.out.print(d.to() + ";" + d.weight() + ";");
+                                g1.digraph().addEdge(new DirectedEdge(v, d.to(),d.weight())); //adiciona ligaçao entre salas e pdp
+                              //  g1.digraph().addEdge(new DirectedEdge(d.to(), v, d.weight())); //adiciona ligaçao entre salas e pdp
                                 out.print(d.to() + ";" + d.weight() + ";");
                             }
                         }
                         salasBoolean1 = false;
                     }
-                   // System.out.println();
-                    out.print("\n");
                 }
+                out.print("\n");
                salasBoolean = false;
             }
         }
         out.close();
     }
-
-
 
     public Point pdpOuSalaMaisProxima(Aluno a){ // dá a localizacao da sala ou pdp mais proxima do aluno
         double dist_sala = 1000; // valor aleatorio
@@ -384,5 +381,23 @@ public class Graph_project <T extends Point> {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public void printSubGraph(SymbolDigraphWeighted g){
+        for (int v = 0; v < g.digraph().V(); v++) {       //percorre os vertices
+            int i = salasOuPdp(g,v); // procura se é sala ou pdp
+            if(i == 0){
+                System.out.print("s" + ";" + v + ";");
+            }else if(i== 1){
+                System.out.print("pdp" + ";" + v + ";");
+            }else {
+                System.out.println("Erro Vertice nao existe nas ST");
+                return;
+            }
+            for (DirectedEdge d : g.digraph().adj(v)) {
+                System.out.print(d.to() + ";" + d.weight() + ";");
+            }
+            System.out.println();
+        }
     }
 }

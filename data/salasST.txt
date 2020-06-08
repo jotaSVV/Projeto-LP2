@@ -1,9 +1,5 @@
 Sala:
-224;2;50;50;Informatica
-TURMAS:
-
-Sala:
-112;1;50;50;Informatica
+332;3;50;50;Informatica
 TURMAS:
 
 Sala:
@@ -11,26 +7,26 @@ Sala:
 TURMAS:
 
 Sala:
-332;3;50;50;Informatica
+112;1;50;50;Informatica
+TURMAS:
+
+Sala:
+224;2;50;50;Informatica
 TURMAS:
 TUR6
-JPT
-RAF
-TYH
-ERT
+WRTH
 TUR1
 TUR2
-WRTH
+JPT
+ERT
+TYH
+RAF
 TUR3
 TUR4
 TUR5
 
 Sala:
-113;1;50;50;Informatica
-TURMAS:
-
-Sala:
-221;2;50;50;Informatica
+109;1;50;50;Informatica
 TURMAS:
 
 Sala:
@@ -38,19 +34,11 @@ Sala:
 TURMAS:
 
 Sala:
-109;1;50;50;Informatica
+221;2;50;50;Informatica
 TURMAS:
 
 Sala:
-330;3;50;50;Informatica
-TURMAS:
-
-Sala:
-334;3;50;50;Informatica
-TURMAS:
-
-Sala:
-114;1;50;50;Informatica
+113;1;50;50;Informatica
 TURMAS:
 
 Sala:
@@ -58,7 +46,19 @@ Sala:
 TURMAS:
 
 Sala:
-331;3;50;50;Informatica
+114;1;50;50;Informatica
+TURMAS:
+
+Sala:
+334;3;50;50;Informatica
+TURMAS:
+
+Sala:
+330;3;50;50;Informatica
+TURMAS:
+
+Sala:
+223;2;50;50;Informatica
 TURMAS:
 
 Sala:
@@ -66,6 +66,6 @@ Sala:
 TURMAS:
 
 Sala:
-223;2;50;50;Informatica
+331;3;50;50;Informatica
 TURMAS:
 

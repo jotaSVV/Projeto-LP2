@@ -391,7 +391,7 @@ public class GraphCreator extends Application {
         g.conectGraphs(f1.salas.get(333),f1.salas.get(334),graph_pdpSalas,pdpSalastxt,10);
         // CONECTAR SALAS E PDP
         // ENTRADA
-        g.conectGraphs(f1.pdp.get(3),f1.salas.get(109),graph_pdpSalas,pdpSalastxt,5); // entrada à 1 sala do piso 1
+        g.conectGraphs(f1.pdp.get(3),f1.salas.get(109),graph_pdpSalas,pdpSalastxt,5); // Escadas P0 sala 109 do piso 1
         // 1 PISO
         g.conectGraphs(f1.pdp.get(1),f1.salas.get(114),graph_pdpSalas,pdpSalastxt,15); // Ligaçao do piso 1 ao piso 2
         g.conectGraphs(f1.pdp.get(1),f1.salas.get(220),graph_pdpSalas,pdpSalastxt,25);
@@ -411,7 +411,7 @@ public class GraphCreator extends Application {
         g.conectGraphs(f1.pdp.get(0),f1.pdp.get(6),graph_pdpSalas,pdpSalastxt,30); // entrada ao bar
         g.conectGraphs(f1.pdp.get(6),f1.pdp.get(5),graph_pdpSalas,pdpSalastxt,30); // bar à biblioteca
         g.conectGraphs(f1.pdp.get(5),f1.pdp.get(1),graph_pdpSalas,pdpSalastxt,20); // biblioteca as escadas P1
-        g.conectGraphs(f1.pdp.get(3),f1.pdp.get(7),graph_pdpSalas,pdpSalastxt,5); // Piso 1 à saída 1
+        g.conectGraphs(f1.pdp.get(1),f1.pdp.get(7),graph_pdpSalas,pdpSalastxt,5); // Piso 1 à saída 1
 
         launch(args);
     }

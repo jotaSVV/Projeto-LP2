@@ -15,9 +15,12 @@ public class Professor extends Pessoa {
     public Professor(String nome, String apelido, Data dataNascimento) {
         super(nome, apelido, dataNascimento);
         email();
-        this.setX(30); // para "nascer" na entrada da faculdade
-        this.setY(20);
-        this.setZ(0);
+    }
+
+    public void addCoords(double x, double y, int z){
+        this.setX(x); // para "nascer" na entrada da faculdade
+        this.setY(y);
+        this.setZ(z);
     }
 
     public ArrayList<Horario_Atendimento> getHorario_atendimento() {

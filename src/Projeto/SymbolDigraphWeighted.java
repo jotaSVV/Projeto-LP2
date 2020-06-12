@@ -60,41 +60,26 @@ public class SymbolDigraphWeighted implements Serializable {
      */
     public SymbolDigraphWeighted(String filename, String delimiter) {
         st = new edu.princeton.cs.algs4.ST<String, Integer>();
-
+        int i= 0; // key da st
         // First pass builds the index by reading strings to associate
         // distinct strings with an index
         edu.princeton.cs.algs4.In in = new edu.princeton.cs.algs4.In(filename);
         // while (in.hasNextLine()) {
         while (!in.isEmpty()) {
             String[] a = in.readLine().split(delimiter);
-            for (int i = 0; i < a.length; i++) {
-                    if (!st.contains(a[i]))
-                        st.put(a[i], st.size());
-            }
+                if (!st.contains(a[0])) { // codigos da salas e dos pdp que estao no ficheiro
+                    st.put(a[0], i);
+                    i++;
+                }
         }
         // inverted index to get string keys in an array
-        keys = new String[st.size()];
+        keys = new String[i];
         for (String name : st.keys()) {
             keys[st.get(name)] = name;
         }
-
         // second pass builds the graph by connecting first vertex on each
         // line to all others
         graph = new edu.princeton.cs.algs4.EdgeWeightedDigraph(st.size());
-        in = new edu.princeton.cs.algs4.In(filename);
-        while (in.hasNextLine()) {
-            String[] a = in.readLine().split(delimiter);
-            int v = st.get(a[0]);
-            for(int i = 1;i<a.length;i=i+2)
-            {
-                for(int j = 2;j<a.length;j=j+2)
-                {
-                    int w = st.get(a[i]);
-                    Double x = Double.parseDouble(a[j]);
-                    graph.addEdge(new edu.princeton.cs.algs4.DirectedEdge(v,w,x));
-                }
-            }
-        }
     }
 
     /**

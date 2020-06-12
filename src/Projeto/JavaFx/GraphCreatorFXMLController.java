@@ -30,12 +30,7 @@ import static Projeto.Faculdade.*;
 import static Projeto.JavaFx.GraphCreator.f1;
 import static Projeto.JavaFx.GraphCreator.graph_pdpSalas;
 public class GraphCreatorFXMLController implements Initializable {
-
-
     public Pane graphPane;
-    private static final int radius = 25;
-    public HBox addSearchBox12;
-    public TextField bipartiteTextField;
     public HBox addSearchBox121;
     public TextField printConexo;
     public ComboBox<String> salasComboBox;
@@ -51,8 +46,6 @@ public class GraphCreatorFXMLController implements Initializable {
     public ComboBox<String> comboSalaSala;
     public ComboBox<String> comboSalaSala1;
     public TextField resultDistance;
-    public TableColumn<Object, Integer> distToSalas;
-    public TableColumn dadosAluno;
     public Button saidaEmergencia;
     public TextField resultSaidaEmergencia;
     public ComboBox<String> selectAlunoSEmergencia;
@@ -60,16 +53,20 @@ public class GraphCreatorFXMLController implements Initializable {
     public ListView<Sala> listViewAddGraph;
     public Pane graphPane1;
     public ListView<String> listViewAddGraph1;
-    public static SymbolDigraphWeighted subGraphSalasPdp ;    // cria o symbol graph de pdp
     public ComboBox<String> selectGraph1;
     public TextField grafoAtual1;
     public TextField grafoAtual;
+    public TextArea disSalasText;
+    public TextArea nameProAlunoText;
+
+    private static final int radius = 25;
     boolean auxSubGraph = false;
     private String pdpSalastxt = ".//data//salasPdp.txt";
     private String pdpSalasBinFile = ".//data//SalasPdpBinFile.bin";
     private String subGraphTxt = ".//data//subGraph.txt";
 
     Graph_project<Point> gi = new Graph_project<>();
+    public static SymbolDigraphWeighted subGraphSalasPdp ;    // cria o symbol graph de pdp
     /*
     TABELA DOS PONTOS DE PASSAGEM
      */
@@ -456,23 +453,15 @@ public class GraphCreatorFXMLController implements Initializable {
         showAlunosComboBox();
         showProfessoresComboBox();
         showPdpComboBox();
-        ///Tabela Faculdade
-
-
-
         viewAddGraph();
         showSelectGraph();
     }
-
 
     /*
     METODO NOW NA INTERFACE GRAFICA
      */
     public void handleMetodoNowFaculdade(ActionEvent actionEvent){
-
-
         Data d = new Data();
-
         int salasOcupadas = 0;
         Horario horar = new Horario(d,d,d.getYear()); // horario do momento que corro o codigo
         for (Integer s:f1.salas.keys()) {
@@ -489,16 +478,15 @@ public class GraphCreatorFXMLController implements Initializable {
             faculdadenow.appendText("A taxa de ocupação das salas neste momento é de " + aux+ "%\n" );
         }
 
-            Horario horario = new Horario(d,d,d.getYear()); // horario do momento que corro o codigo
-            faculdadenow.appendText("Turmas atualmente em aulas:\n");
-            for (String t:f1.turmas.keys()) { // percorro as turmas
-                if(f1.intersection_hor(f1.turmas.get(t).getHorario(),horario)){ // verifico se o horario da turma "intersecta" a hora em que corro o programa, se sim e como as disciplinas, alunos e professores tem o mesmo horario com a turma, podemos ver quem esta a ter aulas neste momento
+        Horario horario = new Horario(d,d,d.getYear()); // horario do momento que corro o codigo
+        faculdadenow.appendText("Turmas atualmente em aulas:\n");
+        for (String t:f1.turmas.keys()) { // percorro as turmas
+            if(f1.intersection_hor(f1.turmas.get(t).getHorario(),horario)){ // verifico se o horario da turma "intersecta" a hora em que corro o programa, se sim e como as disciplinas, alunos e professores tem o mesmo horario com a turma, podemos ver quem esta a ter aulas neste momento
                     faculdadenow.appendText(f1.turmas.get(t).getCodigo()+  "\n" +" Disciplina: " +f1.turmas.get(t).getDisciplina().getNome()+  "\n" +" Professor:"+f1.turmas.get(t).getProfessor().getNome() + "\n");
-                }else { // se o professor nao estiver a dar aula entao está "disponivel"
-                    faculdadenow.appendText("Professor " + f1.turmas.get(t).getProfessor().getNome() +" está disponivel" + "\n");
-                }
+            }else { // se o professor nao estiver a dar aula entao está "disponivel"
+                faculdadenow.appendText("Professor " + f1.turmas.get(t).getProfessor().getNome() +" está disponivel" + "\n");
             }
-
+        }
     }
 
     /*
@@ -559,15 +547,8 @@ public class GraphCreatorFXMLController implements Initializable {
                         break;
                     }
                 }
-
-
-
             }
         }
-
-
-
-
     }
 
     /*
@@ -784,11 +765,9 @@ public class GraphCreatorFXMLController implements Initializable {
             }
         }
     }
-
     /*
     HANDLERS ALUNOS
      */
-
     public void handleListarAlunos(ActionEvent actionEvent){
         ///Tabela Alunos
 
@@ -1051,10 +1030,6 @@ public class GraphCreatorFXMLController implements Initializable {
             }
         }
 
-
-
-
-
         ///ULTIMA TRIAGEM PARA QUANDO UNS FILTROS NAO SAO ADICIONADOS PELA ORDEM
         if(!codigosdaTurma.getText().isEmpty()){
             for (Turma t: results
@@ -1112,14 +1087,8 @@ public class GraphCreatorFXMLController implements Initializable {
                 }
             }
         }
-
-
-
-            TabelaTurmas.getItems().clear();
-            TabelaTurmas.setItems(results);
-
-
-
+        TabelaTurmas.getItems().clear();
+        TabelaTurmas.setItems(results);
     }
 
     public void handleGuardarSTSparaTXT(ActionEvent actionEvent){
@@ -1275,11 +1244,6 @@ public class GraphCreatorFXMLController implements Initializable {
                 }
                 break;
             }
-
-
-
-
-
         }
     }
 
@@ -1315,7 +1279,6 @@ public class GraphCreatorFXMLController implements Initializable {
         TabelaCursos.getItems().clear();
         TabelaCursos.setItems(results);
     }
-
 
     public void handleListarCursos(ActionEvent actionEvent){
         ///Tabela Curso
@@ -1426,8 +1389,6 @@ public class GraphCreatorFXMLController implements Initializable {
         TabelaSalas.setItems(results);
 
     }
-
-
     public void handleAddSala(ActionEvent actionEvent){
 
         if(codigoSalaTextfield.getText().isEmpty() || nrCadeirasSalaTextfield.getText().isEmpty() || edificiosSala.getSelectionModel().isEmpty()){
@@ -1526,19 +1487,33 @@ public class GraphCreatorFXMLController implements Initializable {
 
     public void handleRemoverSala(ActionEvent actionEvent) throws IOException {
         ///Recebo o codigo da sala a remover
-        Sala s = f1.salas.get(Integer.parseInt(codigoSalaTextfield.getText()));
+        Sala s = salas.get(Integer.parseInt(codigoSalaTextfield.getText()));
         f1.removerSalas(s);
 
-//        gi.removerSalasGraph(pdpSalastxt,s,graph_pdpSalas);
-//        if(auxSubGraph){ // se o auxGraph foi criado tb alteramos
-//            gi.removerSalasGraph(subGraphTxt,s,subGraphSalasPdp);
-//        }
+        if(selectGraph1.getValue().equals("Graph")){
+            gi.removerSalasGraph(pdpSalastxt,s,graph_pdpSalas);
+            handleGerarGrafoSalas(null);
+        }else if(selectGraph1.getValue().equals("Sub Graph")){
+            gi.removerSalasGraph(subGraphTxt,s,subGraphSalasPdp);
+            drawSubGraph();
+        }
+    }
+
+    public void handleRemovePdp(ActionEvent event) {
+        PontosDePassagem p = pdp.get(Integer.parseInt(coddoPDP.getText()));
+        f1.removePdp(p);
+        if(selectGraph1.getValue().equals("Graph")){
+            gi.removerPdpGraph(pdpSalastxt,p,graph_pdpSalas);
+            handleGerarGrafoSalas(null);
+        }else if(selectGraph1.getValue().equals("Sub Graph")){
+            gi.removerPdpGraph(subGraphTxt,p,subGraphSalasPdp);
+            drawSubGraph();
+        }
     }
     /*
         HANDLERS EDIFICIO
      */
     public void handleAddEdificio(ActionEvent actionEvent){
-
         Edificio e = new Edificio(nomeEdificioTextField.getText(),f1);
         if(nomeEdificioTextField.getText().isEmpty()){
             Alert a1 = new Alert(Alert.AlertType.ERROR);
@@ -1555,7 +1530,6 @@ public class GraphCreatorFXMLController implements Initializable {
                 a1.showAndWait();
             }else{
                 f1.edificios.put(e.getNome(),e);
-
                 TabelaEdificio.getItems().add(e);
             }
         }
@@ -1710,27 +1684,18 @@ public class GraphCreatorFXMLController implements Initializable {
         grafoAtual.setText(String.valueOf(selectGraph1.getValue()));
         grafoAtual1.setText(String.valueOf(selectGraph1.getValue()));
     }
-    /// Graph Bipartite
-    public void handleBipartite(ActionEvent event) {
-        if(selectGraph1.getValue().equals("Graph")){
-            Bipartite_Projeto bp = new Bipartite_Projeto(graph_pdpSalas);
-            bipartiteTextField.setText(""+bp.isBipartite());
-        }else if(selectGraph1.getValue().equals("Sub Graph")){
-            Bipartite_Projeto bp = new Bipartite_Projeto(subGraphSalasPdp);
-            bipartiteTextField.setText(""+bp.isBipartite());
-        }
-    }
+
     /// Graph Conexo
     public void handleConexo(ActionEvent event) {
         if(selectGraph1.getValue().equals("Graph")){
             DepthFirstSearch_Project dfs = new DepthFirstSearch_Project(graph_pdpSalas,1);
-            if (dfs.count() != graph_pdpSalas.digraph().V())
+            if (dfs.count() == graph_pdpSalas.digraph().V())
                 printConexo.setText("Conexo");
             else
                 printConexo.setText("Not Conexo");
         }else if(selectGraph1.getValue().equals("Sub Graph")){
             DepthFirstSearch_Project dfs = new DepthFirstSearch_Project(subGraphSalasPdp,1);
-            if (dfs.count() != subGraphSalasPdp.digraph().V())
+            if (dfs.count() == subGraphSalasPdp.digraph().V())
                 printConexo.setText("Conexo");
             else
                 printConexo.setText("Not Conexo");
@@ -1782,6 +1747,14 @@ public class GraphCreatorFXMLController implements Initializable {
         atualizarTextGraph();
     }
 
+    /**
+     *
+     * @param numAluno numero do aluno
+     * @param num numero da sala que quero ir
+     * @param graph grafos
+     * vamos buscar a sala e o aluno, de seguida, caso o aluno nao esteja em uma sala ou pdp colocamo-lo na mais proxima ( pdpOusSalaMaisProxima )
+     * depois verificamos se o sitio em que o aluno esta e fazemos o dijkstra para calcular a distancia
+     */
     public void calculeDistance(int numAluno,int num,SymbolDigraphWeighted graph){
         // Se for o ponto aonde quero ir for uma sala
         if(salas.contains(num)){
@@ -1803,10 +1776,8 @@ public class GraphCreatorFXMLController implements Initializable {
                                         f1.guardar_STALUNOS();
                                         double dist = sp.distTo(vi)+p1.distAlunoPdpProx;
                                         resultDistance.setText(String.valueOf(dist));
-                                        //   distToSalas.setText("test"); ////////////////////////////////////////// FALTA METER OS DADOS NAS TABELAS TB
-                                        //  distToSalas.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
-                                        //   distToSalas;
-                                        //  public TableColumn dadosAluno;
+                                        disSalasText.setText("De PDP " + p1.getName() + " para sala " + sala.getCodigo());
+                                        nameProAlunoText.setText("Aluno " +a1.getNumeroAluno());
                                     }else {
                                         resultDistance.setText("Sem Caminho Possivel");
                                     }
@@ -1828,6 +1799,8 @@ public class GraphCreatorFXMLController implements Initializable {
                                         f1.guardar_STALUNOS();
                                         double dist = sp.distTo(vi)+s1.distAlunoSalaProx;
                                         resultDistance.setText(String.valueOf(dist));
+                                        disSalasText.setText("De sala " + s1.getCodigo() + " para sala " + sala.getCodigo());
+                                        nameProAlunoText.setText("Aluno " +a1.getNumeroAluno());
                                     }else {
                                         resultDistance.setText("Sem Caminho Possivel");
                                     }
@@ -1860,10 +1833,8 @@ public class GraphCreatorFXMLController implements Initializable {
                                         f1.guardar_STALUNOS();
                                         double dist = sp.distTo(vi)+p1.distAlunoPdpProx;
                                         resultDistance.setText(String.valueOf(dist));
-                                        //   distToSalas.setText("test"); ////////////////////////////////////////// FALTA METER OS DADOS NAS TABELAS TB
-                                        //  distToSalas.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
-                                        //   distToSalas;
-                                        //  public TableColumn dadosAluno;
+                                        disSalasText.setText("De PDP " + p1.getName() + " para PDP " + pontoPassagem.getName());
+                                        nameProAlunoText.setText("Aluno " +a1.getNumeroAluno());
                                     }else {
                                         resultDistance.setText("Sem Caminho Possivel");
                                     }
@@ -1885,7 +1856,8 @@ public class GraphCreatorFXMLController implements Initializable {
                                         f1.guardar_STALUNOS();
                                         double dist = sp.distTo(vi)+s1.distAlunoSalaProx;
                                         resultDistance.setText(String.valueOf(dist));
-                                        distToSalas.setText("test");
+                                        disSalasText.setText("De sala " + s1.getCodigo() + " para PDP " + pontoPassagem.getName());
+                                        nameProAlunoText.setText("Aluno " +a1.getNumeroAluno());
                                     }else {
                                         resultDistance.setText("Sem Caminho Possivel");
                                     }
@@ -1899,7 +1871,15 @@ public class GraphCreatorFXMLController implements Initializable {
             }
         }
     }
-
+    /**
+     *
+     * @param email numero do aluno
+     * @param num numero da sala que quero ir
+     * @param graph grafos
+     * vamos buscar a sala e o aluno, de seguida, caso o aluno nao esteja em uma sala ou pdp colocamo-lo na mais proxima ( pdpOusSalaMaisProxima )
+     * depois verificamos se o sitio em que o aluno esta e fazemos o dijkstra para calcular a distancia
+     *
+     */
     public void calculeDistanceProfessor(String email,int num,SymbolDigraphWeighted graph){
         // Se for o ponto aonde quero ir for uma sala
         if(salas.contains(num)){
@@ -1921,9 +1901,8 @@ public class GraphCreatorFXMLController implements Initializable {
                                         f1.guardar_STPROFESSORES();
                                         double dist = sp.distTo(vi)+p1.distAlunoPdpProx;
                                         resultDistance.setText(String.valueOf(dist));
-                                        //   distToSalas.setText("test"); ////////////////////////////////////////// FALTA METER OS DADOS NAS TABELAS TB
-                                        //  distToSalas.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
-                                        //  public TableColumn dadosAluno;
+                                        disSalasText.setText("De PDP " + p1.getName() + " para sala " + sala.getCodigo());
+                                        nameProAlunoText.setText("Aluno " +a1.getEmail());
                                     }else {
                                         resultDistance.setText("Sem Caminho Possivel");
                                     }
@@ -1943,8 +1922,10 @@ public class GraphCreatorFXMLController implements Initializable {
                                         a1.setY(sala.getY());
                                         a1.setZ(sala.getZ());
                                         f1.guardar_STPROFESSORES();
-                                        double dist = sp.distTo(vi)+s1.distAlunoSalaProx; ////////////////////////////////////////// FALTA METER OS DADOS NAS TABELAS TB
+                                        double dist = sp.distTo(vi)+s1.distAlunoSalaProx;
                                         resultDistance.setText(String.valueOf(dist));
+                                        disSalasText.setText("De sala " + s1.getCodigo() + " para sala " + sala.getCodigo());
+                                        nameProAlunoText.setText("Aluno " +a1.getEmail());
                                     }else {
                                         resultDistance.setText("Sem Caminho Possivel");
                                     }
@@ -1975,12 +1956,10 @@ public class GraphCreatorFXMLController implements Initializable {
                                         a1.setY(pontoPassagem.getY());
                                         a1.setZ(pontoPassagem.getZ());
                                         f1.guardar_STPROFESSORES();
-                                        double dist = sp.distTo(vi)+p1.distAlunoPdpProx; ////////////////////////////////////////// FALTA METER OS DADOS NAS TABELAS TB
+                                        double dist = sp.distTo(vi)+p1.distAlunoPdpProx;
                                         resultDistance.setText(String.valueOf(dist));
-                                        //   distToSalas.setText("test");
-                                        //  distToSalas.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
-                                        //   distToSalas;
-                                        //  public TableColumn dadosAluno;
+                                        disSalasText.setText("De PDP " + p1.getName() + " para PDP " + pontoPassagem.getName());
+                                        nameProAlunoText.setText("Aluno " +a1.getEmail());
                                     }else {
                                         resultDistance.setText("Sem Caminho Possivel");
                                     }
@@ -2002,7 +1981,8 @@ public class GraphCreatorFXMLController implements Initializable {
                                         f1.guardar_STPROFESSORES();
                                         double dist = sp.distTo(vi)+s1.distAlunoSalaProx; // tb da para professores
                                         resultDistance.setText(String.valueOf(dist));
-                                      //  distToSalas.setText("test");
+                                        disSalasText.setText("De sala " + s1.getCodigo() + " para PDP " + pontoPassagem.getName());
+                                        nameProAlunoText.setText("Aluno " +a1.getEmail());
                                     }else {
                                         resultDistance.setText("Sem Caminho Possivel");
                                     }
@@ -2017,7 +1997,7 @@ public class GraphCreatorFXMLController implements Initializable {
         }
     }
 
-    public void handleCalculeDistance(ActionEvent event) { // FALTA IMPRIMIR PASSO POR PASSO PARA QUE SALA/PDP O ALUNO PASSOU ATÉ CHEGAR AO DESTINO, COM OS RESPECTIVOS CUSTOS
+    public void handleCalculeDistance(ActionEvent event) {
         if (salasComboBox.getSelectionModel().isEmpty()) {
             Alert a1 = new Alert(Alert.AlertType.ERROR);
             a1.setTitle("Sala");
@@ -2094,7 +2074,7 @@ public class GraphCreatorFXMLController implements Initializable {
         showProfessoresComboBox();
     }
 
-    public void handlerButtonConnectPdpSala(ActionEvent event) { //////////////////////////////////////////////////////////////////
+    public void handlerButtonConnectPdpSala(ActionEvent event) {
         if (comboPdp.getSelectionModel().isEmpty() || comboSala.getSelectionModel().isEmpty() || pesosPdpSalas.getText().isEmpty() ) {
             Alert a1 = new Alert(Alert.AlertType.ERROR);
             a1.setTitle("EROO");

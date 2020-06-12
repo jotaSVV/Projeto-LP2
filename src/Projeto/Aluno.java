@@ -40,6 +40,10 @@ public class Aluno extends  Pessoa {
     return s1 + "@ufp.edu.pt";
   }
 
+  public String nomeAluno(){
+    return this.getName();
+  }
+
   public void ver_notas(){
     System.out.println("Notas do " + "aluno: " +this.getNumeroAluno()+ " " +this.getNome());
     for (String d:this.getDisciplinas().keys()) {

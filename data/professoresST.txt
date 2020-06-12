@@ -3,12 +3,16 @@ Cristina;Almeida;1/3/1971;49;CristinaAlmeida@ufp.edu.pt
 TURMAS:
 2020;TUR3;CUR2;DIS3;224;
 2020;TUR4;CUR2;DIS4;224;
+POSICAO(XYZ):
+40.0;270.0;3;
 
 PROFESSOR:
 Filonema;Almeida;3/11/1956;63;FilonemaAlmeida@ufp.edu.pt
 TURMAS:
 2020;TUR1;CUR1;DIS1;224;
 2020;TUR2;CUR1;DIS2;224;
+POSICAO(XYZ):
+30.0;20.0;0;
 
 PROFESSOR:
 Georgina;Castro;1/3/1971;49;GeorginaCastro@ufp.edu.pt
@@ -16,20 +20,28 @@ TURMAS:
 10;JPT;INF;SO;224;
 2020;TYH;INF;SO;224;
 10;RAF;INF;SO;224;
+POSICAO(XYZ):
+200.0;180.0;2;
 
 PROFESSOR:
 Joao;Goncalves;1/3/1971;49;JoaoGoncalves@ufp.edu.pt
 TURMAS:
 2020;TUR5;CUR3;DIS5;224;
+POSICAO(XYZ):
+30.0;20.0;0;
 
 PROFESSOR:
 Jose;Jose;1/3/1971;49;JoseJose@ufp.edu.pt
 TURMAS:
 2020;TUR6;CUR4;BIO;224;
 2020;WRTH;CBL;BIO;224;
+POSICAO(XYZ):
+30.0;20.0;0;
 
 PROFESSOR:
 Ricardo;Almeida;14/4/1980;40;RicardoAlmeida@ufp.edu.pt
 TURMAS:
 2020;ERT;INF;LP2;224;
+POSICAO(XYZ):
+30.0;20.0;0;
 

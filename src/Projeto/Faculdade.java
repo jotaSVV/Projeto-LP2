@@ -844,6 +844,16 @@ public class Faculdade {
         }
     }
 
+    public void removePdp(PontosDePassagem p){
+        if(!pdp.contains(p.getCod())){
+            System.out.println("Erro pdp nao esta na base de dados");
+            return;
+        }
+        p.getEdificio().getPdp().remove(p); // remover o pdp do edificio e vice-versa
+        p.setE(null);
+        pdp.delete(p.getCod());
+    }
+
     public void guardar_STALUNOS() {
         try {
             FileWriter myWriter = new FileWriter(".//data//alunosST.txt");
@@ -930,6 +940,8 @@ public class Faculdade {
                     Turma t = p.getTurmas().get(c);
                     myWriter.write(t.getAno() + ";" + t.getCodigo() + ";" + t.getCurso().getNome() + ";" + t.getDisciplina().getNome() + ";" + t.getSala().getCodigo() + ";" + "\n");
                 }
+                myWriter.write("POSICAO(XYZ):\n");
+                myWriter.write(p.getX() + ";" + p.getY() + ";" + p.getZ() + ";" + "\n");
                 myWriter.write("\n");
             }
 
@@ -954,7 +966,7 @@ public class Faculdade {
                 p.setEmail(fields[4]);
                 if (in.readLine().compareTo("TURMA:") != 0) {
                     linhaturma = in.readLine();
-                    while(linhaturma.compareTo("")!=0){
+                    while(linhaturma.compareTo("POSICAO(XYZ):")!=0){
                         String[] turmainfo = linhaturma.split(";");
                         if (turmas.contains(turmainfo[1])) {
                             Turma t = turmas.get(turmainfo[1]);
@@ -963,6 +975,10 @@ public class Faculdade {
                         }
                         linhaturma = in.readLine();
                     }
+                    // ADICIONAR AS COORDENADAS NOS ALUNOS
+                    String aux3 = in.readLine();
+                    String[] posix = aux3.split(";");
+                    p.addCoords(Double.parseDouble(posix[0]),Double.parseDouble(posix[1]),Integer.parseInt(posix[2]));
                 }
                 professores.put(p.getEmail(), p);
             }
